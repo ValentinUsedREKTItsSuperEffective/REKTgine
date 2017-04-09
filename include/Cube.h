@@ -1,7 +1,6 @@
 #ifndef CUBE_H
 #define CUBE_H
 
-
 #include <GL/glew.h>
 
 #include <glm/glm.hpp>
@@ -18,8 +17,8 @@ class Cube
     public:
         Cube(float dim, std::string vertexShader, std::string fragmentShader);
         ~Cube();
-        void display(glm::mat4 &projection, glm::mat4 &modelView);
-        void load();
+        virtual void display(glm::mat4 &projection, glm::mat4 &modelView);
+        virtual void load();
 
     protected:
         Shader _shader;

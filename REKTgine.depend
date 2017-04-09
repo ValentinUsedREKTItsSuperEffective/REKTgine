@@ -597,7 +597,7 @@
 	<GL/glew.h>
 	<string>
 
-1470114778 c:\users\utilisateur\rektgine\include\cube.h
+1483391591 c:\users\utilisateur\rektgine\include\cube.h
 	<GL/glew.h>
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
@@ -630,7 +630,7 @@
 	<glm/gtc/type_ptr.hpp>
 	"Input.h"
 
-1470115432 c:\users\utilisateur\rektgine\include\mesh.h
+1483416637 c:\users\utilisateur\rektgine\include\mesh.h
 	<vector>
 	<GL/glew.h>
 	<glm/glm.hpp>
@@ -639,6 +639,7 @@
 	"ObjLoader.h"
 	"Shader.h"
 	"Texture.h"
+	"Light.h"
 
 1470114974 c:\users\utilisateur\rektgine\include\objloader.h
 	<GL/glew.h>
@@ -652,13 +653,13 @@
 1470114749 source:c:\users\utilisateur\rektgine\src\crate.cpp
 	"Crate.h"
 
-1470114783 source:c:\users\utilisateur\rektgine\src\cube.cpp
+1470578102 source:c:\users\utilisateur\rektgine\src\cube.cpp
 	"Cube.h"
 
 1470114903 source:c:\users\utilisateur\rektgine\src\input.cpp
 	"Input.h"
 
-1470115425 source:c:\users\utilisateur\rektgine\src\mesh.cpp
+1483416882 source:c:\users\utilisateur\rektgine\src\mesh.cpp
 	"Mesh.h"
 	<cstring>
 
@@ -667,4 +668,26 @@
 	<iostream>
 	<stdio.h>
 	<cstring>
+
+1483417061 source:c:\users\utilisateur\rektgine\src\sceneopengl.cpp
+	"SceneOpenGL.h"
+	"Light.h"
+
+1483386076 source:c:\users\utilisateur\rektgine\src\shader.cpp
+	"Shader.h"
+	<iostream>
+	<fstream>
+
+1470115046 source:c:\users\utilisateur\rektgine\src\texture.cpp
+	"Texture.h"
+
+1483415904 source:c:\users\utilisateur\rektgine\src\light.cpp
+	"Light.h"
+
+1483413064 c:\users\utilisateur\rektgine\include\light.h
+	<GL/glew.h>
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+	"Cube.h"
 

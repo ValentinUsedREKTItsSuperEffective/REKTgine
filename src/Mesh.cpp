@@ -95,6 +95,9 @@ void Mesh::load(){
             glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(_sizeVerticesBytes));
             glEnableVertexAttribArray(2);
 
+            glVertexAttribPointer(3,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(_sizeVerticesBytes+_sizeUvsBytes));
+            glEnableVertexAttribArray(3);
+
         glBindBuffer(GL_ARRAY_BUFFER,0);
 
     glBindVertexArray(0);
@@ -118,4 +121,20 @@ void Mesh::updateVBO(void *data, int sizeBytes, int offset){
         glUnmapBuffer(GL_ARRAY_BUFFER);
 
     glBindBuffer(GL_ARRAY_BUFFER,0);
+}
+
+
+void Mesh::useLight(Light &light) {
+    glUseProgram(_shader.getProgramID());
+
+        glBindVertexArray(_vao);
+
+            GLuint lightColorLoc = glGetUniformLocation(_shader.getProgramID(), "lightColor");
+            glm::vec3 lightColor = light.getColor();
+            float toFloat3[3] = {lightColor.x, lightColor.y, lightColor.z};
+            glUniform3fv(lightColorLoc, 1, toFloat3);
+
+        glBindVertexArray(0);
+
+    glUseProgram(0);
 }

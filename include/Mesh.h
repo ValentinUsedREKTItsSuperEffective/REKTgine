@@ -12,6 +12,7 @@
 #include "ObjLoader.h"
 #include "Shader.h"
 #include "Texture.h"
+#include "Light.h"
 
 class Mesh
 {
@@ -22,6 +23,7 @@ class Mesh
         void display(glm::mat4 &projection, glm::mat4 &modelView);
         void load();
         void updateVBO(void *data, int sizeBytes, int offset);
+        void useLight(Light &light);
 
     private:
         std::vector<glm::vec3> _vertices;

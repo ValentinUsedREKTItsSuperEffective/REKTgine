@@ -1,5 +1,7 @@
 #include "SceneOpenGL.h"
 
+#include "Light.h"
+
 SceneOpenGL::SceneOpenGL(std::string title, int width, int height) : _window(0), _context(0), _input(), _title(title), _width(width), _height(height)
 {
 
@@ -80,12 +82,33 @@ void SceneOpenGL::mainLoop(){
     unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
 
+    glm::vec3 cubePositions[] = {
+      glm::vec3( 0.0f,  0.0f,  0.0f),
+      glm::vec3( 2.0f,  5.0f, -15.0f),
+      glm::vec3(-1.5f, -2.2f, -2.5f),
+      glm::vec3(-3.8f, -2.0f, -12.3f),
+      glm::vec3( 2.4f, -0.4f, -3.5f),
+      glm::vec3(-1.7f,  3.0f, -7.5f),
+      glm::vec3( 1.3f, -2.0f, -2.5f),
+      glm::vec3( 1.5f,  2.0f, -2.5f),
+      glm::vec3( 1.5f,  0.2f, -1.5f),
+      glm::vec3(-1.3f,  1.0f, -1.5f)
+    };
+
     // Load mesh
-    Crate crate(2.f,"Shaders/texture.vert", "Shaders/texture.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
+    Cube cube(0.5f,"Shaders/couleur3D.vert", "Shaders/couleur3D.frag");
+    cube.load();
+
+    Crate crate(1.f,"Shaders/texture.vert", "Shaders/texture.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
     crate.load();
 
-    Mesh suzanne("Ressources/suzanne.obj","Shaders/texture.vert", "Shaders/texture.frag","Ressources/uvmap.tga");
+    Light light(glm::vec3(1.f), "Shaders/light.vert", "Shaders/light.frag");
+    light.setPosition(cubePositions[0]);
+    light.load();
+
+    Mesh suzanne("Ressources/suzanne.obj","Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");
     suzanne.load();
+    suzanne.useLight(light);
 
     // load texture
 
@@ -93,9 +116,9 @@ void SceneOpenGL::mainLoop(){
 
     // matrix
     glm::mat4 projection, modelView;
+    // TODO : envoyer les matrices de projection et de vue une seule fois et pas à chaque appel de la fonction display
 
     projection = glm::perspective(70.0,(double)_width/_height,1.0,100.0);
-    modelView = glm::mat4(1.0);
 
     // create camera
     Camera camera(glm::vec3(3,3,3),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
@@ -117,9 +140,24 @@ void SceneOpenGL::mainLoop(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Camera location
-        camera.lookAt(modelView);
+        glm::mat4 view;
+        camera.lookAt(view);
 
-        //crate.display(projection, modelView);
+/*      for(int i = 1; i<10; i++){
+            glm::mat4 model;
+            model = glm::translate(model,cubePositions[i]);
+            modelView = view * model;
+            crate.display(projection,modelView);
+        }
+*/
+
+        glm::mat4 model;
+        model = glm::translate(model,light.getPosition());
+        modelView = view * model;
+        light.display(projection, modelView);
+
+        model = glm::translate(model,cubePositions[4]);
+        modelView = view * model;
         suzanne.display(projection, modelView);
 
 /*
