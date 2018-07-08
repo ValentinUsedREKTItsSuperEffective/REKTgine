@@ -43,11 +43,30 @@ Cube::Cube(float dim, std::string vertexShader, std::string fragmentShader) : _s
         _vertex[i] = vertexTmp[i];
         _color[i] = colorTmp[i];
     }
+
+    load();
 }
 
 Cube::~Cube()
 {
     glDeleteBuffers(1,&_vbo);
+}
+
+void Cube::load(){
+
+    if(glIsBuffer(_vbo) == GL_TRUE)
+        glDeleteBuffers(1,&_vbo);
+
+    glGenBuffers(1,&_vbo);
+
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo);
+
+    glBufferData(GL_ARRAY_BUFFER,_sizeVerticesBytes+_sizeVerticesBytes,0,GL_STATIC_DRAW);
+
+    glBufferSubData(GL_ARRAY_BUFFER,0,_sizeVerticesBytes,_vertex);
+    glBufferSubData(GL_ARRAY_BUFFER,_sizeVerticesBytes,_sizeColorBytes  ,_color);
+
+    glBindBuffer(GL_ARRAY_BUFFER,0);
 }
 
 void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
@@ -79,21 +98,4 @@ void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
 
     // Don't use the shader anymore
     glUseProgram(0);
-}
-
-void Cube::load(){
-
-    if(glIsBuffer(_vbo) == GL_TRUE)
-        glDeleteBuffers(1,&_vbo);
-
-    glGenBuffers(1,&_vbo);
-
-    glBindBuffer(GL_ARRAY_BUFFER,_vbo);
-
-    glBufferData(GL_ARRAY_BUFFER,_sizeVerticesBytes+_sizeVerticesBytes,0,GL_STATIC_DRAW);
-
-    glBufferSubData(GL_ARRAY_BUFFER,0,_sizeVerticesBytes,_vertex);
-    glBufferSubData(GL_ARRAY_BUFFER,_sizeVerticesBytes,_sizeColorBytes  ,_color);
-
-    glBindBuffer(GL_ARRAY_BUFFER,0);
 }

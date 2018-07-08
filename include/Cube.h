@@ -7,13 +7,13 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Object3D.h"
 #include "Shader.h"
 
 
 // Class Cube
 
-class Cube
-{
+class Cube : public Object3D{
     public:
         Cube(float dim, std::string vertexShader, std::string fragmentShader);
         ~Cube();

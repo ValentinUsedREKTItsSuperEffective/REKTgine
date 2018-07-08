@@ -28,7 +28,8 @@ class SceneOpenGL
 
         bool initWindow();
         bool initGL();
-        void mainLoop();
+        void ExampleOne();
+        void ExampleTwo();
 
     private:
         SDL_Window* _window;

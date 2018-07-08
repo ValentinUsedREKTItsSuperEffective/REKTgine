@@ -13,7 +13,7 @@ int main(int argc, char **argv)
         return -1;
 
     //Boucle principale
-    scene.mainLoop();
+    scene.ExampleOne();
 
     return 0;
 }
