@@ -38,8 +38,24 @@ Crate::~Crate()
     //dtor
 }
 
-void Crate::display(glm::mat4 &projection, glm::mat4 &modelView){
-    //glm::mat4 modelView = view * matrix;
+void Crate::load(){
+    if(glIsBuffer(_vbo) == GL_TRUE)
+        glDeleteBuffers(1,&_vbo);
+
+    glGenBuffers(1,&_vbo);
+
+    glBindBuffer(GL_ARRAY_BUFFER,_vbo);
+
+    glBufferData(GL_ARRAY_BUFFER,_sizeVerticesBytes+_sizeTexCoordBytes,0,GL_STATIC_DRAW);
+
+    glBufferSubData(GL_ARRAY_BUFFER,0,_sizeVerticesBytes,_vertex);
+    glBufferSubData(GL_ARRAY_BUFFER,_sizeVerticesBytes,_sizeTexCoordBytes,_texCoord);
+
+    glBindBuffer(GL_ARRAY_BUFFER,0);
+}
+
+void Crate::display(glm::mat4 &projection, glm::mat4 &view){
+    glm::mat4 modelView = view * matrix;
 
     // Specify which shader we are using
     glUseProgram(_shader.getProgramID());
@@ -73,20 +89,4 @@ void Crate::display(glm::mat4 &projection, glm::mat4 &modelView){
     // Don't use the shader anymore
     glUseProgram(0);
 
-}
-
-void Crate::load(){
-    if(glIsBuffer(_vbo) == GL_TRUE)
-        glDeleteBuffers(1,&_vbo);
-
-    glGenBuffers(1,&_vbo);
-
-    glBindBuffer(GL_ARRAY_BUFFER,_vbo);
-
-    glBufferData(GL_ARRAY_BUFFER,_sizeVerticesBytes+_sizeTexCoordBytes,0,GL_STATIC_DRAW);
-
-    glBufferSubData(GL_ARRAY_BUFFER,0,_sizeVerticesBytes,_vertex);
-    glBufferSubData(GL_ARRAY_BUFFER,_sizeVerticesBytes,_sizeTexCoordBytes,_texCoord);
-
-    glBindBuffer(GL_ARRAY_BUFFER,0);
 }

@@ -3,6 +3,8 @@
 
 #include "glm/ext.hpp"
 
+using namespace std;
+
 SceneOpenGL::SceneOpenGL(std::string title, int width, int height) : _window(0), _context(0), _input(), _title(title), _width(width), _height(height)
 {
 
@@ -100,11 +102,16 @@ void SceneOpenGL::ExampleOne(){
     // Cube cube(0.5f,"Shaders/couleur3D.vert", "Shaders/couleur3D.frag");
     // cube.load();
 
-    Crate crate(1.f,"Shaders/texture.vert", "Shaders/texture.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
-    crate.load();
+    vector<Crate*> crates;
+    for(int i = 0; i<10; i++){
+        Crate* crate = new Crate(1.f,"Shaders/texture.vert", "Shaders/texture.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
+        crate->load();
+        crate->SetPosition(cubePositions[i]);
+        crates.push_back(crate);
+    }
 
     // matrix
-    glm::mat4 projection, modelView;
+    glm::mat4 projection;
     projection = glm::perspective(70.0,(double)_width/_height,1.0,100.0);
 
      // create camera
@@ -132,10 +139,7 @@ void SceneOpenGL::ExampleOne(){
         camera.lookAt(view);
 
         for(int i = 0; i<10; i++){
-            model = glm::mat4();
-            model = glm::translate(model,cubePositions[i]);
-            modelView = view * model;
-            crate.display(projection,modelView);
+            crates[i]->display(projection,view);
         }
 
         SDL_GL_SwapWindow(_window);
@@ -145,6 +149,10 @@ void SceneOpenGL::ExampleOne(){
         if(timeSpend < frameRate){
             SDL_Delay(frameRate-timeSpend);
         }
+     }
+
+    for(int i = 0; i<10; i++){
+        delete crates[i];
     }
 }
 

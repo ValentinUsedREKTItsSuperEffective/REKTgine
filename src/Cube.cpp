@@ -6,7 +6,7 @@
 
 #endif
 
-Cube::Cube(float dim, std::string vertexShader, std::string fragmentShader) : _shader(vertexShader,fragmentShader), _vbo(0), _sizeVerticesBytes(sizeof(float)*108),
+Cube::Cube(float dim, std::string vertexShader, std::string fragmentShader) : Object3D(), _shader(vertexShader,fragmentShader), _vbo(0), _sizeVerticesBytes(sizeof(float)*108),
                                                                     _sizeColorBytes(sizeof(float)*108){
 
     _shader.load();
