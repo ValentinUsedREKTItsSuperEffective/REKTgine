@@ -2,6 +2,7 @@
 #define OBJECT3D_H
 
 #include <glm/glm.hpp>
+#include <glm/gtx/transform.hpp>
 
 class Object3D{
     public:
@@ -14,6 +15,11 @@ class Object3D{
         // Functions
         Object3D();
         virtual ~Object3D();
+        void SetPosition(glm::vec3 position);
+        void SetRotation(glm::vec3 rotation);
+        void SetScale(glm::vec3 scale);
+    protected:
+        void CombineTransformations();
 };
 
 #endif // OBJECT3D_H

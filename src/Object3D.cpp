@@ -10,3 +10,13 @@ Object3D::Object3D(){
 Object3D::~Object3D(){
     //dtor
 }
+
+void Object3D::SetPosition(glm::vec3 p){
+    position = p;
+
+    CombineTransformations();
+}
+
+void Object3D::CombineTransformations(){
+    matrix = glm::translate(matrix, position);
+}

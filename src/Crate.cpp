@@ -39,6 +39,8 @@ Crate::~Crate()
 }
 
 void Crate::display(glm::mat4 &projection, glm::mat4 &modelView){
+    //glm::mat4 modelView = view * matrix;
+
     // Specify which shader we are using
     glUseProgram(_shader.getProgramID());
 

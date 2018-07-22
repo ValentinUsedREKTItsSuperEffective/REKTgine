@@ -1,6 +1,7 @@
 #include "SceneOpenGL.h"
-
 #include "Light.h"
+
+#include "glm/ext.hpp"
 
 SceneOpenGL::SceneOpenGL(std::string title, int width, int height) : _window(0), _context(0), _input(), _title(title), _width(width), _height(height)
 {
@@ -80,7 +81,7 @@ bool SceneOpenGL::initGL(){
 
 // Cubes example
 void SceneOpenGL::ExampleOne(){
-     unsigned int frameRate = 1000 / 60;
+    unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
 
     glm::vec3 cubePositions[] = {
@@ -111,6 +112,8 @@ void SceneOpenGL::ExampleOne(){
     _input.showCursor(false);
     _input.captureCursor(true);
 
+     glm::mat4 view, model;
+
      while(!_input.isEnd()){
 
         tic = SDL_GetTicks();
@@ -126,10 +129,10 @@ void SceneOpenGL::ExampleOne(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Camera location
-        glm::mat4 view, model;
         camera.lookAt(view);
 
-        for(int i = 1; i<10; i++){
+        for(int i = 0; i<10; i++){
+            model = glm::mat4();
             model = glm::translate(model,cubePositions[i]);
             modelView = view * model;
             crate.display(projection,modelView);

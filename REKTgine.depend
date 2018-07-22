@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1470114037 source:c:\users\utilisateur\rektgine\main.cpp
+1531147033 source:c:\users\utilisateur\rektgine\main.cpp
 	"SceneOpenGL.h"
 
-1531061730 c:\users\utilisateur\rektgine\include\sceneopengl.h
+1531062719 c:\users\utilisateur\rektgine\include\sceneopengl.h
 	<GL/glew.h>
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
@@ -605,7 +605,7 @@
 	"Object3D.h"
 	"Shader.h"
 
-1470114763 c:\users\utilisateur\rektgine\include\crate.h
+1531148537 c:\users\utilisateur\rektgine\include\crate.h
 	"Cube.h"
 	"Texture.h"
 
@@ -651,7 +651,7 @@
 1470114712 source:c:\users\utilisateur\rektgine\src\camera.cpp
 	"Camera.h"
 
-1470114749 source:c:\users\utilisateur\rektgine\src\crate.cpp
+1531233122 source:c:\users\utilisateur\rektgine\src\crate.cpp
 	"Crate.h"
 
 1531061817 source:c:\users\utilisateur\rektgine\src\cube.cpp
@@ -670,9 +670,10 @@
 	<stdio.h>
 	<cstring>
 
-1531062637 source:c:\users\utilisateur\rektgine\src\sceneopengl.cpp
+1531753819 source:c:\users\utilisateur\rektgine\src\sceneopengl.cpp
 	"SceneOpenGL.h"
 	"Light.h"
+	"glm/ext.hpp"
 
 1483386076 source:c:\users\utilisateur\rektgine\src\shader.cpp
 	"Shader.h"
@@ -692,9 +693,535 @@
 	<glm/gtc/type_ptr.hpp>
 	"Cube.h"
 
-1531059808 source:c:\users\utilisateur\rektgine\src\object3d.cpp
+1531233049 source:c:\users\utilisateur\rektgine\src\object3d.cpp
 	"Object3D.h"
 
-1531060645 c:\users\utilisateur\rektgine\include\object3d.h
+1531148679 c:\users\utilisateur\rektgine\include\object3d.h
 	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\ext.hpp
+	"./gtc/constants.hpp"
+	"./gtc/epsilon.hpp"
+	"./gtc/half_float.hpp"
+	"./gtc/matrix_access.hpp"
+	"./gtc/matrix_integer.hpp"
+	"./gtc/matrix_inverse.hpp"
+	"./gtc/matrix_transform.hpp"
+	"./gtc/noise.hpp"
+	"./gtc/quaternion.hpp"
+	"./gtc/random.hpp"
+	"./gtc/reciprocal.hpp"
+	"./gtc/swizzle.hpp"
+	"./gtc/type_precision.hpp"
+	"./gtc/type_ptr.hpp"
+	"./gtc/ulp.hpp"
+	"./gtx/associated_min_max.hpp"
+	"./gtx/bit.hpp"
+	"./gtx/closest_point.hpp"
+	"./gtx/color_cast.hpp"
+	"./gtx/color_space.hpp"
+	"./gtx/color_space_YCoCg.hpp"
+	"./gtx/compatibility.hpp"
+	"./gtx/component_wise.hpp"
+	"./gtx/euler_angles.hpp"
+	"./gtx/extend.hpp"
+	"./gtx/extented_min_max.hpp"
+	"./gtx/fast_exponential.hpp"
+	"./gtx/fast_square_root.hpp"
+	"./gtx/fast_trigonometry.hpp"
+	"./gtx/gradient_paint.hpp"
+	"./gtx/handed_coordinate_space.hpp"
+	"./gtx/inertia.hpp"
+	"./gtx/int_10_10_10_2.hpp"
+	"./gtx/integer.hpp"
+	"./gtx/intersect.hpp"
+	"./gtx/log_base.hpp"
+	"./gtx/matrix_cross_product.hpp"
+	"./gtx/matrix_interpolation.hpp"
+	"./gtx/matrix_major_storage.hpp"
+	"./gtx/matrix_operation.hpp"
+	"./gtx/matrix_query.hpp"
+	"./gtx/mixed_product.hpp"
+	"./gtx/multiple.hpp"
+	"./gtx/norm.hpp"
+	"./gtx/normal.hpp"
+	"./gtx/normalize_dot.hpp"
+	"./gtx/number_precision.hpp"
+	"./gtx/ocl_type.hpp"
+	"./gtx/optimum_pow.hpp"
+	"./gtx/orthonormalize.hpp"
+	"./gtx/perpendicular.hpp"
+	"./gtx/polar_coordinates.hpp"
+	"./gtx/projection.hpp"
+	"./gtx/quaternion.hpp"
+	"./gtx/raw_data.hpp"
+	"./gtx/rotate_vector.hpp"
+	"./gtx/spline.hpp"
+	"./gtx/std_based_type.hpp"
+	"./gtx/string_cast.hpp"
+	"./gtx/transform.hpp"
+	"./gtx/transform2.hpp"
+	"./gtx/vec1.hpp"
+	"./gtx/vector_access.hpp"
+	"./gtx/vector_angle.hpp"
+	"./gtx/vector_query.hpp"
+	"./gtx/verbose_operator.hpp"
+	"./gtx/wrap.hpp"
+	"./gtx/simd_vec4.hpp"
+	"./gtx/simd_mat4.hpp"
+	"./virtrev/xstream.hpp"
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\epsilon.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"../gtc/quaternion.hpp"
+	"epsilon.inl"
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\epsilon.inl
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\matrix_access.hpp
+	"../glm.hpp"
+	"matrix_access.inl"
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\matrix_access.inl
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\matrix_integer.hpp
+	"../glm.hpp"
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\matrix_inverse.hpp
+	"../glm.hpp"
+	"matrix_inverse.inl"
+
+1368193830 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\matrix_inverse.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\noise.hpp
+	"../glm.hpp"
+	"noise.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\noise.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\random.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"random.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\random.inl
+	<ctime>
+	<cassert>
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\reciprocal.hpp
+	"../glm.hpp"
+	"reciprocal.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\reciprocal.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\swizzle.hpp
+	"../glm.hpp"
+	"../gtc/type_precision.hpp"
+	"swizzle.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\type_precision.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"../gtc/quaternion.hpp"
+	"type_precision.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\type_precision.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\swizzle.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\ulp.hpp
+	"../glm.hpp"
+	"ulp.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\ulp.inl
+	<cmath>
+	<cfloat>
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\associated_min_max.hpp
+	"../glm.hpp"
+	"associated_min_max.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\associated_min_max.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\bit.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"bit.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\bit.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\closest_point.hpp
+	"../glm.hpp"
+	"closest_point.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\closest_point.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\color_cast.hpp
+	"../glm.hpp"
+	"../gtx/number_precision.hpp"
+	"color_cast.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\number_precision.hpp
+	"../glm.hpp"
+	"../gtc/type_precision.hpp"
+	"number_precision.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\number_precision.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\color_cast.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\color_space.hpp
+	"../glm.hpp"
+	"color_space.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\color_space.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\color_space_ycocg.hpp
+	"../glm.hpp"
+	"color_space_YCoCg.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\color_space_ycocg.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\compatibility.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"../gtc/quaternion.hpp"
+	<cfloat>
+	<cmath>
+	"compatibility.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\compatibility.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\component_wise.hpp
+	"../glm.hpp"
+	"component_wise.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\component_wise.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\euler_angles.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"euler_angles.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\euler_angles.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\extend.hpp
+	"../glm.hpp"
+	"extend.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\extend.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\extented_min_max.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"extented_min_max.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\extented_min_max.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\fast_exponential.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"fast_exponential.inl"
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\fast_exponential.inl
+
+1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\fast_square_root.hpp
+	"../glm.hpp"
+	"fast_square_root.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\fast_square_root.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\fast_trigonometry.hpp
+	"../glm.hpp"
+	"fast_trigonometry.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\fast_trigonometry.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\gradient_paint.hpp
+	"../glm.hpp"
+	"../gtx/optimum_pow.hpp"
+	"gradient_paint.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\optimum_pow.hpp
+	"../glm.hpp"
+	"optimum_pow.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\optimum_pow.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\gradient_paint.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\handed_coordinate_space.hpp
+	"../glm.hpp"
+	"handed_coordinate_space.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\handed_coordinate_space.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\inertia.hpp
+	"../glm.hpp"
+	"inertia.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\inertia.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\int_10_10_10_2.hpp
+	"../glm.hpp"
+	"../gtx/raw_data.hpp"
+	"int_10_10_10_2.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\raw_data.hpp
+	"../glm.hpp"
+	"../gtc/type_precision.hpp"
+	"raw_data.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\raw_data.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\int_10_10_10_2.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\integer.hpp
+	"../glm.hpp"
+	"integer.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\integer.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\intersect.hpp
+	"../glm.hpp"
+	"../gtx/closest_point.hpp"
+	"intersect.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\intersect.inl
+	<cfloat>
+	<limits>
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\log_base.hpp
+	"../glm.hpp"
+	"log_base.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\log_base.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_cross_product.hpp
+	"../glm.hpp"
+	"matrix_cross_product.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_cross_product.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_interpolation.hpp
+	"matrix_interpolation.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_interpolation.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_major_storage.hpp
+	"../glm.hpp"
+	"matrix_major_storage.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_major_storage.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_operation.hpp
+	"../glm.hpp"
+	"matrix_operation.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_operation.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_query.hpp
+	"../glm.hpp"
+	"../gtx/vector_query.hpp"
+	<limits>
+	"matrix_query.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vector_query.hpp
+	"../glm.hpp"
+	<cfloat>
+	<limits>
+	"vector_query.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vector_query.inl
+	<cassert>
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\matrix_query.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\mixed_product.hpp
+	"../glm.hpp"
+	"mixed_product.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\mixed_product.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\multiple.hpp
+	"../glm.hpp"
+	"multiple.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\multiple.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\norm.hpp
+	"../glm.hpp"
+	"../gtx/quaternion.hpp"
+	"norm.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\quaternion.hpp
+	"../glm.hpp"
+	"../gtc/quaternion.hpp"
+	"quaternion.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\quaternion.inl
+	<limits>
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\norm.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\normal.hpp
+	"../glm.hpp"
+	"normal.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\normal.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\normalize_dot.hpp
+	"../glm.hpp"
+	"../gtx/fast_square_root.hpp"
+	"normalize_dot.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\normalize_dot.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\ocl_type.hpp
+	"../glm.hpp"
+	"ocl_type.inl"
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\ocl_type.inl
+
+1368193834 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\orthonormalize.hpp
+	"../glm.hpp"
+	"orthonormalize.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\orthonormalize.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\perpendicular.hpp
+	"../glm.hpp"
+	"../gtx/projection.hpp"
+	"perpendicular.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\projection.hpp
+	"../glm.hpp"
+	"projection.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\projection.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\perpendicular.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\polar_coordinates.hpp
+	"../glm.hpp"
+	"polar_coordinates.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\polar_coordinates.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\rotate_vector.hpp
+	"../glm.hpp"
+	"../gtx/transform.hpp"
+	"rotate_vector.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\rotate_vector.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\spline.hpp
+	"../glm.hpp"
+	"../gtx/optimum_pow.hpp"
+	"spline.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\spline.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\std_based_type.hpp
+	"../glm.hpp"
+	<cstdlib>
+	"std_based_type.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\std_based_type.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\string_cast.hpp
+	"../glm.hpp"
+	"../gtc/half_float.hpp"
+	"../gtx/integer.hpp"
+	"../gtx/quaternion.hpp"
+	<string>
+	"string_cast.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\string_cast.inl
+	<cstdarg>
+	<cstdio>
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\transform2.hpp
+	"../glm.hpp"
+	"../gtx/transform.hpp"
+	"transform2.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\transform2.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vec1.hpp
+	"../glm.hpp"
+	"../core/type_vec1.hpp"
+	"vec1.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vec1.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vector_access.hpp
+	"../glm.hpp"
+	"vector_access.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vector_access.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vector_angle.hpp
+	"../glm.hpp"
+	"../gtc/epsilon.hpp"
+	"../gtx/quaternion.hpp"
+	"../gtx/rotate_vector.hpp"
+	"vector_angle.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\vector_angle.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\verbose_operator.hpp
+	"../glm.hpp"
+	"verbose_operator.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\verbose_operator.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\wrap.hpp
+	"../glm.hpp"
+	"wrap.inl"
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\wrap.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\simd_vec4.hpp
+	"../glm.hpp"
+	"../core/intrinsic_common.hpp"
+	"../core/intrinsic_geometric.hpp"
+	"simd_vec4.inl"
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\core\intrinsic_common.hpp
+	"setup.hpp"
+	"intrinsic_common.inl"
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\core\intrinsic_common.inl
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\core\intrinsic_geometric.hpp
+	"setup.hpp"
+	"intrinsic_common.hpp"
+	"intrinsic_geometric.inl"
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\core\intrinsic_geometric.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\simd_vec4.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\simd_mat4.hpp
+	"../glm.hpp"
+	"../core/intrinsic_matrix.hpp"
+	"../gtx/simd_vec4.hpp"
+	"simd_mat4.inl"
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\core\intrinsic_matrix.hpp
+	"setup.hpp"
+	"intrinsic_geometric.hpp"
+	"intrinsic_matrix.inl"
+
+1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\core\intrinsic_matrix.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtx\simd_mat4.inl
+
+1368193836 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\virtrev\xstream.hpp
+	"../glm.hpp"
+	"../gtc/matrix_access.hpp"
+	<iostream>
 
