@@ -104,7 +104,7 @@ void SceneOpenGL::ExampleOne(){
 
     vector<Crate*> crates;
     for(int i = 0; i<10; i++){
-        Crate* crate = new Crate(1.f,"Shaders/texture.vert", "Shaders/texture.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
+        Crate* crate = new Crate(1.f,"Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
         crate->load();
         crate->SetPosition(cubePositions[i]);
         crates.push_back(crate);
