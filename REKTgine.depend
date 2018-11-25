@@ -1,6 +1,8 @@
 # depslib dependency file v1.0
-1531147033 source:c:\users\utilisateur\rektgine\main.cpp
+1543136234 source:c:\users\utilisateur\rektgine\main.cpp
+	<iostream>
 	"SceneOpenGL.h"
+	"Vector3.h"
 
 1531062719 c:\users\utilisateur\rektgine\include\sceneopengl.h
 	<GL/glew.h>
@@ -1224,4 +1226,10 @@
 	"../glm.hpp"
 	"../gtc/matrix_access.hpp"
 	<iostream>
+
+1543137846 c:\users\utilisateur\rektgine\include\vector3.h
+	<math.h>
+
+1543136082 source:c:\users\utilisateur\rektgine\src\vector3.cpp
+	"Vector3.h"
 

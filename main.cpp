@@ -2,6 +2,8 @@
 
 #include "SceneOpenGL.h"
 
+#include "Vector3.h"
+
 int main(int argc, char **argv){
 
     bool realtime = false;
@@ -29,12 +31,12 @@ int main(int argc, char **argv){
 
         for(int j = y -1; j >= 0; j--){
             for(int i = 0; i < x; i++){
-                double r,g,b;
-                r = (double(i) / double(x)) * double(255.99);
-                g = (double(j) / double(y)) * double(255.99);
-                b = 0.2 * 255.99;
-
-                (void) fprintf(fp,"%f %f %f\n", r, g, b);
+                Vector3 color(
+                    (double(i) / double(x)) * double(255.99),
+                    (double(j) / double(y)) * double(255.99),
+                    0.2 * 255.99
+                );
+                (void) fprintf(fp,"%f %f %f\n", color.r(), color.g(), color.b());
             }
         }
 
