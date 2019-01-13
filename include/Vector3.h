@@ -37,4 +37,27 @@ class Vector3
         double v[3];
 };
 
+inline Vector3 operator+(const Vector3& v1, const Vector3& v2){
+    return Vector3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
+}
+
+inline Vector3 operator*(const Vector3& v1, const Vector3& v2){
+    return Vector3(v1[0] * v2[0], v1[1] * v2[1], v1[2] * v2[2]);
+}
+
+inline Vector3 operator*(float f, const Vector3& v){
+    return Vector3(v[0] * f, v[1] * f, v[2] * f);
+}
+
+inline Vector3 operator*(const Vector3& v, float f){
+    return Vector3(v[0] * f, v[1] * f, v[2] * f);
+}
+
+inline void Vector3::normalize(){
+    double k = 1 / length();
+    v[0] *= k;
+    v[1] *= k;
+    v[2] *= k;
+}
+
 #endif // VECTOR3_H

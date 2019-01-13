@@ -1,32 +1,12 @@
 # depslib dependency file v1.0
-1543136234 source:c:\users\utilisateur\rektgine\main.cpp
-	<iostream>
-	"SceneOpenGL.h"
-	"Vector3.h"
+1470114712 source:c:\users\utilisateur\rektgine\src\camera.cpp
+	"Camera.h"
 
-1531062719 c:\users\utilisateur\rektgine\include\sceneopengl.h
-	<GL/glew.h>
+1470114725 c:\users\utilisateur\rektgine\include\camera.h
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 	<glm/gtc/type_ptr.hpp>
-	<SDL2/SDL.h>
-	"Shader.h"
-	"Cube.h"
-	"Crate.h"
 	"Input.h"
-	"Texture.h"
-	"Camera.h"
-	"Mesh.h"
-	<iostream>
-	<string>
-
-1353396304 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\gl\glew.h
-	<stddef.h>
-	<inttypes.h>
-	<stdint.h>
-	<inttypes.h>
-	<OpenGL/glu.h>
-	<GL/glu.h>
 
 1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\glm.hpp
 	"core/_fixes.hpp"
@@ -304,6 +284,9 @@
 	<limits>
 
 1368193832 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\gtc\type_ptr.inl
+
+1470114899 c:\users\utilisateur\rektgine\include\input.h
+	<SDL2/SDL.h>
 
 1353383912 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\sdl2\sdl.h
 	"SDL_main.h"
@@ -595,9 +578,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1470115025 c:\users\utilisateur\rektgine\include\shader.h
-	<GL/glew.h>
-	<string>
+1532252437 source:c:\users\utilisateur\rektgine\src\crate.cpp
+	"Crate.h"
+
+1531148537 c:\users\utilisateur\rektgine\include\crate.h
+	"Cube.h"
+	"Texture.h"
 
 1531060569 c:\users\utilisateur\rektgine\include\cube.h
 	<GL/glew.h>
@@ -607,13 +593,21 @@
 	"Object3D.h"
 	"Shader.h"
 
+1353396304 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\gl\glew.h
+	<stddef.h>
+	<inttypes.h>
+	<stdint.h>
+	<inttypes.h>
+	<OpenGL/glu.h>
+	<GL/glu.h>
+
 1531148679 c:\users\utilisateur\rektgine\include\object3d.h
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 
-1531148537 c:\users\utilisateur\rektgine\include\crate.h
-	"Cube.h"
-	"Texture.h"
+1470115025 c:\users\utilisateur\rektgine\include\shader.h
+	<GL/glew.h>
+	<string>
 
 1470115042 c:\users\utilisateur\rektgine\include\texture.h
 	<GL/glew.h>
@@ -628,14 +622,25 @@
 	"begin_code.h"
 	"close_code.h"
 
-1470114899 c:\users\utilisateur\rektgine\include\input.h
-	<SDL2/SDL.h>
+1532251136 source:c:\users\utilisateur\rektgine\src\cube.cpp
+	"Cube.h"
 
-1470114725 c:\users\utilisateur\rektgine\include\camera.h
+1470114903 source:c:\users\utilisateur\rektgine\src\input.cpp
+	"Input.h"
+
+1483415904 source:c:\users\utilisateur\rektgine\src\light.cpp
+	"Light.h"
+
+1483413064 c:\users\utilisateur\rektgine\include\light.h
+	<GL/glew.h>
 	<glm/glm.hpp>
 	<glm/gtx/transform.hpp>
 	<glm/gtc/type_ptr.hpp>
-	"Input.h"
+	"Cube.h"
+
+1483416882 source:c:\users\utilisateur\rektgine\src\mesh.cpp
+	"Mesh.h"
+	<cstring>
 
 1483416637 c:\users\utilisateur\rektgine\include\mesh.h
 	<vector>
@@ -654,32 +659,6 @@
 	<vector>
 	<string>
 
-1483413064 c:\users\utilisateur\rektgine\include\light.h
-	<GL/glew.h>
-	<glm/glm.hpp>
-	<glm/gtx/transform.hpp>
-	<glm/gtc/type_ptr.hpp>
-	"Cube.h"
-
-1470114712 source:c:\users\utilisateur\rektgine\src\camera.cpp
-	"Camera.h"
-
-1532252437 source:c:\users\utilisateur\rektgine\src\crate.cpp
-	"Crate.h"
-
-1532251136 source:c:\users\utilisateur\rektgine\src\cube.cpp
-	"Cube.h"
-
-1470114903 source:c:\users\utilisateur\rektgine\src\input.cpp
-	"Input.h"
-
-1483415904 source:c:\users\utilisateur\rektgine\src\light.cpp
-	"Light.h"
-
-1483416882 source:c:\users\utilisateur\rektgine\src\mesh.cpp
-	"Mesh.h"
-	<cstring>
-
 1531233049 source:c:\users\utilisateur\rektgine\src\object3d.cpp
 	"Object3D.h"
 
@@ -689,18 +668,26 @@
 	<stdio.h>
 	<cstring>
 
-1483386076 source:c:\users\utilisateur\rektgine\src\shader.cpp
-	"Shader.h"
-	<iostream>
-	<fstream>
-
-1470115046 source:c:\users\utilisateur\rektgine\src\texture.cpp
-	"Texture.h"
-
 1535294899 source:c:\users\utilisateur\rektgine\src\sceneopengl.cpp
 	"SceneOpenGL.h"
 	"Light.h"
 	"glm/ext.hpp"
+
+1531062719 c:\users\utilisateur\rektgine\include\sceneopengl.h
+	<GL/glew.h>
+	<glm/glm.hpp>
+	<glm/gtx/transform.hpp>
+	<glm/gtc/type_ptr.hpp>
+	<SDL2/SDL.h>
+	"Shader.h"
+	"Cube.h"
+	"Crate.h"
+	"Input.h"
+	"Texture.h"
+	"Camera.h"
+	"Mesh.h"
+	<iostream>
+	<string>
 
 1368193828 c:\program files (x86)\codeblocks\mingw\sdl-2.0\include\glm\ext.hpp
 	"./gtc/constants.hpp"
@@ -1227,9 +1214,23 @@
 	"../gtc/matrix_access.hpp"
 	<iostream>
 
-1543137846 c:\users\utilisateur\rektgine\include\vector3.h
+1483386076 source:c:\users\utilisateur\rektgine\src\shader.cpp
+	"Shader.h"
+	<iostream>
+	<fstream>
+
+1470115046 source:c:\users\utilisateur\rektgine\src\texture.cpp
+	"Texture.h"
+
+1547346185 source:c:\users\utilisateur\rektgine\main.cpp
+	<iostream>
+	"SceneOpenGL.h"
+	"Vector3.h"
+	"Ray.h"
+
+1543330493 c:\users\utilisateur\rektgine\include\vector3.h
 	<math.h>
 
-1543136082 source:c:\users\utilisateur\rektgine\src\vector3.cpp
+1543329731 c:\users\utilisateur\rektgine\include\ray.h
 	"Vector3.h"
 
