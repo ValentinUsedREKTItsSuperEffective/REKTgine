@@ -28,8 +28,8 @@ class Vector3
         inline Vector3& operator*=(double);
         inline Vector3& operator/=(double);
 
-        inline float length() const {return sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);}
-        inline float lengthSq() const {return v[0]*v[0] + v[1]*v[1] + v[2]*v[2];}
+        inline double length() const {return sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);}
+        inline double lengthSq() const {return v[0]*v[0] + v[1]*v[1] + v[2]*v[2];}
         inline void normalize();
         inline double dot(const Vector3& vec);
         inline Vector3 cross(const Vector3& vec);
@@ -39,6 +39,10 @@ class Vector3
 
 inline Vector3 operator+(const Vector3& v1, const Vector3& v2){
     return Vector3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
+}
+
+inline Vector3 operator-(const Vector3& v1, const Vector3& v2){
+    return Vector3(v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]);
 }
 
 inline Vector3 operator*(const Vector3& v1, const Vector3& v2){
@@ -58,6 +62,19 @@ inline void Vector3::normalize(){
     v[0] *= k;
     v[1] *= k;
     v[2] *= k;
+}
+
+inline double dot(const Vector3& vec1, const Vector3& vec2){
+    return vec1[0]*vec2[0] + vec1[1]*vec2[1] + vec1[2]*vec2[2];
+}
+
+inline Vector3 normalize(Vector3 v){
+    double k = 1 / v.length();
+    v[0] *= k;
+    v[1] *= k;
+    v[2] *= k;
+
+    return v;
 }
 
 #endif // VECTOR3_H

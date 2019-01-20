@@ -5,9 +5,28 @@
 #include "Vector3.h"
 #include "Ray.h"
 
+double hitSphere(const Vector3& center, float radius, const Ray& r){
+    Vector3 oc = r.origin - center;
+    float a = dot(r.direction, r.direction);
+    float b = 2.0 * dot(oc, r.direction);
+    float c = dot(oc, oc) - radius*radius;
+    float det = b*b - 4*a*c;
+    if(det < 0){
+        return -1.0;
+    } else {
+        return (-b - sqrt(det)) / 2.0*a;
+    }
+}
+
 Vector3 color(Ray& ray){
+    double t = hitSphere(Vector3(0, 0, -1), 0.5, ray);
+    if(t > 0.0){
+        Vector3 N = normalize(ray.projectAt(t) - Vector3(0, 0, -1));
+        return 0.5 * Vector3(N.x() + 1, N.y() + 1, N.z() + 1);
+    }
+
     ray.direction.normalize();
-    double t = 0.5*(ray.direction.y() + 1);
+    t = 0.5*(ray.direction.y() + 1.0);
     return (1.0 - t)*Vector3(1.0, 1.0, 1.0)+ t*Vector3(0.5, 0.7, 1.0);
 }
 

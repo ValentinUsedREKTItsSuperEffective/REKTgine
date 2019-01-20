@@ -1222,15 +1222,21 @@
 1470115046 source:c:\users\utilisateur\rektgine\src\texture.cpp
 	"Texture.h"
 
-1547346185 source:c:\users\utilisateur\rektgine\main.cpp
+1547364564 source:c:\users\utilisateur\rektgine\main.cpp
 	<iostream>
 	"SceneOpenGL.h"
 	"Vector3.h"
 	"Ray.h"
 
-1543330493 c:\users\utilisateur\rektgine\include\vector3.h
+1547955755 c:\users\utilisateur\rektgine\include\vector3.h
 	<math.h>
 
 1543329731 c:\users\utilisateur\rektgine\include\ray.h
+	"Vector3.h"
+
+1547346230 source:c:\users\utilisateur\rektgine\src\ray.cpp
+	"Ray.h"
+
+1547954581 source:c:\users\utilisateur\rektgine\src\vector3.cpp
 	"Vector3.h"
 
