@@ -4,30 +4,18 @@
 
 #include "Vector3.h"
 #include "Ray.h"
+#include "HitableList.h"
+#include "rt_Sphere.h"
 
-double hitSphere(const Vector3& center, float radius, const Ray& r){
-    Vector3 oc = r.origin - center;
-    float a = dot(r.direction, r.direction);
-    float b = 2.0 * dot(oc, r.direction);
-    float c = dot(oc, oc) - radius*radius;
-    float det = b*b - 4*a*c;
-    if(det < 0){
-        return -1.0;
+Vector3 color(Ray& ray, Hitable* world){
+    HitRecord record;
+    if(world->hit(ray, 0.0, 100000000.0, record)){
+        return 0.5*Vector3(record.normal.x() + 1, record.normal.y() + 1, record.normal.z() + 1);
     } else {
-        return (-b - sqrt(det)) / 2.0*a;
+        ray.direction.normalize();
+        double t = 0.5*(ray.direction.y() + 1.0);
+        return (1.0 - t)*Vector3(1.0, 1.0, 1.0)+ t*Vector3(0.5, 0.7, 1.0);
     }
-}
-
-Vector3 color(Ray& ray){
-    double t = hitSphere(Vector3(0, 0, -1), 0.5, ray);
-    if(t > 0.0){
-        Vector3 N = normalize(ray.projectAt(t) - Vector3(0, 0, -1));
-        return 0.5 * Vector3(N.x() + 1, N.y() + 1, N.z() + 1);
-    }
-
-    ray.direction.normalize();
-    t = 0.5*(ray.direction.y() + 1.0);
-    return (1.0 - t)*Vector3(1.0, 1.0, 1.0)+ t*Vector3(0.5, 0.7, 1.0);
 }
 
 int main(int argc, char **argv){
@@ -48,13 +36,18 @@ int main(int argc, char **argv){
         scene.ExampleOne();
     } else {
         // raytracing
-        // This is the implementation of the 3 documents : Raytracing in a Week-end, the next week-end, and te rest of your life by Peter Shirley
+        // This is the implementation of the 3 documents : Raytracing in a Week-end, the next week-end, and the rest of your life by Peter Shirley
         int x = 400;
         int y = 200;
 
         Vector3 lowerLeftCorner(-2.0, -1.0, -1.0);
         Vector3 cameraLens(4.0, 2.0, 0.0);
         Vector3 origin(0.0, 0.0, 0.0);
+
+        Hitable *list[2];
+        list[0] = new rt_Sphere(Vector3(0, 0, -1), 0.5);
+        list[1] = new rt_Sphere(Vector3(0, -100.5, -1), 100);
+        HitableList *world = new HitableList(list, 2);
 
         FILE *fp = fopen("output.ppm", "wb");
 
@@ -64,7 +57,7 @@ int main(int argc, char **argv){
             for(int i = 0; i < x; i++){
                 Vector3 uv(double(i) / double(x), double(j) / double(y), 0.0);
                 Ray ray(origin, lowerLeftCorner + uv*cameraLens);
-                Vector3 col = color(ray)* double(255.99);
+                Vector3 col = color(ray, world)* double(255.99);
 
                 (void) fprintf(fp,"%f %f %f\n", col.r(), col.g(), col.b());
             }

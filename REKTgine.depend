@@ -668,6 +668,15 @@
 	<stdio.h>
 	<cstring>
 
+1547346230 source:c:\users\utilisateur\rektgine\src\ray.cpp
+	"Ray.h"
+
+1543329731 c:\users\utilisateur\rektgine\include\ray.h
+	"Vector3.h"
+
+1547955755 c:\users\utilisateur\rektgine\include\vector3.h
+	<math.h>
+
 1535294899 source:c:\users\utilisateur\rektgine\src\sceneopengl.cpp
 	"SceneOpenGL.h"
 	"Light.h"
@@ -1222,21 +1231,23 @@
 1470115046 source:c:\users\utilisateur\rektgine\src\texture.cpp
 	"Texture.h"
 
-1547364564 source:c:\users\utilisateur\rektgine\main.cpp
+1547954581 source:c:\users\utilisateur\rektgine\src\vector3.cpp
+	"Vector3.h"
+
+1547964969 source:c:\users\utilisateur\rektgine\main.cpp
 	<iostream>
 	"SceneOpenGL.h"
 	"Vector3.h"
 	"Ray.h"
+	"HitableList.h"
+	"rt_Sphere.h"
 
-1547955755 c:\users\utilisateur\rektgine\include\vector3.h
-	<math.h>
+1547965123 c:\users\utilisateur\rektgine\include\hitablelist.h
+	"Hitable.h"
 
-1543329731 c:\users\utilisateur\rektgine\include\ray.h
-	"Vector3.h"
-
-1547346230 source:c:\users\utilisateur\rektgine\src\ray.cpp
+1547958676 c:\users\utilisateur\rektgine\include\hitable.h
 	"Ray.h"
 
-1547954581 source:c:\users\utilisateur\rektgine\src\vector3.cpp
-	"Vector3.h"
+1547965708 c:\users\utilisateur\rektgine\include\rt_sphere.h
+	"Hitable.h"
 
