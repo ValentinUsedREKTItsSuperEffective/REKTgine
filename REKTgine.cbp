@@ -64,6 +64,8 @@
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Crate.h" />
 		<Unit filename="include/Cube.h" />
+		<Unit filename="include/Hitable.h" />
+		<Unit filename="include/HitableList.h" />
 		<Unit filename="include/Input.h" />
 		<Unit filename="include/Light.h" />
 		<Unit filename="include/Mesh.h" />
@@ -74,6 +76,8 @@
 		<Unit filename="include/Shader.h" />
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/Vector3.h" />
+		<Unit filename="include/rt_Camera.h" />
+		<Unit filename="include/rt_Sphere.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Crate.cpp" />

@@ -37,6 +37,20 @@ class Vector3
         double v[3];
 };
 
+inline Vector3& Vector3::operator+=(const Vector3& vec){
+    v[0] += vec[0];
+    v[1] += vec[1];
+    v[2] += vec[2];
+    return *this;
+}
+
+inline Vector3& Vector3::operator/=(double t){
+    v[0] /= t;
+    v[1] /= t;
+    v[2] /= t;
+    return *this;
+}
+
 inline Vector3 operator+(const Vector3& v1, const Vector3& v2){
     return Vector3(v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]);
 }

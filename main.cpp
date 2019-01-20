@@ -6,6 +6,7 @@
 #include "Ray.h"
 #include "HitableList.h"
 #include "rt_Sphere.h"
+#include "rt_Camera.h"
 
 Vector3 color(Ray& ray, Hitable* world){
     HitRecord record;
@@ -16,6 +17,10 @@ Vector3 color(Ray& ray, Hitable* world){
         double t = 0.5*(ray.direction.y() + 1.0);
         return (1.0 - t)*Vector3(1.0, 1.0, 1.0)+ t*Vector3(0.5, 0.7, 1.0);
     }
+}
+
+double frand(){
+    return double(rand()) / double(RAND_MAX);
 }
 
 int main(int argc, char **argv){
@@ -40,14 +45,14 @@ int main(int argc, char **argv){
         int x = 400;
         int y = 200;
 
-        Vector3 lowerLeftCorner(-2.0, -1.0, -1.0);
-        Vector3 cameraLens(4.0, 2.0, 0.0);
-        Vector3 origin(0.0, 0.0, 0.0);
+        int nSample = 100;
 
         Hitable *list[2];
         list[0] = new rt_Sphere(Vector3(0, 0, -1), 0.5);
         list[1] = new rt_Sphere(Vector3(0, -100.5, -1), 100);
         HitableList *world = new HitableList(list, 2);
+
+        rt_Camera camera;
 
         FILE *fp = fopen("output.ppm", "wb");
 
@@ -55,9 +60,13 @@ int main(int argc, char **argv){
 
         for(int j = y -1; j >= 0; j--){
             for(int i = 0; i < x; i++){
-                Vector3 uv(double(i) / double(x), double(j) / double(y), 0.0);
-                Ray ray(origin, lowerLeftCorner + uv*cameraLens);
-                Vector3 col = color(ray, world)* double(255.99);
+                Vector3 col(0, 0, 0);
+                for(int s = 0; s < nSample; s++){
+                    Vector3 uv(double(i + frand()) / double(x), double(j + frand()) / double(y), 0.0);
+                    Ray ray = camera.getRay(uv);
+                    col += color(ray, world)* double(255.99);
+                }
+                col /= double(nSample);
 
                 (void) fprintf(fp,"%f %f %f\n", col.r(), col.g(), col.b());
             }
