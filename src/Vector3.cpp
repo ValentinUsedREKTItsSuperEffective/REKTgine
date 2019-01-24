@@ -36,10 +36,6 @@ inline Vector3 operator/(const Vector3& v, float f){
     return Vector3(v[0] / f, v[1] / f, v[2] / f);
 }
 
-inline double Vector3::dot(const Vector3& vec){
-    return v[0]*vec[0] + v[1]*vec[1] + v[2]*vec[2];
-}
-
 inline Vector3 Vector3::cross(const Vector3& vec){
     return Vector3(
         v[1]*vec[2] - v[2]*vec[1],

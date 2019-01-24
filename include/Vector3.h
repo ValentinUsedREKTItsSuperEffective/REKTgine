@@ -7,6 +7,7 @@ class Vector3
 {
     public:
         Vector3() {}
+        Vector3(double val) {v[0] = val; v[1] = val; v[2] = val;}
         Vector3(double x, double y, double z) {v[0] = x; v[1] = y; v[2] = z;}
 
         inline double x() const {return v[0];}
@@ -89,6 +90,10 @@ inline Vector3 normalize(Vector3 v){
     v[2] *= k;
 
     return v;
+}
+
+inline double Vector3::dot(const Vector3& vec){
+    return v[0]*vec[0] + v[1]*vec[1] + v[2]*vec[2];
 }
 
 #endif // VECTOR3_H

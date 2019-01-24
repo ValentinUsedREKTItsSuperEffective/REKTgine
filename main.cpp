@@ -8,19 +8,34 @@
 #include "rt_Sphere.h"
 #include "rt_Camera.h"
 
-Vector3 color(Ray& ray, Hitable* world){
+double frand(){
+    return double(rand()) / double(RAND_MAX);
+}
+
+Vector3 getPointInUnitSphere(){
+    Vector3 p;
+    do{
+        p = 2.0 * Vector3(frand(),frand(),frand()) - Vector3(1.0);
+    } while(p.lengthSq() >= 1.0);
+    return p;
+}
+
+Vector3 color(Ray& ray, Hitable* world, int i){
     HitRecord record;
     if(world->hit(ray, 0.0, 100000000.0, record)){
-        return 0.5*Vector3(record.normal.x() + 1, record.normal.y() + 1, record.normal.z() + 1);
+
+        if(i == 0){
+            std::cout << record.normal.x() << ", " << record.normal.y() << ", "<< record.normal.z() << std::endl;
+        }
+
+        Vector3 p = record.p + record.normal + getPointInUnitSphere();
+        Ray r(record.p, p - record.p);
+        return 0.5*color(r, world, i+1);
     } else {
         ray.direction.normalize();
         double t = 0.5*(ray.direction.y() + 1.0);
         return (1.0 - t)*Vector3(1.0, 1.0, 1.0)+ t*Vector3(0.5, 0.7, 1.0);
     }
-}
-
-double frand(){
-    return double(rand()) / double(RAND_MAX);
 }
 
 int main(int argc, char **argv){
@@ -64,7 +79,7 @@ int main(int argc, char **argv){
                 for(int s = 0; s < nSample; s++){
                     Vector3 uv(double(i + frand()) / double(x), double(j + frand()) / double(y), 0.0);
                     Ray ray = camera.getRay(uv);
-                    col += color(ray, world)* double(255.99);
+                    col += color(ray, world, 0)* double(255.99);
                 }
                 col /= double(nSample);
 
