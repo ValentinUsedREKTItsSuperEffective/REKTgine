@@ -16,11 +16,11 @@ class rt_Sphere : public Hitable {
 bool rt_Sphere::hit(const Ray& ray, float tmin, float tmax, HitRecord& record) const {
     Vector3 oc = ray.origin - center;
     float a = dot(ray.direction, ray.direction);
-    float b = 2.0 * dot(oc, ray.direction);
+    float b = dot(oc, ray.direction);
     float c = dot(oc, oc) - radius*radius;
-    float det = b*b - 4*a*c;
+    float det = b*b - a*c;
     if(det > 0){
-        float t = (-b - sqrt(det)) / 2.0*a;
+        float t = (-b - sqrt(det)) / a;
         if (tmin < t && tmax > t) {
             record.t = t;
             record.p = ray.projectAt(t);
@@ -28,7 +28,7 @@ bool rt_Sphere::hit(const Ray& ray, float tmin, float tmax, HitRecord& record) c
             return true;
         }
 
-        t = (-b + sqrt(det)) / 2.0*a;
+        t = (-b + sqrt(det)) / a;
         if (tmin < t && tmax > t) {
             record.t = t;
             record.p = ray.projectAt(t);
