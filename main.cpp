@@ -22,7 +22,7 @@ Vector3 getPointInUnitSphere(){
 
 Vector3 color(Ray& ray, Hitable* world, int i){
     HitRecord record;
-    if(world->hit(ray, 0.0, 100000000.0, record)){
+    if(world->hit(ray, 0.001, 100000000.0, record)){
         Vector3 p = record.p + record.normal + getPointInUnitSphere();
         Ray r(record.p, p - record.p);
         return 0.5*color(r, world, i+1);
