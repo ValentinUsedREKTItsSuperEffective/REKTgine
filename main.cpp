@@ -74,11 +74,12 @@ int main(int argc, char **argv){
                 for(int s = 0; s < nSample; s++){
                     Vector3 uv(double(i + frand()) / double(x), double(j + frand()) / double(y), 0.0);
                     Ray ray = camera.getRay(uv);
-                    col += color(ray, world, 0)* double(255.99);
+                    col += color(ray, world, 0);
                 }
                 col /= double(nSample);
+                col = Vector3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
 
-                (void) fprintf(fp,"%f %f %f\n", col.r(), col.g(), col.b());
+                (void) fprintf(fp,"%f %f %f\n", col.r()* double(255.99), col.g()* double(255.99), col.b()* double(255.99));
             }
         }
 
