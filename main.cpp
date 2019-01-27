@@ -7,6 +7,7 @@
 #include "HitableList.h"
 #include "rt_Sphere.h"
 #include "rt_Camera.h"
+#include "Material_RT.h"
 
 double frand(){
     return double(rand()) / double(RAND_MAX);
@@ -23,9 +24,10 @@ Vector3 getPointInUnitSphere(){
 Vector3 color(Ray& ray, Hitable* world, int i){
     HitRecord record;
     if(world->hit(ray, 0.001, 100000000.0, record)){
-        Vector3 p = record.p + record.normal + getPointInUnitSphere();
-        Ray r(record.p, p - record.p);
-        return 0.5*color(r, world, i+1);
+        Ray scattered;
+        Vector3 attenuation;
+        record.material->scatter(ray, record, attenuation, scattered);
+        return attenuation*color(scattered, world, i+1);
     } else {
         ray.direction.normalize();
         double t = 0.5*(ray.direction.y() + 1.0);
@@ -58,8 +60,8 @@ int main(int argc, char **argv){
         int nSample = 100;
 
         Hitable *list[2];
-        list[0] = new rt_Sphere(Vector3(0, 0, -1), 0.5);
-        list[1] = new rt_Sphere(Vector3(0, -100.5, -1), 100);
+        list[0] = new rt_Sphere(Vector3(0, 0, -1), 0.5, new Lambertian_RT(Vector3(0.8, 0.3, 0.3)));
+        list[1] = new rt_Sphere(Vector3(0, -100.5, -1), 100, new Lambertian_RT(Vector3(0.8, 0.8, 0.0)));
         HitableList *world = new HitableList(list, 2);
 
         rt_Camera camera;

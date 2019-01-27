@@ -6,11 +6,12 @@
 class rt_Sphere : public Hitable {
     public:
         rt_Sphere() {}
-        rt_Sphere(Vector3 c, float r) : center(c), radius(r) {};
+        rt_Sphere(Vector3 c, float r, Material_RT* mat) : center(c), radius(r), material(mat) {};
         virtual bool hit(const Ray& ray, float tmin, float tmax, HitRecord& record) const;
 
         Vector3 center;
         float radius;
+        Material_RT* material;
 };
 
 bool rt_Sphere::hit(const Ray& ray, float tmin, float tmax, HitRecord& record) const {
@@ -25,6 +26,7 @@ bool rt_Sphere::hit(const Ray& ray, float tmin, float tmax, HitRecord& record) c
             record.t = t;
             record.p = ray.projectAt(t);
             record.normal = normalize(record.p - center);
+            record.material = material;
             return true;
         }
 
