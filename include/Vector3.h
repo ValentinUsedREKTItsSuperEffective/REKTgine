@@ -32,7 +32,7 @@ class Vector3
         inline double length() const {return sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);}
         inline double lengthSq() const {return v[0]*v[0] + v[1]*v[1] + v[2]*v[2];}
         inline void normalize();
-        inline double dot(const Vector3& vec);
+        inline double dot(const Vector3& vec) const;
         inline Vector3 cross(const Vector3& vec);
 
         double v[3];
@@ -92,8 +92,12 @@ inline Vector3 normalize(Vector3 v){
     return v;
 }
 
-inline double Vector3::dot(const Vector3& vec){
+inline double Vector3::dot(const Vector3& vec) const {
     return v[0]*vec[0] + v[1]*vec[1] + v[2]*vec[2];
+}
+
+inline Vector3 reflect(const Vector3& v, const Vector3& n){
+    return v - 2*v.dot(n)*n;
 }
 
 #endif // VECTOR3_H
