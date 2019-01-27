@@ -21,13 +21,16 @@ Vector3 getPointInUnitSphere(){
     return p;
 }
 
-Vector3 color(Ray& ray, Hitable* world, int i){
+Vector3 color(Ray& ray, Hitable* world, int depth){
     HitRecord record;
     if(world->hit(ray, 0.001, 100000000.0, record)){
         Ray scattered;
         Vector3 attenuation;
-        record.material->scatter(ray, record, attenuation, scattered);
-        return attenuation*color(scattered, world, i+1);
+        if(depth < 50 && record.material->scatter(ray, record, attenuation, scattered)){
+            return attenuation*color(scattered, world, depth+1);
+        } else {
+            return Vector3(0.0, 0.0, 0.0);
+        }
     } else {
         ray.direction.normalize();
         double t = 0.5*(ray.direction.y() + 1.0);
