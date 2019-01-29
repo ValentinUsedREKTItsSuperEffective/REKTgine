@@ -24,10 +24,12 @@ class Lambertian_RT : public Material_RT {
 class Metal_RT : public Material_RT {
     public:
         Vector3 albedo;
-        Metal_RT(const Vector3& a) : albedo(a){}
+        float fuzzy;
+
+        Metal_RT(const Vector3& a, float f) : albedo(a), fuzzy(f){}
         virtual bool scatter(const Ray& in, const HitRecord& record, Vector3& attenuation, Ray& scattered) const {
             Vector3 reflected = reflect(normalize(in.direction), record.normal);
-            scattered = Ray(record.p, reflected);
+            scattered = Ray(record.p, reflected + fuzzy*getPointInUnitSphere());
             attenuation = albedo;
             return scattered.direction.dot(record.normal) > 0;
         }

@@ -65,8 +65,8 @@ int main(int argc, char **argv){
         Hitable *list[4];
         list[0] = new rt_Sphere(Vector3(0, 0, -1), 0.5, new Lambertian_RT(Vector3(0.8, 0.3, 0.3)));
         list[1] = new rt_Sphere(Vector3(0, -100.5, -1), 100, new Lambertian_RT(Vector3(0.8, 0.8, 0.0)));
-        list[2] = new rt_Sphere(Vector3(1, 0, -1), 0.5, new Metal_RT(Vector3(0.8, 0.6, 0.2)));
-        list[3] = new rt_Sphere(Vector3(-1, 0, -1), 0.5, new Metal_RT(Vector3(0.8, 0.8, 0.8)));
+        list[2] = new rt_Sphere(Vector3(1, 0, -1), 0.5, new Metal_RT(Vector3(0.8, 0.6, 0.2), 0.0));
+        list[3] = new rt_Sphere(Vector3(-1, 0, -1), 0.5, new Metal_RT(Vector3(0.8, 0.8, 0.8), 1.0));
         HitableList *world = new HitableList(list, 4);
 
         rt_Camera camera;
