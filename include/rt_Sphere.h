@@ -35,6 +35,7 @@ bool rt_Sphere::hit(const Ray& ray, float tmin, float tmax, HitRecord& record) c
             record.t = t;
             record.p = ray.projectAt(t);
             record.normal = normalize(record.p - center);
+            record.material = material;
             return true;
         }
     }
