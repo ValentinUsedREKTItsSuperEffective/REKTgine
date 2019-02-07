@@ -18,7 +18,7 @@ class Vector3
         inline double b() const {return v[2];}
 
         inline const Vector3& operator+() const {return *this;}
-        inline Vector3 operator-() {return Vector3(-v[0], -v[1], -v[2]);}
+        inline Vector3 operator-() const {return Vector3(-v[0], -v[1], -v[2]);}
         inline double operator[](int i) const {return v[i];}
         inline double& operator[](int i) {return v[i];}
 
@@ -98,6 +98,18 @@ inline double Vector3::dot(const Vector3& vec) const {
 
 inline Vector3 reflect(const Vector3& v, const Vector3& n){
     return v - 2*v.dot(n)*n;
+}
+
+inline bool refract(const Vector3& v, const Vector3& n, float ni_over_nt, Vector3& refracted){
+    Vector3 uv = normalize(v);
+    float dt = dot(uv, n);
+    float det = 1.0 - ni_over_nt*ni_over_nt*(1-dt*dt);
+    if (det > 0){
+        refracted = ni_over_nt*(uv - n*dt) - n*sqrt(det);
+        return true;
+    } else {
+        return false;
+    }
 }
 
 #endif // VECTOR3_H

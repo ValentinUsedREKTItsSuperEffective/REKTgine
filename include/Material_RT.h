@@ -35,4 +35,53 @@ class Metal_RT : public Material_RT {
         }
 };
 
+class Dielectric_RT: public Material_RT {
+    public:
+        float refractionIndex;
+
+        Dielectric_RT(float r): refractionIndex(r) {}
+        virtual bool scatter(const Ray& in, const HitRecord& record, Vector3& attenuation, Ray& scattered) const {
+            Vector3 outwardNormal;
+            Vector3 reflected = reflect(normalize(in.direction), record.normal);
+            float ni_over_nt;
+            attenuation = Vector3(1.0, 1.0, 1.0);
+            Vector3 refracted;
+            float reflectedProb, cosine;
+            if(dot(in.direction, record.normal) > 0.0){
+                outwardNormal = -record.normal;
+                ni_over_nt = refractionIndex;
+                cosine = refractionIndex * dot(in.direction, record.normal) / in.direction.length();
+            } else {
+                outwardNormal = record.normal;
+                ni_over_nt = 1.0 / refractionIndex;
+                cosine = -dot(in.direction, record.normal) / in.direction.length();
+            }
+
+            if(refract(in.direction, outwardNormal, ni_over_nt, refracted)){
+                reflectedProb = schlick(cosine, refractionIndex);
+            } else {
+                scattered = Ray(record.p, reflected);
+                reflectedProb = 1;
+            }
+
+            if(frand() < reflectedProb){
+                scattered = Ray(record.p, reflected);
+            } else {
+                scattered = Ray(record.p, refracted);
+            }
+
+            return true;
+        }
+
+        float schlick(float cosine, float refIdx) const {
+            float r0 = (1 - refIdx) / (1 + refIdx);
+            r0 = r0*r0;
+            return r0 + (1-r0)*pow(1 - cosine, 5);
+        }
+
+        double frand() const {
+            return double(rand()) / double(RAND_MAX);
+        }
+};
+
 #endif // MATERIAL_RT_H
