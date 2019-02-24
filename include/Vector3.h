@@ -33,7 +33,7 @@ class Vector3
         inline double lengthSq() const {return v[0]*v[0] + v[1]*v[1] + v[2]*v[2];}
         inline void normalize();
         inline double dot(const Vector3& vec) const;
-        inline Vector3 cross(const Vector3& vec);
+        inline Vector3 cross(const Vector3& vec) const;
 
         double v[3];
 };
@@ -110,6 +110,14 @@ inline bool refract(const Vector3& v, const Vector3& n, float ni_over_nt, Vector
     } else {
         return false;
     }
+}
+
+inline Vector3 Vector3::cross(const Vector3& vec) const {
+    return Vector3(
+        v[1]*vec[2] - v[2]*vec[1],
+        -(v[0]*vec[2] - v[2]*vec[0]),
+        v[0]*vec[1] - v[1]*vec[0]
+    );
 }
 
 #endif // VECTOR3_H

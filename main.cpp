@@ -69,7 +69,7 @@ int main(int argc, char **argv){
         list[3] = new rt_Sphere(Vector3(-1, 0, -1), 0.5, new Dielectric_RT(1.5));
         HitableList *world = new HitableList(list, 4);
 
-        rt_Camera camera(90, x/y);
+        rt_Camera camera(Vector3(-2,2,1), Vector3(0,0,-1), Vector3(0,1,0), 90, x/y);
 
         FILE *fp = fopen("output.ppm", "wb");
 
@@ -79,8 +79,7 @@ int main(int argc, char **argv){
             for(int i = 0; i < x; i++){
                 Vector3 col(0, 0, 0);
                 for(int s = 0; s < nSample; s++){
-                    Vector3 uv(double(i + frand()) / double(x), double(j + frand()) / double(y), 0.0);
-                    Ray ray = camera.getRay(uv);
+                    Ray ray = camera.getRay(double(i + frand()) / double(x), double(j + frand()) / double(y));
                     col += color(ray, world, 0);
                 }
                 col /= double(nSample);
