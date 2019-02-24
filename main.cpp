@@ -69,7 +69,7 @@ int main(int argc, char **argv){
         list[3] = new rt_Sphere(Vector3(-1, 0, -1), 0.5, new Dielectric_RT(1.5));
         HitableList *world = new HitableList(list, 4);
 
-        rt_Camera camera;
+        rt_Camera camera(90, x/y);
 
         FILE *fp = fopen("output.ppm", "wb");
 
