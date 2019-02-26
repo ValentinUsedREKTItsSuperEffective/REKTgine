@@ -9,10 +9,6 @@
 #include "rt_Camera.h"
 #include "Material_RT.h"
 
-double frand(){
-    return double(rand()) / double(RAND_MAX);
-}
-
 Vector3 getPointInUnitSphere(){
     Vector3 p;
     do{
@@ -69,7 +65,11 @@ int main(int argc, char **argv){
         list[3] = new rt_Sphere(Vector3(-1, 0, -1), 0.5, new Dielectric_RT(1.5));
         HitableList *world = new HitableList(list, 4);
 
-        rt_Camera camera(Vector3(-2,2,1), Vector3(0,0,-1), Vector3(0,1,0), 90, x/y);
+        Vector3 lookFrom(3,3,2);
+        Vector3 lookAt(0,0,-1);
+        float distToFocus = (lookFrom - lookAt).length();
+        float aperture = 2.0;
+        rt_Camera camera(lookFrom, lookAt, Vector3(0,1,0), 20, x/y, aperture, distToFocus);
 
         FILE *fp = fopen("output.ppm", "wb");
 
