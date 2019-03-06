@@ -34,6 +34,34 @@ Vector3 color(Ray& ray, Hitable* world, int depth){
     }
 }
 
+Hitable *randomList(){
+    int n = 500;
+    Hitable **list = new Hitable*[n+1];
+    list[0] = new rt_Sphere(Vector3(0,-1000,0), 1000, new Lambertian_RT(Vector3(0.5,0.5,0.5)));
+    int i = 1;
+    for(int a = -11; a < 11; a++){
+        for(int b = -11; b < 11; b++){
+            float chooseMat = frand();
+            Vector3 center(a+0.9*frand(), 0.2, b+0.9*frand());
+            if((center - Vector3(4,0.2,0)).length() > 0.9){
+                if(chooseMat < 0.8){
+                    list[i++] = new rt_Sphere(center, 0.2, new Lambertian_RT(Vector3(frand()*frand(),frand()*frand(),frand()*frand())));
+                } else if(chooseMat < 0.95){
+                    list[i++] = new rt_Sphere(center, 0.2, new Metal_RT(Vector3(0.5*(1 + frand()), 0.5*(1 + frand()),0.5*(1 + frand())), 0.5*frand()));
+                } else {
+                     list[i++] = new rt_Sphere(center, 0.2, new Dielectric_RT(1.5));
+                }
+            }
+        }
+    }
+
+    list[i++] = new rt_Sphere(Vector3(0,1,0), 1, new Dielectric_RT(1.5));
+    list[i++] = new rt_Sphere(Vector3(-4,1,0), 1, new Lambertian_RT(Vector3(0.4,0.2,0.1)));
+    list[i++] = new rt_Sphere(Vector3(4,1,0), 1, new Metal_RT(Vector3(0.7, 0.6, 0.5), 0.0));
+
+    return new HitableList(list, i);
+}
+
 int main(int argc, char **argv){
 
     bool realtime = false;
@@ -58,18 +86,20 @@ int main(int argc, char **argv){
 
         int nSample = 100;
 
-        Hitable *list[4];
-        list[0] = new rt_Sphere(Vector3(0, 0, -1), 0.5, new Lambertian_RT(Vector3(0.8, 0.3, 0.3)));
-        list[1] = new rt_Sphere(Vector3(0, -100.5, -1), 100, new Lambertian_RT(Vector3(0.8, 0.8, 0.0)));
-        list[2] = new rt_Sphere(Vector3(1, 0, -1), 0.5, new Metal_RT(Vector3(0.8, 0.6, 0.2), 0.0));
-        list[3] = new rt_Sphere(Vector3(-1, 0, -1), 0.5, new Dielectric_RT(1.5));
-        HitableList *world = new HitableList(list, 4);
+        //Hitable *list[4];
+        //list[0] = new rt_Sphere(Vector3(0, 1, 0), 1, new Lambertian_RT(Vector3(0.8, 0.3, 0.3)));
+        //list[1] = new rt_Sphere(Vector3(0, -1000, 0), 1000, new Lambertian_RT(Vector3(0.8, 0.8, 0.0)));
+        //list[2] = new rt_Sphere(Vector3(4, 1, 0), 1, new Metal_RT(Vector3(0.8, 0.6, 0.2), 0.0));
+        //list[3] = new rt_Sphere(Vector3(-4, 1, 0), 1, new Dielectric_RT(1.5));
+        //HitableList *world = new HitableList(list, 4);
 
-        Vector3 lookFrom(3,3,2);
-        Vector3 lookAt(0,0,-1);
+        Hitable *world = randomList();
+
+        Vector3 lookFrom(9,1.5,4);
+        Vector3 lookAt(0,0,2);
         float distToFocus = (lookFrom - lookAt).length();
-        float aperture = 2.0;
-        rt_Camera camera(lookFrom, lookAt, Vector3(0,1,0), 20, x/y, aperture, distToFocus);
+        float aperture = 1/2.8;
+        rt_Camera camera(lookFrom, lookAt, Vector3(0,1,0), 50, x/y, aperture, distToFocus);
 
         FILE *fp = fopen("output.ppm", "wb");
 
