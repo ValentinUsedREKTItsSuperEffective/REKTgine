@@ -10,7 +10,6 @@ class Crate : public Cube
         Crate(float dim, std::string vertexShader, std::string fragmentShader, std::string textureSrc);
         ~Crate();
         void display(glm::mat4 &projection, glm::mat4 &modelView);
-        void load();
 
     private:
         Texture _texture;

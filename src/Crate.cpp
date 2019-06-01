@@ -16,22 +16,6 @@ Crate::~Crate()
     //dtor
 }
 
-void Crate::load(){
-    if(glIsBuffer(vbo) == GL_TRUE)
-        glDeleteBuffers(1,&vbo);
-
-    glGenBuffers(1,&vbo);
-
-    glBindBuffer(GL_ARRAY_BUFFER,vbo);
-
-    glBufferData(GL_ARRAY_BUFFER,sizeof(positions)+ sizeof(uvs),0,GL_STATIC_DRAW);
-
-    glBufferSubData(GL_ARRAY_BUFFER,0,sizeof(positions),positions);
-    glBufferSubData(GL_ARRAY_BUFFER,sizeof(positions),sizeof(uvs),uvs);
-
-    glBindBuffer(GL_ARRAY_BUFFER,0);
-}
-
 void Crate::display(glm::mat4 &projection, glm::mat4 &view){
     glm::mat4 modelView = view * matrix;
 
