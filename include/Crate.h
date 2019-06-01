@@ -14,9 +14,6 @@ class Crate : public Cube
 
     private:
         Texture _texture;
-        float _texCoord[72];
-
-        int _sizeTexCoordBytes;
 };
 
 #endif // CRATE_H

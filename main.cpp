@@ -64,7 +64,7 @@ Hitable *randomList(){
 
 int main(int argc, char **argv){
 
-    bool realtime = false;
+    bool realtime = true;
 
     if (realtime) {
         // Notre scène

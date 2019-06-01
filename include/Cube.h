@@ -21,12 +21,12 @@ class Cube : public Object3D{
         virtual void load();
 
     protected:
-        Shader _shader;
-        float _vertex[108];
+        Shader shader;
+        float positions[108];
         float _color[108];
+        float uvs[72];
 
-        GLuint _vbo;
-        int _sizeVerticesBytes;
+        GLuint vbo;
         int _sizeColorBytes;
 };
 
