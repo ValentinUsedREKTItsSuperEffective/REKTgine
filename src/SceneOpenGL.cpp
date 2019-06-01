@@ -104,7 +104,7 @@ void SceneOpenGL::ExampleOne(){
 
     vector<Crate*> crates;
     for(int i = 0; i<10; i++){
-        Crate* crate = new Crate(1.f,"Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
+        Crate* crate = new Crate(1.f,"Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
         crate->load();
         crate->SetPosition(cubePositions[i]);
         crates.push_back(crate);
@@ -161,11 +161,11 @@ void SceneOpenGL::ExampleTwo(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
     // Load mesh
-    Light light(glm::vec3(1.f), "Shaders/light.vert", "Shaders/light.frag");
+    Light light(glm::vec3(1.f), "Shaders/default.vert", "Shaders/light.frag");
     light.setPosition(glm::vec3( 0.0f,  0.0f,  0.0f));
     light.load();
 
-    Mesh suzanne("Ressources/suzanne.obj","Shaders/blinnPhong.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");
+    Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");
     suzanne.load();
     suzanne.useLight(light);
 
