@@ -27,8 +27,8 @@ void Crate::display(glm::mat4 &projection, glm::mat4 &view){
             glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(sizeof(positions)));
-            glEnableVertexAttribArray(2);
+            glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(sizeof(positions)));
+            glEnableVertexAttribArray(1);
 
             //Transformations
 
@@ -44,7 +44,7 @@ void Crate::display(glm::mat4 &projection, glm::mat4 &view){
             glBindTexture(GL_TEXTURE_2D,0);
 
             glDisableVertexAttribArray(0);
-            glDisableVertexAttribArray(2);
+            glDisableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER,0);
 

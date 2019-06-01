@@ -58,7 +58,7 @@ void Mesh::display(glm::mat4 &projection, glm::mat4 &modelView)
         glBindVertexArray(0);
 
         glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(2);
+        glDisableVertexAttribArray(1);
 
     // Don't use the shader anymore
     glUseProgram(0);
@@ -92,11 +92,11 @@ void Mesh::load(){
             glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(_sizeVerticesBytes));
-            glEnableVertexAttribArray(2);
+            glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(_sizeVerticesBytes));
+            glEnableVertexAttribArray(1);
 
-            glVertexAttribPointer(3,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(_sizeVerticesBytes+_sizeUvsBytes));
-            glEnableVertexAttribArray(3);
+            glVertexAttribPointer(2,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(_sizeVerticesBytes+_sizeUvsBytes));
+            glEnableVertexAttribArray(2);
 
         glBindBuffer(GL_ARRAY_BUFFER,0);
 
