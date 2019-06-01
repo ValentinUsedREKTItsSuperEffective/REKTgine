@@ -6,26 +6,7 @@
 
 #endif
 
-Light::Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader) : Cube(0.1f, vertexShader, fragmentShader), _lightColor(color) {
-
-    float colorTmp[] = {color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z,
-                        color.x, color.y, color.z,   color.x, color.y, color.z,   color.x, color.y, color.z};
-
-    for(int i = 0; i<108; i++){
-        _color[i] = colorTmp[i];
-    }
-}
-
+Light::Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader) : Cube(0.1f, vertexShader, fragmentShader), _lightColor(color) {}
 
 void Light::load() {
     Cube::load();

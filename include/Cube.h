@@ -23,11 +23,9 @@ class Cube : public Object3D{
     protected:
         Shader shader;
         float positions[108];
-        float _color[108];
         float uvs[72];
 
         GLuint vbo;
-        int _sizeColorBytes;
 };
 
 #endif // CUBE_H

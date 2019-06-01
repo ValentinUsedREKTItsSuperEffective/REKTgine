@@ -6,7 +6,7 @@
 
 #endif
 
-Cube::Cube(float dim, std::string vertexShader, std::string fragmentShader) : Object3D(), shader(vertexShader,fragmentShader), vbo(0), _sizeColorBytes(sizeof(float)*108){
+Cube::Cube(float dim, std::string vertexShader, std::string fragmentShader) : Object3D(), shader(vertexShader,fragmentShader), vbo(0){
 
     shader.load();
 
@@ -27,24 +27,8 @@ Cube::Cube(float dim, std::string vertexShader, std::string fragmentShader) : Ob
         -dim, dim, dim,   -dim, dim, -dim,   dim, dim, -dim
     };
 
-    float colorTmp[] = {
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0,
-        1.0, 1.0, 1.0,   1.0, 1.0, 1.0,   1.0, 1.0, 1.0
-    };
-
     for(int i = 0; i<108; i++){
         positions[i] = positionsTmp[i];
-        _color[i] = colorTmp[i];
     }
 
     float uvsTmp[] = {
@@ -86,10 +70,9 @@ void Cube::load(){
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(positions), 0, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positions), 0, GL_STATIC_DRAW);
 
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), positions);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions), _sizeColorBytes, _color);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -104,9 +87,6 @@ void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
             glVertexAttribPointer(0, 3, GL_FLOAT,GL_FALSE, 0, BUFFER_OFFSET(0));
             glEnableVertexAttribArray(0);
 
-            glVertexAttribPointer(1, 3, GL_FLOAT,GL_FALSE, 0, BUFFER_OFFSET(sizeof(positions)));
-            glEnableVertexAttribArray(1);
-
             //Transformations
 
             // Matrix send to shader as Uniform after transformation
@@ -117,7 +97,6 @@ void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
             glDrawArrays(GL_TRIANGLES, 0, 36);
 
             glDisableVertexAttribArray(0);
-            glDisableVertexAttribArray(1);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
 
