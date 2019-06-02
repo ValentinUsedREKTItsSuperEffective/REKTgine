@@ -5,9 +5,9 @@
 
 #include <string>
 
-class Shader
-{
+class Shader{
     public:
+        Shader();
         Shader(std::string, std::string);
         ~Shader();
         bool load();

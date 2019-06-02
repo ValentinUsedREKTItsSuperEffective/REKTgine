@@ -3,6 +3,9 @@
 #include <iostream>
 #include <fstream>
 
+Shader::Shader() : _programID(0), _vertexShaderID(0), _fragmentShaderID(0), _vertexSource(""), _fragmentSource(""){
+}
+
 Shader::Shader(std::string vertexSource, std::string fragmentSource) : _programID(0), _vertexShaderID(0), _fragmentShaderID(0),
                                                                         _vertexSource(vertexSource), _fragmentSource(fragmentSource)
 {
