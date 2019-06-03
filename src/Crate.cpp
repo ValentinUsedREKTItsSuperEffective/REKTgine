@@ -20,7 +20,7 @@ void Crate::display(glm::mat4 &projection, glm::mat4 &view){
     glm::mat4 modelView = view * matrix;
 
     // Specify which shader we are using
-    glUseProgram(shader.getProgramID());
+    glUseProgram(shader.programID);
 
         glBindBuffer(GL_ARRAY_BUFFER,vbo);
 
@@ -33,8 +33,8 @@ void Crate::display(glm::mat4 &projection, glm::mat4 &view){
             //Transformations
 
             // Matrix send to shader as Uniform after transformation
-            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(),"projection"),1,GL_FALSE,glm::value_ptr(projection));
-            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(),"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
+            glUniformMatrix4fv(glGetUniformLocation(shader.programID,"projection"),1,GL_FALSE,glm::value_ptr(projection));
+            glUniformMatrix4fv(glGetUniformLocation(shader.programID,"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
 
             glBindTexture(GL_TEXTURE_2D,_texture.getID());
 

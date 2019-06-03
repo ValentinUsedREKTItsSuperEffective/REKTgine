@@ -38,15 +38,15 @@ Mesh::~Mesh()
 void Mesh::display(glm::mat4 &projection, glm::mat4 &modelView)
 {
     // Specify which shader we are using
-    glUseProgram(_shader.getProgramID());
+    glUseProgram(_shader.programID);
 
         glBindVertexArray(_vao);
 
             //Transformations
 
             // Matrix send to shader as Uniform after transformation
-            glUniformMatrix4fv(glGetUniformLocation(_shader.getProgramID(),"projection"),1,GL_FALSE,glm::value_ptr(projection));
-            glUniformMatrix4fv(glGetUniformLocation(_shader.getProgramID(),"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
+            glUniformMatrix4fv(glGetUniformLocation(_shader.programID,"projection"),1,GL_FALSE,glm::value_ptr(projection));
+            glUniformMatrix4fv(glGetUniformLocation(_shader.programID,"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
 
             glBindTexture(GL_TEXTURE_2D,_texture.getID());
 
@@ -125,11 +125,11 @@ void Mesh::updateVBO(void *data, int sizeBytes, int offset){
 
 
 void Mesh::useLight(Light &light) {
-    glUseProgram(_shader.getProgramID());
+    glUseProgram(_shader.programID);
 
         glBindVertexArray(_vao);
 
-            GLuint lightColorLoc = glGetUniformLocation(_shader.getProgramID(), "lightColor");
+            GLuint lightColorLoc = glGetUniformLocation(_shader.programID, "lightColor");
             glm::vec3 lightColor = light.getColor();
             float toFloat3[3] = {lightColor.x, lightColor.y, lightColor.z};
             glUniform3fv(lightColorLoc, 1, toFloat3);

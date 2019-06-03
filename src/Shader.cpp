@@ -3,44 +3,32 @@
 #include <iostream>
 #include <fstream>
 
-Shader::Shader() : _programID(0), _vertexShaderID(0), _fragmentShaderID(0), _vertexSource(""), _fragmentSource(""){
+Shader::Shader() : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(""), fragSrc(""){
 }
 
-Shader::Shader(std::string vertexSource, std::string fragmentSource) : _programID(0), _vertexShaderID(0), _fragmentShaderID(0),
-                                                                        _vertexSource(vertexSource), _fragmentSource(fragmentSource)
-{
+Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){
 }
 
-Shader::~Shader()
-{
-    glDeleteShader(_vertexShaderID);
-    glDeleteShader(_fragmentShaderID);
-    glDeleteProgram(_programID);
+Shader::~Shader(){
+    glDeleteShader(vertShaderID);
+    glDeleteShader(fragShaderID);
+    glDeleteProgram(programID);
 }
 
 bool Shader::load(){
-
-    if(compile(_vertexShaderID,GL_VERTEX_SHADER,_vertexSource) == false)
-    {
+    if(compile(vertShaderID ,GL_VERTEX_SHADER, vertSrc) == false){
         return false;
     }
 
-    if(compile(_fragmentShaderID,GL_FRAGMENT_SHADER,_fragmentSource) == false)
-    {
+    if(compile(fragShaderID,GL_FRAGMENT_SHADER,fragSrc) == false){
         return false;
     }
 
-    _programID = glCreateProgram();
+    programID = glCreateProgram();
 
-    glAttachShader(_programID,_vertexShaderID);
-    glAttachShader(_programID,_fragmentShaderID);
-
-    glBindAttribLocation(_programID,0,"in_Vertex");
-    glBindAttribLocation(_programID,1,"in_Color");
-    glBindAttribLocation(_programID,2,"in_TexCoord0");
-    glBindAttribLocation(_programID,3,"in_Normal");
-
-    glLinkProgram(_programID);
+    glAttachShader(programID, vertShaderID);
+    glAttachShader(programID, fragShaderID);
+    glLinkProgram(programID);
 
     return true;
 }
@@ -87,9 +75,4 @@ bool Shader::compile(GLuint &shader, GLenum type, std::string const &fileSrc){
     }
 
     return true;
-}
-
-GLuint Shader::getProgramID() const{
-
-    return _programID;
 }

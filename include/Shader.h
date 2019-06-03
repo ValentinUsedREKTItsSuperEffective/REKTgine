@@ -7,6 +7,8 @@
 
 class Shader{
     public:
+        GLuint programID;
+
         Shader();
         Shader(std::string, std::string);
         ~Shader();
@@ -15,12 +17,11 @@ class Shader{
         GLuint getProgramID() const;
 
     private:
-        GLuint _programID;
-        GLuint _vertexShaderID;
-        GLuint _fragmentShaderID;
+        GLuint vertShaderID;
+        GLuint fragShaderID;
 
-        std::string _vertexSource;
-        std::string _fragmentSource;
+        std::string vertSrc;
+        std::string fragSrc;
 };
 
 #endif // SHADER_H

@@ -16,7 +16,7 @@ void Light::load() {
 
     glGenVertexArrays(1,&_lightVAO);
 
-    glUseProgram(shader.getProgramID());
+    glUseProgram(shader.programID);
 
     glBindVertexArray(_lightVAO);
 
@@ -25,7 +25,7 @@ void Light::load() {
             glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(0));
             glEnableVertexAttribArray(0);
 
-            GLuint lightColorLoc = glGetUniformLocation(shader.getProgramID(), "lightColor");
+            GLuint lightColorLoc = glGetUniformLocation(shader.programID, "lightColor");
             float toFloat3[3] = {_lightColor.x, _lightColor.y, _lightColor.z};
             glUniform3fv(lightColorLoc, 1, toFloat3);
 
@@ -38,15 +38,15 @@ void Light::load() {
 
 void Light::display(glm::mat4 &projection, glm::mat4 &modelView) {
     // Specify which shader we are using
-    glUseProgram(shader.getProgramID());
+    glUseProgram(shader.programID);
 
         glBindVertexArray(_lightVAO);
 
             //Transformations
 
             // Matrix send to shader as Uniform after transformation
-            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(),"projection"),1,GL_FALSE,glm::value_ptr(projection));
-            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(),"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
+            glUniformMatrix4fv(glGetUniformLocation(shader.programID,"projection"),1,GL_FALSE,glm::value_ptr(projection));
+            glUniformMatrix4fv(glGetUniformLocation(shader.programID,"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
 
             // Time to draw
             glDrawArrays(GL_TRIANGLES,0,36);
