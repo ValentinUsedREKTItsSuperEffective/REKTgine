@@ -1,9 +1,17 @@
 #include "BaseMaterial.h"
 
 BaseMaterial::BaseMaterial() : color(glm::vec3(1.f, 1.f, 1.f)){
+    colorTexture = Texture();
+    colorTexture.load();
+
     loadShader();
 }
-BaseMaterial::BaseMaterial(glm::vec3 color) : color(color) {
+BaseMaterial::BaseMaterial(BaseMaterialParameters parameters) : color(parameters.color){
+    if(parameters.textureSrc != ""){
+        colorTexture = Texture(parameters.textureSrc);
+        colorTexture.load();
+    }
+
     loadShader();
 }
 

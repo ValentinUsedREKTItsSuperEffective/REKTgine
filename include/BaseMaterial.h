@@ -4,13 +4,20 @@
 #include <glm/glm.hpp>
 
 #include "Shader.h"
+#include "Texture.h"
+
+struct BaseMaterialParameters{
+    glm::vec3 color = glm::vec3(1.f, 1.f, 1.f);
+    std::string textureSrc = "";
+};
 
 class BaseMaterial{
     public:
         glm::vec3 color;
+        Texture colorTexture;
 
         BaseMaterial();
-        BaseMaterial(glm::vec3 color);
+        BaseMaterial(BaseMaterialParameters parameters);
         virtual ~BaseMaterial();
 
     protected:
