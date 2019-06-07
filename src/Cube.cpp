@@ -97,7 +97,6 @@ void Cube::load(){
 }
 
 void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
-
     // Specify which shader we are using
     glUseProgram(shader.programID);
 
@@ -110,6 +109,8 @@ void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
 
     // Time to draw
     glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glBindVertexArray(0);
 
     // Don't use the shader anymore
     glUseProgram(0);

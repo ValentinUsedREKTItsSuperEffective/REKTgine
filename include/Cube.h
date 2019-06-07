@@ -17,8 +17,8 @@ class Cube : public Object3D{
     public:
         Cube(float dim, std::string vertexShader, std::string fragmentShader);
         ~Cube();
-        virtual void display(glm::mat4 &projection, glm::mat4 &modelView);
         virtual void load();
+        virtual void display(glm::mat4 &projection, glm::mat4 &modelView);
 
     protected:
         Shader shader;

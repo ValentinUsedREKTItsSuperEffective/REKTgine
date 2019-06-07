@@ -24,7 +24,7 @@ out vec4 out_Color;
 // Fonctions
 
 vec3 Phong() {
-    float ambientIntensity = 0.1f;
+    float ambientIntensity = 1f;
     vec3 ambientColor = vec3(0.8f, 0.8f, 0.7f);
 
     vec3 ambient = ambientIntensity * ambientColor;
