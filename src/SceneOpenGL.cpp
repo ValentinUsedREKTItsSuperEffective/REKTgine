@@ -161,7 +161,7 @@ void SceneOpenGL::ExampleTwo(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
     // Load mesh
-    Light light(glm::vec3(1.f), "Shaders/default.vert", "Shaders/light.frag");
+    Light light(glm::vec3(1.f), "Shaders/default.vert", "Shaders/default.frag");
     light.load();
 
     Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");

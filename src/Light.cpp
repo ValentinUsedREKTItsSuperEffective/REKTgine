@@ -13,7 +13,7 @@ void Light::load(){
 
     glUseProgram(shader.programID);
 
-    GLuint lightColorLoc = glGetUniformLocation(shader.programID, "lightColor");
+    GLuint lightColorLoc = glGetUniformLocation(shader.programID, "color");
     float toFloat3[3] = {lightColor.x, lightColor.y, lightColor.z};
     glUniform3fv(lightColorLoc, 1, toFloat3);
 

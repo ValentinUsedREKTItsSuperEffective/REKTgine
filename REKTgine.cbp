@@ -53,9 +53,8 @@
 		<Unit filename="Shaders/blinnPhong.vert" />
 		<Unit filename="Shaders/couleur3D.frag" />
 		<Unit filename="Shaders/couleur3D.vert" />
+		<Unit filename="Shaders/default.frag" />
 		<Unit filename="Shaders/default.vert" />
-		<Unit filename="Shaders/light.frag" />
-		<Unit filename="Shaders/light.vert" />
 		<Unit filename="Shaders/texture.frag" />
 		<Unit filename="Shaders/texture.vert" />
 		<Unit filename="include/BaseMaterial.h" />
