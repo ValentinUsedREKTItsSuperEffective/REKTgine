@@ -84,6 +84,16 @@ void Cube::load(){
 
     glGenVertexArrays(1,&vao);
 
+    glBindVertexArray(vao);
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    glBindVertexArray(0);
 }
 
 void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
@@ -91,23 +101,15 @@ void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){
     // Specify which shader we are using
     glUseProgram(shader.programID);
 
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBindVertexArray(vao);
 
-            glVertexAttribPointer(0, 3, GL_FLOAT,GL_FALSE, 0, BUFFER_OFFSET(0));
-            glEnableVertexAttribArray(0);
+    //Transformations
+    // Matrix send to shader as Uniform after transformation
+    glUniformMatrix4fv(glGetUniformLocation(shader.programID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(shader.programID, "modelView"), 1, GL_FALSE, glm::value_ptr(modelView));
 
-            //Transformations
-
-            // Matrix send to shader as Uniform after transformation
-            glUniformMatrix4fv(glGetUniformLocation(shader.programID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-            glUniformMatrix4fv(glGetUniformLocation(shader.programID, "modelView"), 1, GL_FALSE, glm::value_ptr(modelView));
-
-            // Time to draw
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-
-            glDisableVertexAttribArray(0);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    // Time to draw
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 
     // Don't use the shader anymore
     glUseProgram(0);

@@ -13,20 +13,9 @@ void Light::load(){
 
     glUseProgram(shader.programID);
 
-    glBindVertexArray(vao);
-
-        glBindBuffer(GL_ARRAY_BUFFER, vbo);
-
-            glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(0));
-            glEnableVertexAttribArray(0);
-
-            GLuint lightColorLoc = glGetUniformLocation(shader.programID, "lightColor");
-            float toFloat3[3] = {lightColor.x, lightColor.y, lightColor.z};
-            glUniform3fv(lightColorLoc, 1, toFloat3);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-    glBindVertexArray(0);
+    GLuint lightColorLoc = glGetUniformLocation(shader.programID, "lightColor");
+    float toFloat3[3] = {lightColor.x, lightColor.y, lightColor.z};
+    glUniform3fv(lightColorLoc, 1, toFloat3);
 
     glUseProgram(0);
 }
