@@ -15,14 +15,16 @@ class BaseMaterial{
     public:
         glm::vec3 color;
         Texture colorTexture;
+        bool needUpdate;
+
+        Shader shader;
 
         BaseMaterial();
         BaseMaterial(BaseMaterialParameters parameters);
         virtual ~BaseMaterial();
+        virtual void update();
 
     protected:
-        Shader shader;
-
         virtual void loadShader();
 
     private:
