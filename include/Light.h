@@ -11,17 +11,12 @@
 
 class Light : public Cube {
     public:
+        glm::vec3 lightColor;
+
         Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader);
-        inline glm::vec3 getPosition() {return _position;}
-        inline void setPosition(glm::vec3 position) {_position = position;}
-        inline glm::vec3 getColor() {return _lightColor;}
         virtual void load() override;
         virtual void display(glm::mat4 &projection, glm::mat4 &modelView) override;
     private:
-
-        glm::vec3 _position;
-        glm::vec3 _lightColor;
-
         GLuint _lightVAO;
 };
 

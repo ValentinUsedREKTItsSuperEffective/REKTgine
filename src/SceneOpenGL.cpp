@@ -162,7 +162,6 @@ void SceneOpenGL::ExampleTwo(){
 
     // Load mesh
     Light light(glm::vec3(1.f), "Shaders/default.vert", "Shaders/light.frag");
-    light.setPosition(glm::vec3( 0.0f,  0.0f,  0.0f));
     light.load();
 
     Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");
@@ -203,7 +202,7 @@ void SceneOpenGL::ExampleTwo(){
         camera.lookAt(view);
 
         glm::mat4 model;
-        model = glm::translate(model,light.getPosition());
+        model = glm::translate(model,light.position);
         modelView = view * model;
         light.display(projection, modelView);
 

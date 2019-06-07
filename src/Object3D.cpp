@@ -7,9 +7,7 @@ Object3D::Object3D(){
     rotation = glm::vec3(0.f);
 }
 
-Object3D::~Object3D(){
-    //dtor
-}
+Object3D::~Object3D(){}
 
 void Object3D::SetPosition(glm::vec3 p){
     position = p;

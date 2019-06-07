@@ -6,9 +6,9 @@
 
 #endif
 
-Light::Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader) : Cube(0.1f, vertexShader, fragmentShader), _lightColor(color) {}
+Light::Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader) : Cube(0.1f, vertexShader, fragmentShader), lightColor(color) {}
 
-void Light::load() {
+void Light::load(){
     Cube::load();
 
     if(glIsVertexArray(_lightVAO) == GL_TRUE)
@@ -26,7 +26,7 @@ void Light::load() {
             glEnableVertexAttribArray(0);
 
             GLuint lightColorLoc = glGetUniformLocation(shader.programID, "lightColor");
-            float toFloat3[3] = {_lightColor.x, _lightColor.y, _lightColor.z};
+            float toFloat3[3] = {lightColor.x, lightColor.y, lightColor.z};
             glUniform3fv(lightColorLoc, 1, toFloat3);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
