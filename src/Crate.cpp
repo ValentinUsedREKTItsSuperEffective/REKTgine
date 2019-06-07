@@ -36,7 +36,7 @@ void Crate::display(glm::mat4 &projection, glm::mat4 &view){
             glUniformMatrix4fv(glGetUniformLocation(shader.programID,"projection"),1,GL_FALSE,glm::value_ptr(projection));
             glUniformMatrix4fv(glGetUniformLocation(shader.programID,"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
 
-            glBindTexture(GL_TEXTURE_2D,_texture.getID());
+            glBindTexture(GL_TEXTURE_2D,_texture.textureID);
 
             // Time to draw
             glDrawArrays(GL_TRIANGLES,0,36);

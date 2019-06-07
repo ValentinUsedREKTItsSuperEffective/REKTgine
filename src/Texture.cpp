@@ -1,47 +1,34 @@
 #include "Texture.h"
 
-Texture::Texture() : _ID(0), _textureSrc(""){
+Texture::Texture() : textureID(0), src(""){}
 
-}
-
-Texture::Texture(std::string src) : _ID(0), _textureSrc(src){
-
-}
+Texture::Texture(std::string src) : textureID(0), src(src){}
 
 Texture::Texture(const Texture &texture){
-    _textureSrc = texture._textureSrc;
+    src = texture.src;
     load();
 }
 
 Texture::~Texture(){
-    glDeleteTextures(1,&_ID);
+    glDeleteTextures(1, &textureID);
 }
 
 Texture& Texture::operator=(Texture const &texture){
-    _textureSrc = texture._textureSrc;
+    src = texture.src;
     load();
 
     return *this;
 }
 
 bool Texture::load(){
-
-    SDL_Surface* img = IMG_Load(_textureSrc.c_str());
-    if(img == 0){
-        std::cout << "Error : " << SDL_GetError() << std::endl;
-        return false;
-    }
-
-    img = invertPixels(img);
-
-    if(glIsTexture(_ID) == GL_TRUE)
-        glDeleteTextures(1,&_ID);
+    if(glIsTexture(textureID) == GL_TRUE)
+        glDeleteTextures(1, &textureID);
 
     // ID generation
-    glGenTextures(1,&_ID);
+    glGenTextures(1, &textureID);
 
     // lock the texture
-    glBindTexture(GL_TEXTURE_2D,_ID);
+    glBindTexture(GL_TEXTURE_2D, textureID);
 
     // rgb or rgba
     GLenum internalFormat(0);
@@ -49,61 +36,57 @@ bool Texture::load(){
     // rgb or brg (.bmp)
     GLenum format(0);
 
+    SDL_Surface* img = IMG_Load(src.c_str());
+    if(img == 0){
+        std::cout << "Error : " << SDL_GetError() << std::endl;
+        return false;
+    }
+
+    img = invertPixels(img);
+
     if(img->format->BytesPerPixel == 3){
         internalFormat = GL_RGB;
 
         if(img->format->Rmask == 0xff){
             format = GL_RGB;
-        }
-        else{
+        } else {
             format = GL_BGR;
         }
-    }
-    else if(img->format->BytesPerPixel == 4){
+    } else if(img->format->BytesPerPixel == 4){
         internalFormat = GL_RGBA;
 
         if(img->format->Rmask == 0xff){
             format = GL_RGBA;
-        }
-        else{
+        } else{
             format = GL_BGRA;
         }
-    }
-    else{
+    } else {
         std::cout << "Error : Unknown format file !"<< std::endl;
         SDL_FreeSurface(img);
         return false;
     }
 
     // fill the texture
-    glTexImage2D(GL_TEXTURE_2D,0,internalFormat,img->w,img->h,0,format,GL_UNSIGNED_BYTE,img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, img->w, img->h, 0, format, GL_UNSIGNED_BYTE, img->pixels);
 
     // filters
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     // unlock
-    glBindTexture(GL_TEXTURE_2D,0);
+    glBindTexture(GL_TEXTURE_2D, 0);
 
     SDL_FreeSurface(img);
     return true;
 }
 
-GLuint Texture::getID() const{
-    return _ID;
-}
-
-void Texture::setSource(const std::string &src){
-    _textureSrc = src;
-}
-
-SDL_Surface* Texture::invertPixels(SDL_Surface* img) const{
+SDL_Surface* Texture::invertPixels(SDL_Surface* img) const {
     int height = img->h;
     int width = img->w;
     int bytesPerPixels = img->format->BytesPerPixel;
 
-    SDL_Surface* invertedImg = SDL_CreateRGBSurface(0,width,height,img->format->BitsPerPixel,
-        img->format->Rmask,img->format->Gmask,img->format->Bmask,img->format->Amask);
+    SDL_Surface* invertedImg = SDL_CreateRGBSurface(0, width,height, img->format->BitsPerPixel,
+        img->format->Rmask, img->format->Gmask, img->format->Bmask, img->format->Amask);
 
     unsigned char* pixelsSrc = (unsigned char *)img->pixels;
     unsigned char* pixelsDest = (unsigned char *)invertedImg->pixels;
