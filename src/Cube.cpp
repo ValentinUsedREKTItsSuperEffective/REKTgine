@@ -63,6 +63,7 @@ Cube::~Cube(){
 }
 
 void Cube::load(){
+    // Geometry
     if(glIsBuffer(vbo) == GL_TRUE)
         glDeleteBuffers(1, &vbo);
 
@@ -76,6 +77,13 @@ void Cube::load(){
     glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions), sizeof(uvs), uvs);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+    // VAO
+    if(glIsVertexArray(vao) == GL_TRUE)
+        glDeleteVertexArrays(1,&vao);
+
+    glGenVertexArrays(1,&vao);
+
 }
 
 void Cube::display(glm::mat4 &projection, glm::mat4 &modelView){

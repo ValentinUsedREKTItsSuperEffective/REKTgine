@@ -11,14 +11,9 @@ Light::Light(glm::vec3 color, std::string vertexShader, std::string fragmentShad
 void Light::load(){
     Cube::load();
 
-    if(glIsVertexArray(_lightVAO) == GL_TRUE)
-        glDeleteVertexArrays(1,&_lightVAO);
-
-    glGenVertexArrays(1,&_lightVAO);
-
     glUseProgram(shader.programID);
 
-    glBindVertexArray(_lightVAO);
+    glBindVertexArray(vao);
 
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
@@ -40,7 +35,7 @@ void Light::display(glm::mat4 &projection, glm::mat4 &modelView) {
     // Specify which shader we are using
     glUseProgram(shader.programID);
 
-        glBindVertexArray(_lightVAO);
+        glBindVertexArray(vao);
 
             //Transformations
 

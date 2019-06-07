@@ -26,6 +26,7 @@ class Cube : public Object3D{
         float uvs[72];
 
         GLuint vbo;
+        GLuint vao;
 };
 
 #endif // CUBE_H

@@ -16,8 +16,6 @@ class Light : public Cube {
         Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader);
         virtual void load() override;
         virtual void display(glm::mat4 &projection, glm::mat4 &modelView) override;
-    private:
-        GLuint _lightVAO;
 };
 
 #endif // LIGHT_H
