@@ -59,7 +59,6 @@
 		<Unit filename="Shaders/texture.vert" />
 		<Unit filename="include/BaseMaterial.h" />
 		<Unit filename="include/Camera.h" />
-		<Unit filename="include/Crate.h" />
 		<Unit filename="include/Cube.h" />
 		<Unit filename="include/Hitable.h" />
 		<Unit filename="include/HitableList.h" />
@@ -79,7 +78,6 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BaseMaterial.cpp" />
 		<Unit filename="src/Camera.cpp" />
-		<Unit filename="src/Crate.cpp" />
 		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/Input.cpp" />
 		<Unit filename="src/Light.cpp" />
