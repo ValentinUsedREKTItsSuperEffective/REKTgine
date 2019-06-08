@@ -9,19 +9,20 @@
 
 #include "Object3D.h"
 #include "Shader.h"
+#include "BaseMaterial.h"
 
 
 // Class Cube
 
 class Cube : public Object3D{
     public:
-        Cube(float dim, std::string vertexShader, std::string fragmentShader);
+        Cube(float dim, BaseMaterial *material);
         ~Cube();
         virtual void load();
         virtual void display(glm::mat4 &projection, glm::mat4 &modelView);
 
     protected:
-        Shader shader;
+        BaseMaterial *material;
         float positions[108];
         float uvs[72];
 

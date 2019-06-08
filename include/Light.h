@@ -7,14 +7,11 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "Cube.h"
-
-class Light : public Cube {
+class Light {
     public:
         glm::vec3 lightColor;
 
-        Light(glm::vec3 color, std::string vertexShader, std::string fragmentShader);
-        virtual void load() override;
+        Light(glm::vec3 color);
 };
 
 #endif // LIGHT_H

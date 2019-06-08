@@ -99,12 +99,13 @@ void SceneOpenGL::ExampleOne(){
       glm::vec3(-1.3f,  1.0f, -1.5f)
     };
 
-    // Cube cube(0.5f,"Shaders/couleur3D.vert", "Shaders/couleur3D.frag");
-    // cube.load();
+    BaseMaterialParameters param;
+    param.textureSrc = "Ressources/photorealistic/photorealistic_crate/crate12.jpg";
+    BaseMaterial mat(param);
 
-    vector<Crate*> crates;
-    for(int i = 0; i<10; i++){
-        Crate* crate = new Crate(1.f,"Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/photorealistic/photorealistic_crate/crate12.jpg");
+    vector<Cube*> crates;
+    for(int i = 0; i < 10; i++){
+        Cube* crate = new Cube(1.f, &mat);
         crate->load();
         crate->SetPosition(cubePositions[i]);
         crates.push_back(crate);
@@ -119,7 +120,7 @@ void SceneOpenGL::ExampleOne(){
     _input.showCursor(false);
     _input.captureCursor(true);
 
-     glm::mat4 view, model;
+     glm::mat4 view, model, modelView;
 
      while(!_input.isEnd()){
 
@@ -139,7 +140,10 @@ void SceneOpenGL::ExampleOne(){
         camera.lookAt(view);
 
         for(int i = 0; i<10; i++){
-            crates[i]->display(projection,view);
+            model = glm::translate(model, crates[i]->position);
+            modelView = view * model;
+            crates[i]->display(projection, modelView);
+            model = glm::mat4(1.f);
         }
 
         SDL_GL_SwapWindow(_window);
@@ -161,8 +165,10 @@ void SceneOpenGL::ExampleTwo(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
     // Load mesh
-    Light light(glm::vec3(1.f), "Shaders/default.vert", "Shaders/default.frag");
-    light.load();
+    Light light(glm::vec3(1.f));
+
+    BaseMaterial mat;
+    Cube cube(0.1f, &mat);
 
     Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");
     suzanne.load();
@@ -202,9 +208,9 @@ void SceneOpenGL::ExampleTwo(){
         camera.lookAt(view);
 
         glm::mat4 model;
-        model = glm::translate(model,light.position);
+        model = glm::translate(model,cube.position);
         modelView = view * model;
-        light.display(projection, modelView);
+        cube.display(projection, modelView);
 
         model = glm::translate(model,glm::vec3( 2.4f, -0.4f, -3.5f));
         modelView = view * model;
