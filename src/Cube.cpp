@@ -80,16 +80,19 @@ void Cube::load(){
 
     // VAO
     if(glIsVertexArray(vao) == GL_TRUE)
-        glDeleteVertexArrays(1,&vao);
+        glDeleteVertexArrays(1, &vao);
 
-    glGenVertexArrays(1,&vao);
+    glGenVertexArrays(1, &vao);
 
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,BUFFER_OFFSET(0));
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
     glEnableVertexAttribArray(0);
+
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(positions)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
