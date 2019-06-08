@@ -23,6 +23,7 @@ class BaseMaterial{
         BaseMaterial(BaseMaterialParameters parameters);
         virtual ~BaseMaterial();
         virtual void update();
+        virtual void bindTextures();
 
     protected:
         virtual void loadShader();

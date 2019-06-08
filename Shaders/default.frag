@@ -9,7 +9,7 @@ in vec2 coordTexture;
 
 // Uniform
 
-uniform sampler2D tex;
+uniform sampler2D colorTex;
 uniform vec3 color;
 
 
@@ -18,5 +18,5 @@ uniform vec3 color;
 out vec4 out_Color;
 
 void main(){
-    out_Color = texture(tex, coordTexture) * vec4(color, 1);
+    out_Color = texture(colorTex, coordTexture) * vec4(color, 1);
 }

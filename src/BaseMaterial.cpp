@@ -29,7 +29,14 @@ void BaseMaterial::update(){
     float toFloat3[3] = {color.x, color.y, color.z};
     glUniform3fv(colorLoc, 1, toFloat3);
 
+    glUniform1i(glGetUniformLocation(shader.programID, "colorTex"), 0);
+
     glUseProgram(0);
 
     needUpdate = false;
+}
+
+void BaseMaterial::bindTextures(){
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, colorTexture.textureID);
 }
