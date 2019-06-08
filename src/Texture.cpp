@@ -31,43 +31,65 @@ bool Texture::load(){
     glBindTexture(GL_TEXTURE_2D, textureID);
 
     // rgb or rgba
-    GLenum internalFormat(0);
+    GLenum internalFormat = GL_RGB;
 
     // rgb or brg (.bmp)
-    GLenum format(0);
+    GLenum format = GL_RGB;
 
-    SDL_Surface* img = IMG_Load(src.c_str());
-    if(img == 0){
-        std::cout << "Error : " << SDL_GetError() << std::endl;
-        return false;
-    }
+    GLsizei width = 1;
+    GLsizei height = 1;
 
-    img = invertPixels(img);
+    GLvoid *data;
 
-    if(img->format->BytesPerPixel == 3){
-        internalFormat = GL_RGB;
+    SDL_Surface* img = NULL;
 
-        if(img->format->Rmask == 0xff){
-            format = GL_RGB;
+    if(src != ""){
+        img = IMG_Load(src.c_str());
+        if(img == 0){
+            std::cout << "Error : " << SDL_GetError() << std::endl;
+            return false;
+        }
+
+        img = invertPixels(img);
+
+        if(img->format->BytesPerPixel == 3){
+            internalFormat = GL_RGB;
+
+            if(img->format->Rmask == 0xff){
+                format = GL_RGB;
+            } else {
+                format = GL_BGR;
+            }
+        } else if(img->format->BytesPerPixel == 4){
+            internalFormat = GL_RGBA;
+
+            if(img->format->Rmask == 0xff){
+                format = GL_RGBA;
+            } else{
+                format = GL_BGRA;
+            }
         } else {
-            format = GL_BGR;
+            std::cout << "Error : Unknown format file !"<< std::endl;
+            SDL_FreeSurface(img);
+            return false;
         }
-    } else if(img->format->BytesPerPixel == 4){
-        internalFormat = GL_RGBA;
 
-        if(img->format->Rmask == 0xff){
-            format = GL_RGBA;
-        } else{
-            format = GL_BGRA;
-        }
+        width = img->w;
+        height = img->h;
+
+        data = img->pixels;
     } else {
-        std::cout << "Error : Unknown format file !"<< std::endl;
-        SDL_FreeSurface(img);
-        return false;
+        img = SDL_CreateRGBSurface(0, 1, 1, 32, 0, 0, 0, 0);
+
+        SDL_LockSurface(img);
+        SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 255, 255, 255));
+        SDL_UnlockSurface(img);
+
+        data = img->pixels;
     }
 
     // fill the texture
-    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, img->w, img->h, 0, format, GL_UNSIGNED_BYTE, img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, GL_UNSIGNED_BYTE, data);
 
     // filters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
