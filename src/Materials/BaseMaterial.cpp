@@ -40,3 +40,5 @@ void BaseMaterial::bindTextures(){
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, colorTexture.textureID);
 }
+
+void BaseMaterial::useLight(Light &light){}

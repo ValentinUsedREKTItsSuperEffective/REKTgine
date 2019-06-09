@@ -14,3 +14,13 @@ void PhongMaterial::loadShader(){
     shader = Shader("Shaders/default.vert", "Shaders/blinnPhong.frag");
     shader.load();
 }
+
+// ONLY FOR ONE TYPE OF LIGHT CASTER !
+void PhongMaterial::useLight(Light &light){
+    glUseProgram(shader.programID);
+
+    float toFloat3[3] = {light.lightColor.x, light.lightColor.y, light.lightColor.z};
+    glUniform3fv(glGetUniformLocation(shader.programID, "ambientColor"), 1, toFloat3);
+
+    glUseProgram(0);
+}

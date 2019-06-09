@@ -5,6 +5,7 @@
 
 #include "Shader.h"
 #include "Texture.h"
+#include "Light.h"
 
 struct BaseMaterialParameters{
     glm::vec3 color = glm::vec3(1.f, 1.f, 1.f);
@@ -24,6 +25,8 @@ class BaseMaterial{
         virtual ~BaseMaterial();
         virtual void update();
         virtual void bindTextures();
+
+        virtual void useLight(Light &light);
 
     protected:
         virtual void loadShader();

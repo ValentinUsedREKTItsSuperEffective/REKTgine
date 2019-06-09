@@ -1,5 +1,6 @@
 #include "SceneOpenGL.h"
 #include "Light.h"
+#include "Materials/PhongMaterial.h"
 
 #include "glm/ext.hpp"
 
@@ -95,8 +96,7 @@ void SceneOpenGL::ExampleOne(){
       glm::vec3(-1.7f,  3.0f, -7.5f),
       glm::vec3( 1.3f, -2.0f, -2.5f),
       glm::vec3( 1.5f,  2.0f, -2.5f),
-      glm::vec3( 1.5f,  0.2f, -1.5f),
-      glm::vec3(-1.3f,  1.0f, -1.5f)
+      glm::vec3( 1.5f,  0.2f, -1.5f)
     };
 
     BaseMaterialParameters param;
@@ -104,12 +104,23 @@ void SceneOpenGL::ExampleOne(){
     BaseMaterial mat(param);
 
     vector<Cube*> crates;
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 9; i++){
         Cube* crate = new Cube(1.f, &mat);
         crate->load();
         crate->SetPosition(cubePositions[i]);
         crates.push_back(crate);
     }
+
+    Light ambientLight(glm::vec3(1.f, 1.f, 1.f));
+
+    PhongMaterialParameters phongParam;
+    param.color = glm::vec3(1.0f, 0.5f, 0.31f);
+    PhongMaterial phongMat(phongParam);
+    Cube* phongCube = new Cube(0.5f, &phongMat);
+    phongCube->load();
+    phongCube->SetPosition(glm::vec3(-1.3f,  1.0f, -1.5f));
+    phongCube->useLight(ambientLight);
+    crates.push_back(phongCube);
 
     // matrix
     glm::mat4 projection;
@@ -139,7 +150,7 @@ void SceneOpenGL::ExampleOne(){
         // Camera location
         camera.lookAt(view);
 
-        for(int i = 0; i<10; i++){
+        for(int i = 0; i < 10; i++){
             model = glm::translate(model, crates[i]->position);
             modelView = view * model;
             crates[i]->display(projection, modelView);
@@ -170,7 +181,7 @@ void SceneOpenGL::ExampleTwo(){
     BaseMaterial mat;
     Cube cube(0.1f, &mat);
 
-    Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag","Ressources/uvmap.tga");
+    Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag", "Ressources/uvmap.tga");
     suzanne.load();
     suzanne.useLight(light);
 

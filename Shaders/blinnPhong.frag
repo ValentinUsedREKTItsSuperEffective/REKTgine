@@ -6,34 +6,18 @@
 // Entrée
 
 in vec2 coordTexture;
-in vec3 normal;
-
 
 // Uniform
 
-uniform sampler2D tex;
+uniform sampler2D colorTex;
+uniform vec3 color;
 
-uniform vec3 lightColor;
-
+uniform vec3 ambientColor;
 
 // Sortie
 
 out vec4 out_Color;
 
-
-// Fonctions
-
-vec3 Phong() {
-    float ambientIntensity = 1f;
-    vec3 ambientColor = vec3(0.8f, 0.8f, 0.7f);
-
-    vec3 ambient = ambientIntensity * ambientColor;
-
-    return ambient;
-}
-
-void main()
-{
-    // Couleur du pixel
-    out_Color = texture(tex, coordTexture) * vec4(Phong(), 1);
+void main(){
+    out_Color = texture(colorTex, coordTexture) * vec4(color * ambientColor, 1);
 }

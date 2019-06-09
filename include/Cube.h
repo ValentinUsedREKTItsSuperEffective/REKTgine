@@ -21,6 +21,10 @@ class Cube : public Object3D{
         virtual void load();
         virtual void display(glm::mat4 &projection, glm::mat4 &modelView);
 
+        inline void useLight(Light &light){
+            material->useLight(light);
+        }
+
     protected:
         BaseMaterial *material;
         float positions[108];
