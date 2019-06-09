@@ -50,14 +50,12 @@
 			<Add directory="C:/Program Files (x86)/CodeBlocks/MinGW/SDL-2.0/lib" />
 		</Linker>
 		<Unit filename="Shaders/blinnPhong.frag" />
-		<Unit filename="Shaders/blinnPhong.vert" />
 		<Unit filename="Shaders/couleur3D.frag" />
 		<Unit filename="Shaders/couleur3D.vert" />
 		<Unit filename="Shaders/default.frag" />
 		<Unit filename="Shaders/default.vert" />
 		<Unit filename="Shaders/texture.frag" />
 		<Unit filename="Shaders/texture.vert" />
-		<Unit filename="include/BaseMaterial.h" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Cube.h" />
 		<Unit filename="include/Hitable.h" />
@@ -65,6 +63,8 @@
 		<Unit filename="include/Input.h" />
 		<Unit filename="include/Light.h" />
 		<Unit filename="include/Material_RT.h" />
+		<Unit filename="include/Materials/BaseMaterial.h" />
+		<Unit filename="include/Materials/PhongMaterial.h" />
 		<Unit filename="include/Mesh.h" />
 		<Unit filename="include/ObjLoader.h" />
 		<Unit filename="include/Object3D.h" />
@@ -76,11 +76,12 @@
 		<Unit filename="include/rt_Camera.h" />
 		<Unit filename="include/rt_Sphere.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/BaseMaterial.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/Input.cpp" />
 		<Unit filename="src/Light.cpp" />
+		<Unit filename="src/Materials/BaseMaterial.cpp" />
+		<Unit filename="src/Materials/PhongMaterial.cpp" />
 		<Unit filename="src/Mesh.cpp" />
 		<Unit filename="src/ObjLoader.cpp" />
 		<Unit filename="src/Object3D.cpp" />
