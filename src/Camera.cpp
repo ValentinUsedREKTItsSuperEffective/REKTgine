@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#define M_PI 3.14159265358979323846
+
 Camera::Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 axis) : _theta(0.), _phi(0.), _orientation(), _axis(axis), _sideDisplacement(), _eye(eye), _target(target),
                                                                     _sensibility(0.5f), _speed(0.5f)
 {

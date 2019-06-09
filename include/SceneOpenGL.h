@@ -11,7 +11,6 @@
 
 #include "Shader.h"
 #include "Cube.h"
-#include "Crate.h"
 #include "Input.h"
 #include "Texture.h"
 #include "Camera.h"

@@ -9,7 +9,7 @@
 
 #include "Object3D.h"
 #include "Shader.h"
-#include "BaseMaterial.h"
+#include "Materials/BaseMaterial.h"
 
 
 // Class Cube

@@ -14,7 +14,6 @@ class Shader{
         ~Shader();
         bool load();
         bool compile(GLuint &shader, GLenum type, std::string const &fileSrc);
-        GLuint getProgramID() const;
 
     private:
         GLuint vertShaderID;

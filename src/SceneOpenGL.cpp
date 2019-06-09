@@ -216,38 +216,6 @@ void SceneOpenGL::ExampleTwo(){
         modelView = view * model;
         suzanne.display(projection, modelView);
 
-/*
-        // Shader activation
-        glUseProgram(shader.getProgramID());
-
-            // Rendering
-            // glVertexAttribPointer + glEnableVertexAttribArray
-            glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,vertex);
-            glEnableVertexAttribArray(0);
-
-            glVertexAttribPointer(2,2,GL_FLOAT,GL_FALSE,0,coordTex);
-            glEnableVertexAttribArray(2);
-
-            // uniform
-            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(),"projection"),1,GL_FALSE,glm::value_ptr(projection));
-            glUniformMatrix4fv(glGetUniformLocation(shader.getProgramID(),"modelView"),1,GL_FALSE,glm::value_ptr(modelView));
-
-            // glBindTexture
-            glBindTexture(GL_TEXTURE_2D, tex.getID());
-
-            // glDrawArrays
-            glDrawArrays(GL_TRIANGLES,0,6);
-
-            // unbind texture
-            glBindTexture(GL_TEXTURE_2D,0);
-
-            // glDisableVertexAttribArray
-            glDisableVertexAttribArray(0);
-            glDisableVertexAttribArray(2);
-
-        // Shader disactivation
-        glUseProgram(0);
-*/
         SDL_GL_SwapWindow(_window);
 
         tac = SDL_GetTicks();
