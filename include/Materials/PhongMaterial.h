@@ -2,7 +2,7 @@
 #define PHONGMATERIAL_H
 
 #include <Materials/BaseMaterial.h>
-#include <Light.h>
+#include <Lights/Light.h>
 
 struct PhongMaterialParameters : public BaseMaterialParameters {
 

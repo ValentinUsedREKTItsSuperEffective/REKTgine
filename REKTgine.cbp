@@ -61,7 +61,7 @@
 		<Unit filename="include/Hitable.h" />
 		<Unit filename="include/HitableList.h" />
 		<Unit filename="include/Input.h" />
-		<Unit filename="include/Light.h" />
+		<Unit filename="include/Lights/Light.h" />
 		<Unit filename="include/Material_RT.h" />
 		<Unit filename="include/Materials/BaseMaterial.h" />
 		<Unit filename="include/Materials/PhongMaterial.h" />
@@ -79,7 +79,7 @@
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Cube.cpp" />
 		<Unit filename="src/Input.cpp" />
-		<Unit filename="src/Light.cpp" />
+		<Unit filename="src/Lights/Light.cpp" />
 		<Unit filename="src/Materials/BaseMaterial.cpp" />
 		<Unit filename="src/Materials/PhongMaterial.cpp" />
 		<Unit filename="src/Mesh.cpp" />

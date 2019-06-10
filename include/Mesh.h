@@ -12,7 +12,7 @@
 #include "ObjLoader.h"
 #include "Shader.h"
 #include "Texture.h"
-#include "Light.h"
+#include "Lights/Light.h"
 
 class Mesh
 {

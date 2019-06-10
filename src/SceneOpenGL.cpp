@@ -1,5 +1,5 @@
 #include "SceneOpenGL.h"
-#include "Light.h"
+#include "Lights/Light.h"
 #include "Materials/PhongMaterial.h"
 
 #include "glm/ext.hpp"
@@ -111,7 +111,7 @@ void SceneOpenGL::ExampleOne(){
         crates.push_back(crate);
     }
 
-    Light ambientLight(glm::vec3(1.f, 1.f, 1.f));
+    Light ambientLight(glm::vec3(1.f, 1.f, 1.f), 0.1f);
 
     PhongMaterialParameters phongParam;
     phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
@@ -176,7 +176,7 @@ void SceneOpenGL::ExampleTwo(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
     // Load mesh
-    Light light(glm::vec3(1.f));
+    Light light(glm::vec3(1.f), 0.1f);
 
     BaseMaterial mat;
     Cube cube(0.1f, &mat);
