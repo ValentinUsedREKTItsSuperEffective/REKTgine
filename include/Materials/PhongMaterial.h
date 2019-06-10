@@ -4,7 +4,7 @@
 #include <Materials/BaseMaterial.h>
 #include <Light.h>
 
-struct PhongMaterialParameters : public BaseMaterialParameters{
+struct PhongMaterialParameters : public BaseMaterialParameters {
 
 };
 
@@ -18,7 +18,7 @@ class PhongMaterial : public BaseMaterial {
         virtual void useLight(Light &light);
 
     protected:
-        virtual void loadShader();
+        virtual void loadShader() override;
 };
 
 #endif // PHONGMATERIAL_H

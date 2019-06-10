@@ -53,6 +53,7 @@ Cube::Cube(float dim, BaseMaterial *mat) : Object3D(), material(mat), vbo(0){
     }
 
     load();
+    material->loadShader();
 }
 
 Cube::~Cube(){

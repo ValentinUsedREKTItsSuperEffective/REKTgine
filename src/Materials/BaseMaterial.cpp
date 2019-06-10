@@ -3,16 +3,14 @@
 BaseMaterial::BaseMaterial() : color(glm::vec3(1.f, 1.f, 1.f)), needUpdate(true){
     colorTexture = Texture();
     colorTexture.load();
-
-    loadShader();
 }
 BaseMaterial::BaseMaterial(BaseMaterialParameters parameters) : color(parameters.color), needUpdate(true){
     if(parameters.textureSrc != ""){
         colorTexture = Texture(parameters.textureSrc);
-        colorTexture.load();
+    } else {
+        colorTexture = Texture();
     }
-
-    loadShader();
+    colorTexture.load();
 }
 
 BaseMaterial::~BaseMaterial(){}

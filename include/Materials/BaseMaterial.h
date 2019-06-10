@@ -25,11 +25,11 @@ class BaseMaterial{
         virtual ~BaseMaterial();
         virtual void update();
         virtual void bindTextures();
+        virtual void loadShader();
 
         virtual void useLight(Light &light);
 
     protected:
-        virtual void loadShader();
 
     private:
 };

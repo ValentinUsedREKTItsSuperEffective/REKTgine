@@ -114,7 +114,7 @@ void SceneOpenGL::ExampleOne(){
     Light ambientLight(glm::vec3(1.f, 1.f, 1.f));
 
     PhongMaterialParameters phongParam;
-    param.color = glm::vec3(1.0f, 0.5f, 0.31f);
+    phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     PhongMaterial phongMat(phongParam);
     Cube* phongCube = new Cube(0.5f, &phongMat);
     phongCube->load();
@@ -124,7 +124,7 @@ void SceneOpenGL::ExampleOne(){
 
     // matrix
     glm::mat4 projection;
-    projection = glm::perspective(70.0,(double)_width/_height,1.0,100.0);
+    projection = glm::perspective(70.0, (double)_width/_height, 1.0, 100.0);
 
      // create camera
     Camera camera(glm::vec3(3,3,3),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));

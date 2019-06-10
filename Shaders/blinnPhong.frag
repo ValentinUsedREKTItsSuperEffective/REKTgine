@@ -16,8 +16,8 @@ uniform vec3 ambientColor;
 
 // Sortie
 
-out vec4 out_Color;
+out vec4 outColor;
 
 void main(){
-    out_Color = texture(colorTex, coordTexture) * vec4(color * ambientColor, 1);
+    outColor = texture(colorTex, coordTexture) * vec4(color * ambientColor, 1);
 }
