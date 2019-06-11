@@ -115,6 +115,10 @@ void SceneOpenGL::ExampleOne(){
     Light ambientLight(glm::vec3(1.f, 1.f, 1.f), 0.1f);
     ambientLight.SetPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
+    BaseMaterial lightMat;
+    Cube lightCube(0.1f, &lightMat);
+    lightCube.SetPosition(glm::vec3(1.2f, 1.0f, 2.0f));
+
     PhongMaterialParameters phongParam;
     phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     PhongMaterial phongMat(phongParam);
@@ -151,6 +155,8 @@ void SceneOpenGL::ExampleOne(){
 
         // Camera location
         camera.lookAt(view);
+
+        lightCube.display(projection, view);
 
         for(int i = 0; i < 10; i++){
             crates[i]->display(projection, view);
