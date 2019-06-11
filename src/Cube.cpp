@@ -10,43 +10,143 @@ Cube::Cube(float dim, BaseMaterial *mat) : Object3D(), material(mat), vbo(0){
     dim /= 2.f;
 
     float positionsTmp[] = {
-        -dim, -dim, -dim,   dim, -dim, -dim,   dim, dim, -dim,
-        -dim, -dim, -dim,   -dim, dim, -dim,   dim, dim, -dim,
-        dim, -dim, dim,   dim, -dim, -dim,   dim, dim, -dim,
-        dim, -dim, dim,   dim, dim, dim,   dim, dim, -dim,
-        -dim, -dim, dim,   dim, -dim, dim,   dim, -dim, -dim,
-        -dim, -dim, dim,   -dim, -dim, -dim,   dim, -dim, -dim,
-        -dim, -dim, dim,   dim, -dim, dim,   dim, dim, dim,
-        -dim, -dim, dim,   -dim, dim, dim,   dim, dim, dim,
-        -dim, -dim, -dim,   -dim, -dim, dim,   -dim, dim, dim,
-        -dim, -dim, -dim,   -dim, dim, -dim,   -dim, dim, dim,
-        -dim, dim, dim,   dim, dim, dim,   dim, dim, -dim,
-        -dim, dim, dim,   -dim, dim, -dim,   dim, dim, -dim
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, -0.5f,
+
+        -0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f
+    };
+
+    float normalTmp[] = {
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+        0.0f,  0.0f, -1.0f,
+
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+        0.0f,  0.0f,  1.0f,
+
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+        1.0f,  0.0f,  0.0f,
+
+        0.0f, -1.0f,  0.0f,
+        0.0f, -1.0f,  0.0f,
+        0.0f, -1.0f,  0.0f,
+        0.0f, -1.0f,  0.0f,
+        0.0f, -1.0f,  0.0f,
+        0.0f, -1.0f,  0.0f,
+
+        0.0f,  1.0f,  0.0f,
+        0.0f,  1.0f,  0.0f,
+        0.0f,  1.0f,  0.0f,
+        0.0f,  1.0f,  0.0f,
+        0.0f,  1.0f,  0.0f,
+        0.0f,  1.0f,  0.0f
     };
 
     for(int i = 0; i<108; i++){
-        positions[i] = positionsTmp[i];
+        positions[i] = positionsTmp[i] * dim;
+        normals[i] = normalTmp[i];
     }
 
     float uvsTmp[] = {
-        0, 0,   1, 0,   1, 1,     // Face 1
-        0, 0,   0, 1,   1, 1,     // Face 1
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
 
-        0, 0,   1, 0,   1, 1,     // Face 2
-        0, 0,   0, 1,   1, 1,     // Face 2
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
 
-        0, 0,   1, 0,   1, 1,     // Face 3
-        0, 0,   0, 1,   1, 1,     // Face 3
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
 
-        0, 0,   1, 0,   1, 1,     // Face 4
-        0, 0,   0, 1,   1, 1,     // Face 4
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 1.0f,
+        0.0f, 0.0f,
+        1.0f, 0.0f,
 
-        0, 0,   1, 0,   1, 1,     // Face 5
-        0, 0,   0, 1,   1, 1,     // Face 5
+        0.0f, 1.0f,
+        1.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 0.0f,
+        0.0f, 0.0f,
+        0.0f, 1.0f,
 
-        0, 0,   1, 0,   1, 1,     // Face 6
-        0, 0,   0, 1,   1, 1      // Face 6
+        0.0f, 1.0f,
+        1.0f, 1.0f,
+        1.0f, 0.0f,
+        1.0f, 0.0f,
+        0.0f, 0.0f,
+        0.0f, 1.0f
     };
+
+
 
     for(int i = 0; i<72; i++){
         uvs[i] = uvsTmp[i];
@@ -69,10 +169,11 @@ void Cube::load(){
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-    glBufferData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(uvs), 0, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(uvs) + sizeof(normals), 0, GL_STATIC_DRAW);
 
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(positions), positions);
     glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions), sizeof(uvs), uvs);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(positions) + sizeof(uvs), sizeof(normals), normals);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -91,6 +192,9 @@ void Cube::load(){
 
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(positions)));
     glEnableVertexAttribArray(1);
+
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeof(positions)) + sizeof(uvs));
+    glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 

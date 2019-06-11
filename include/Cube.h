@@ -29,9 +29,11 @@ class Cube : public Object3D{
         BaseMaterial *material;
         float positions[108];
         float uvs[72];
+        float normals[108];
 
         GLuint vbo;
         GLuint vao;
+        // TODO : Add ebo
 };
 
 #endif // CUBE_H
