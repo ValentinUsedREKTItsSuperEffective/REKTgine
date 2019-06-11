@@ -24,5 +24,9 @@ void PhongMaterial::useLight(Light &light){
 
     glUniform1f(glGetUniformLocation(shader.programID, "ambientIntensity"), light.intensity);
 
+    // TODO : Update the shader as the light move
+    float ligthPosition[3] = {light.position.x, light.position.y, light.position.z};
+    glUniform3fv(glGetUniformLocation(shader.programID, "lightPosition"), 1, ligthPosition);
+
     glUseProgram(0);
 }

@@ -12,9 +12,18 @@ uniform vec3 color;
 uniform vec3 ambientColor;
 uniform float ambientIntensity;
 
+uniform vec3 lightPosition;
+
 // Sortie
 out vec4 outColor;
 
 void main(){
-    outColor = texture(colorTex, coordTexture) * vec4(color * ambientColor, 1) * ambientIntensity;
+    vec3 ambient = ambientColor * ambientIntensity;
+
+    // TODO : Use a light color for  the diffuse and specular components
+    vec3 N = normalize(normal);
+    vec3 lightDir = normalize(lightPosition - position);
+    vec3 diffuse = vec3(1.0) * max(0.0, dot(lightDir, N));
+
+    outColor = texture(colorTex, coordTexture) * vec4(color * (ambient + diffuse), 1);
 }

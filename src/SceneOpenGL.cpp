@@ -111,14 +111,16 @@ void SceneOpenGL::ExampleOne(){
         crates.push_back(crate);
     }
 
+    // TODO : Make the difference between ambient light and point light
     Light ambientLight(glm::vec3(1.f, 1.f, 1.f), 0.1f);
+    ambientLight.SetPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
     PhongMaterialParameters phongParam;
     phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     PhongMaterial phongMat(phongParam);
-    Cube* phongCube = new Cube(0.5f, &phongMat);
+    Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
-    phongCube->SetPosition(glm::vec3(-1.3f,  1.0f, -1.5f));
+    phongCube->SetPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
     phongCube->useLight(ambientLight);
     crates.push_back(phongCube);
 

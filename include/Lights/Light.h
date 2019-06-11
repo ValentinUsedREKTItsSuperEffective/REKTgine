@@ -3,7 +3,7 @@
 
 #include "Object3D.h"
 
-class Light : Object3D {
+class Light : public Object3D {
     public:
         glm::vec3 lightColor;
         float intensity;

@@ -18,9 +18,9 @@ out vec2 coordTexture;
 out vec3 normal;
 
 void main(){
-    position = model * vec4(in_Pos, 1.0);
+    position = vec3(model * vec4(in_Pos, 1.0));
     coordTexture = in_UV;
     normal = in_Normal;
 
-    gl_Position = projection * view * position;
+    gl_Position = projection * view * model * vec4(in_Pos, 1.0);
 }
