@@ -131,7 +131,7 @@ void SceneOpenGL::ExampleOne(){
     _input.showCursor(false);
     _input.captureCursor(true);
 
-     glm::mat4 view, model, modelView;
+     glm::mat4 view;
 
      while(!_input.isEnd()){
 
@@ -151,10 +151,7 @@ void SceneOpenGL::ExampleOne(){
         camera.lookAt(view);
 
         for(int i = 0; i < 10; i++){
-            model = glm::translate(model, crates[i]->position);
-            modelView = view * model;
-            crates[i]->display(projection, modelView);
-            model = glm::mat4(1.f);
+            crates[i]->display(projection, view);
         }
 
         SDL_GL_SwapWindow(_window);
@@ -219,13 +216,9 @@ void SceneOpenGL::ExampleTwo(){
         camera.lookAt(view);
 
         glm::mat4 model;
-        model = glm::translate(model,cube.position);
-        modelView = view * model;
-        cube.display(projection, modelView);
+        cube.display(projection, view);
 
-        model = glm::translate(model,glm::vec3( 2.4f, -0.4f, -3.5f));
-        modelView = view * model;
-        suzanne.display(projection, modelView);
+        suzanne.display(projection, view);
 
         SDL_GL_SwapWindow(_window);
 
