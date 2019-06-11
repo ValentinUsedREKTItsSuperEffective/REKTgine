@@ -5,6 +5,7 @@
 
 // Entrée
 
+in vec3 normal;
 in vec2 coordTexture;
 
 // Uniform

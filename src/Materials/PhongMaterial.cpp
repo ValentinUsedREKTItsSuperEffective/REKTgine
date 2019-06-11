@@ -11,7 +11,7 @@ PhongMaterial::PhongMaterial(PhongMaterialParameters parameters) : BaseMaterial(
 PhongMaterial::~PhongMaterial(){}
 
 void PhongMaterial::loadShader(){
-    shader = Shader("Shaders/default.vert", "Shaders/blinnPhong.frag");
+    shader = Shader("Shaders/phong.vert", "Shaders/phong.frag");
     shader.load();
 }
 
