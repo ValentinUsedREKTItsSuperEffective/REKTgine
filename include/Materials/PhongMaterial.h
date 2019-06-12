@@ -16,6 +16,7 @@ class PhongMaterial : public BaseMaterial {
         virtual ~PhongMaterial();
 
         virtual void useLight(Light &light);
+        virtual void setViewPosition(glm::vec3 view);
 
     protected:
         virtual void loadShader() override;

@@ -156,6 +156,8 @@ void SceneOpenGL::ExampleOne(){
         // Camera location
         camera.lookAt(view);
 
+        phongMat.setViewPosition(camera._eye);
+
         lightCube.display(projection, view);
 
         for(int i = 0; i < 10; i++){

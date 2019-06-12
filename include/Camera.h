@@ -12,6 +12,8 @@
 class Camera
 {
     public:
+        glm::vec3 _eye;
+
         Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 axis);
         ~Camera();
         void orientate(int xRel, int yRel);
@@ -28,7 +30,6 @@ class Camera
         glm::vec3 _orientation;
         glm::vec3 _axis;
         glm::vec3 _sideDisplacement;
-        glm::vec3 _eye;
         glm::vec3 _target;
 
         float _sensibility;
