@@ -5,22 +5,20 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "Object3D.h"
 #include "Input.h"
 
 #define _PI 3.14159265358979323846264338327950288
 
-class Camera
-{
+class Camera : public Object3D {
     public:
-        glm::vec3 _eye;
-
-        Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 axis);
+        Camera(glm::vec3 position, glm::vec3 target, glm::vec3 axis);
         ~Camera();
         void orientate(int xRel, int yRel);
         void translate(Input const &input);
         void lookAt(glm::mat4 &modelView);
         void setTarget(glm::vec3 target);
-        void setPosition(glm::vec3 position);
+        virtual void SetPosition(glm::vec3 position);
         void setSensibility(float sensibility);
         void setSpeed(float speed);
 
