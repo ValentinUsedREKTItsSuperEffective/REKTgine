@@ -50,7 +50,7 @@ void Camera::orientate(int xRel, int yRel){
 
 void Camera::translate(Input const &input){
     if(input.inMovement())
-        orientate(input.getRX(),input.getRY());
+        orientate(input.mouseRX, input.mouseRY);
 
     if(input.getKey(SDL_SCANCODE_UP))
     {

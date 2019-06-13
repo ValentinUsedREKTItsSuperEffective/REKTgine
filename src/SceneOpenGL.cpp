@@ -139,7 +139,7 @@ void SceneOpenGL::ExampleOne(){
 
      glm::mat4 view;
 
-     while(!_input.isEnd()){
+     while(!_input.isEnd){
 
         tic = SDL_GetTicks();
 
@@ -207,7 +207,7 @@ void SceneOpenGL::ExampleTwo(){
     _input.showCursor(false);
     _input.captureCursor(true);
 
-    while(!_input.isEnd()){
+    while(!_input.isEnd){
 
         tic = SDL_GetTicks();
 
