@@ -20,7 +20,7 @@ out vec3 normal;
 void main(){
     position = vec3(model * vec4(in_Pos, 1.0));
     coordTexture = in_UV;
-    normal = in_Normal;
+    normal = vec3(model * vec4(in_Normal, 0));
 
     gl_Position = projection * view * model * vec4(in_Pos, 1.0);
 }

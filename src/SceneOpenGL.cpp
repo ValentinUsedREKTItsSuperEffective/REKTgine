@@ -133,7 +133,7 @@ void SceneOpenGL::ExampleOne(){
     projection = glm::perspective(70.0, (double)_width/_height, 1.0, 100.0);
 
      // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), glm::vec3(0.0,1.0,0.0));
+    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), glm::vec3(0.0, 1.0, 0.0));
     _input.showCursor(false);
     _input.captureCursor(true);
 
@@ -157,6 +157,7 @@ void SceneOpenGL::ExampleOne(){
         camera.lookAt(view);
 
         phongMat.setViewPosition(camera.position);
+        phongCube->addRotationFromEuler(glm::vec3(0.01, 0., 0.));
 
         lightCube.display(projection, view);
 
