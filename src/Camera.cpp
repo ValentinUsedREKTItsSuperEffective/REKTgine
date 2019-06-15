@@ -2,16 +2,17 @@
 
 #define M_PI 3.14159265358979323846
 
-Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 axis) : Object3D(), _theta(0.), _phi(0.), _orientation(), _axis(axis), _sideDisplacement(), _target(target), _sensibility(0.5f), _speed(0.5f){
+Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(), _theta(0.), _phi(0.), _orientation(), _axis(up), sensibility(0.5f), speed(0.5f){
     Object3D::SetPosition(position);
+
     setTarget(target);
 }
 
 Camera::~Camera(){}
 
 void Camera::orientate(int xRel, int yRel){
-    _phi += -yRel * _sensibility;
-    _theta += -xRel * _sensibility;
+    _phi += -yRel * sensibility;
+    _theta += -xRel * sensibility;
 
     if(_phi > 89.)
         _phi = 89.;
@@ -35,9 +36,9 @@ void Camera::orientate(int xRel, int yRel){
         _orientation.z = sin(radPhi);
     }
 
-    _sideDisplacement = glm::normalize(glm::cross(_axis, _orientation));
+    sideDisplacement = glm::normalize(glm::cross(_axis, _orientation));
 
-    _target = position + _orientation;
+    target = position + _orientation;
 }
 
 void Camera::translate(Input const &input){
@@ -46,28 +47,24 @@ void Camera::translate(Input const &input){
     }
 
     if(input.getKey(SDL_SCANCODE_UP)){
-        SetPosition(position + _orientation * _speed);
-        _target = position + _orientation;
+        SetPosition(position + _orientation * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_DOWN)){
-        SetPosition(position - _orientation * _speed);
-        _target = position + _orientation;
+        SetPosition(position - _orientation * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_LEFT)){
-        SetPosition(position + _sideDisplacement * _speed);
-        _target = position + _orientation;
+        SetPosition(position + sideDisplacement * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_RIGHT)){
-        SetPosition(position - _sideDisplacement * _speed);
-        _target = position + _orientation;
+        SetPosition(position - sideDisplacement * speed);
     }
 }
 
-void Camera::lookAt(glm::mat4 &modelView){
-    modelView = glm::lookAt(position, _target, _axis);
+void Camera::lookAt(glm::mat4 &view){
+    view = glm::lookAt(position, target, _axis);
 }
 
 void Camera::setTarget(glm::vec3 target){
@@ -100,13 +97,5 @@ void Camera::setTarget(glm::vec3 target){
 void Camera::SetPosition(glm::vec3 position){
     Object3D::SetPosition(position);
 
-    _target = position + _orientation;
-}
-
-void Camera::setSensibility(float sensibility){
-    _sensibility = sensibility;
-}
-
-void Camera::setSpeed(float speed){
-    _speed = speed;
+    target = position + _orientation;
 }

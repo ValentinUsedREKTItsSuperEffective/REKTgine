@@ -12,6 +12,9 @@
 
 class Camera : public Object3D {
     public:
+        float sensibility;
+        float speed;
+
         Camera(glm::vec3 position, glm::vec3 target, glm::vec3 axis);
         ~Camera();
         void orientate(int xRel, int yRel);
@@ -19,19 +22,14 @@ class Camera : public Object3D {
         void lookAt(glm::mat4 &modelView);
         void setTarget(glm::vec3 target);
         virtual void SetPosition(glm::vec3 position);
-        void setSensibility(float sensibility);
-        void setSpeed(float speed);
 
     private:
         float _theta;
         float _phi;
         glm::vec3 _orientation;
         glm::vec3 _axis;
-        glm::vec3 _sideDisplacement;
-        glm::vec3 _target;
-
-        float _sensibility;
-        float _speed;
+        glm::vec3 sideDisplacement;
+        glm::vec3 target;
 };
 
 #endif // CAMERA_H
