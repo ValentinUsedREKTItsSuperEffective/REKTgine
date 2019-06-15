@@ -3,7 +3,7 @@
 #define M_PI 3.14159265358979323846
 
 Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(), _theta(0.), _phi(0.), _orientation(), _axis(up), sensibility(0.5f), speed(0.5f){
-    Object3D::SetPosition(position);
+    Object3D::setPosition(position);
 
     setTarget(target);
 }
@@ -47,19 +47,19 @@ void Camera::translate(Input const &input){
     }
 
     if(input.getKey(SDL_SCANCODE_UP)){
-        SetPosition(position + _orientation * speed);
+        setPosition(position + _orientation * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_DOWN)){
-        SetPosition(position - _orientation * speed);
+        setPosition(position - _orientation * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_LEFT)){
-        SetPosition(position + sideDisplacement * speed);
+        setPosition(position + sideDisplacement * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_RIGHT)){
-        SetPosition(position - sideDisplacement * speed);
+        setPosition(position - sideDisplacement * speed);
     }
 }
 
@@ -94,8 +94,8 @@ void Camera::setTarget(glm::vec3 target){
     _theta = _theta * 180. / M_PI;
 }
 
-void Camera::SetPosition(glm::vec3 position){
-    Object3D::SetPosition(position);
+void Camera::setPosition(glm::vec3 position){
+    Object3D::setPosition(position);
 
     target = position + _orientation;
 }

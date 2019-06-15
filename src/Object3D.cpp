@@ -9,12 +9,12 @@ Object3D::Object3D(){
 
 Object3D::~Object3D(){}
 
-void Object3D::SetPosition(glm::vec3 p){
+void Object3D::setPosition(glm::vec3 p){
     position = p;
 
-    CombineTransformations();
+    combineTransformations();
 }
 
-void Object3D::CombineTransformations(){
+void Object3D::combineTransformations(){
     matrix = glm::translate(matrix, position);
 }

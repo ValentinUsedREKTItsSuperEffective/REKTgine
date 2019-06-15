@@ -21,7 +21,7 @@ class Camera : public Object3D {
         void translate(Input const &input);
         void lookAt(glm::mat4 &modelView);
         void setTarget(glm::vec3 target);
-        virtual void SetPosition(glm::vec3 position);
+        virtual void setPosition(glm::vec3 position);
 
     private:
         float _theta;

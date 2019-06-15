@@ -15,11 +15,11 @@ class Object3D{
         // Functions
         Object3D();
         virtual ~Object3D();
-        virtual void SetPosition(glm::vec3 position);
-        void SetRotation(glm::vec3 rotation);
-        void SetScale(glm::vec3 scale);
+        virtual void setPosition(glm::vec3 position);
+        void setRotation(glm::vec3 rotation);
+        void setScale(glm::vec3 scale);
     protected:
-        void CombineTransformations();
+        void combineTransformations();
 };
 
 #endif // OBJECT3D_H
