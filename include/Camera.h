@@ -15,16 +15,18 @@ class Camera : public Object3D {
         float sensibility;
         float speed;
 
-        Camera(glm::vec3 position, glm::vec3 target, glm::vec3 axis);
+        Camera(glm::vec3 position, glm::vec3 target);
         ~Camera();
         void orientate(int xRel, int yRel);
         void translate(Input const &input);
         void lookAt();
         void setTarget(glm::vec3 target);
 
+    protected:
+        glm::vec3 up;
+
     private:
         glm::vec3 forwardVector;
-        glm::vec3 _axis;
         glm::vec3 sideDisplacement;
 };
 
