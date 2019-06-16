@@ -7,7 +7,13 @@
 Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), forwardVector(glm::vec3()), up(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.5f){
     setPosition(position);
 
-    setTarget(target);
+    forwardVector = glm::normalize(target - position);
+
+    rotation.x = asin(forwardVector.y);
+    rotation.y = acos(forwardVector.z / cos(rotation.x));
+
+    if(forwardVector.z < 0)
+        rotation.y *= -1;
 }
 
 Camera::~Camera(){}
@@ -53,14 +59,4 @@ void Camera::translate(Input const &input){
 
 void Camera::lookAt(){
     matrix = glm::lookAt(position, position + forwardVector, up);
-}
-
-void Camera::setTarget(glm::vec3 target){
-    forwardVector = glm::normalize(target - position);
-
-    rotation.x = asin(forwardVector.y);
-    rotation.y = acos(forwardVector.z / cos(rotation.x));
-
-    if(forwardVector.z < 0)
-        rotation.y *= -1;
 }

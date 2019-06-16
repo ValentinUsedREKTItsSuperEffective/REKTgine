@@ -20,7 +20,6 @@ class Camera : public Object3D {
         void orientate(int xRel, int yRel);
         void translate(Input const &input);
         void lookAt();
-        void setTarget(glm::vec3 target);
 
     protected:
         glm::vec3 up;
