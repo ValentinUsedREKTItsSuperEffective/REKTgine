@@ -61,8 +61,8 @@ void Camera::translate(Input const &input){
     }
 }
 
-void Camera::lookAt(glm::mat4 &view){
-    view = glm::lookAt(position, position + forwardVector, _axis);
+void Camera::lookAt(){
+    matrix = glm::lookAt(position, position + forwardVector, _axis);
 }
 
 void Camera::setTarget(glm::vec3 target){

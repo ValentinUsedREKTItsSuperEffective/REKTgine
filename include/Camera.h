@@ -19,7 +19,7 @@ class Camera : public Object3D {
         ~Camera();
         void orientate(int xRel, int yRel);
         void translate(Input const &input);
-        void lookAt(glm::mat4 &modelView);
+        void lookAt();
         void setTarget(glm::vec3 target);
 
     private:

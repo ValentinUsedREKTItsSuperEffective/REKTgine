@@ -137,8 +137,6 @@ void SceneOpenGL::ExampleOne(){
     _input.showCursor(false);
     _input.captureCursor(true);
 
-     glm::mat4 view;
-
      while(!_input.isEnd){
 
         tic = SDL_GetTicks();
@@ -154,15 +152,15 @@ void SceneOpenGL::ExampleOne(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Camera location
-        camera.lookAt(view);
+        camera.lookAt();
 
         phongMat.setViewPosition(camera.position);
         phongCube->addRotationFromEuler(glm::vec3(0.01, 0., 0.));
 
-        lightCube.display(projection, view);
+        lightCube.display(projection, camera.matrix);
 
         for(int i = 0; i < 10; i++){
-            crates[i]->display(projection, view);
+            crates[i]->display(projection, camera.matrix);
         }
 
         SDL_GL_SwapWindow(_window);
@@ -223,13 +221,12 @@ void SceneOpenGL::ExampleTwo(){
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         // Camera location
-        glm::mat4 view;
-        camera.lookAt(view);
+        camera.lookAt();
 
         glm::mat4 model;
-        cube.display(projection, view);
+        cube.display(projection, camera.matrix);
 
-        suzanne.display(projection, view);
+        suzanne.display(projection, camera.matrix);
 
         SDL_GL_SwapWindow(_window);
 
