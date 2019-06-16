@@ -19,8 +19,7 @@ Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), forwardVector
 Camera::~Camera(){}
 
 void Camera::orientate(int xRel, int yRel){
-    rotation.x += (-yRel * sensibility) * M_PI_180;
-    rotation.y += (-xRel * sensibility) * M_PI_180;
+    addRotationFromEuler(glm::vec3((-yRel * sensibility) * M_PI_180, (-xRel * sensibility) * M_PI_180, 0.0));
 
     if(rotation.x > M_PI_89){
         rotation.x = M_PI_89;
