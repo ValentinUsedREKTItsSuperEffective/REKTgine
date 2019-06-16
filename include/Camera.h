@@ -21,13 +21,11 @@ class Camera : public Object3D {
         void translate(Input const &input);
         void lookAt(glm::mat4 &modelView);
         void setTarget(glm::vec3 target);
-        virtual void setPosition(glm::vec3 position);
 
     private:
-        glm::vec3 _orientation;
+        glm::vec3 forwardVector;
         glm::vec3 _axis;
         glm::vec3 sideDisplacement;
-        glm::vec3 target;
 };
 
 #endif // CAMERA_H

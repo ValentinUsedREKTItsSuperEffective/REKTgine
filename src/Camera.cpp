@@ -4,8 +4,8 @@
 #define M_PI_89     1.5533430342749533234620847839549
 #define M_PI_180    0.0174532925199432957692369076848
 
-Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(), _orientation(), _axis(up), sensibility(0.5f), speed(0.5f){
-    Object3D::setPosition(position);
+Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(), forwardVector(glm::vec3()), _axis(up), sensibility(0.5f), speed(0.5f){
+    setPosition(position);
 
     setTarget(target);
 }
@@ -23,22 +23,20 @@ void Camera::orientate(int xRel, int yRel){
     }
 
     if(_axis.x == 1.0){
-        _orientation.x = sin(rotation.x);
-        _orientation.y = cos(rotation.x) * cos(rotation.y);
-        _orientation.z = cos(rotation.x) * sin(rotation.y);
+        forwardVector.x = sin(rotation.x);
+        forwardVector.y = cos(rotation.x) * cos(rotation.y);
+        forwardVector.z = cos(rotation.x) * sin(rotation.y);
     } else if(_axis.y == 1.0){
-        _orientation.x = cos(rotation.x) * sin(rotation.y);
-        _orientation.y = sin(rotation.x);
-        _orientation.z = cos(rotation.x) * cos(rotation.y);
+        forwardVector.x = cos(rotation.x) * sin(rotation.y);
+        forwardVector.y = sin(rotation.x);
+        forwardVector.z = cos(rotation.x) * cos(rotation.y);
     } else {
-        _orientation.x = cos(rotation.x) * cos(rotation.y);
-        _orientation.y = cos(rotation.x) * sin(rotation.y);
-        _orientation.z = sin(rotation.x);
+        forwardVector.x = cos(rotation.x) * cos(rotation.y);
+        forwardVector.y = cos(rotation.x) * sin(rotation.y);
+        forwardVector.z = sin(rotation.x);
     }
 
-    sideDisplacement = glm::normalize(glm::cross(_axis, _orientation));
-
-    target = position + _orientation;
+    sideDisplacement = glm::normalize(glm::cross(_axis, forwardVector));
 }
 
 void Camera::translate(Input const &input){
@@ -47,11 +45,11 @@ void Camera::translate(Input const &input){
     }
 
     if(input.getKey(SDL_SCANCODE_UP)){
-        setPosition(position + _orientation * speed);
+        setPosition(position + forwardVector * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_DOWN)){
-        setPosition(position - _orientation * speed);
+        setPosition(position - forwardVector * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_LEFT)){
@@ -64,35 +62,29 @@ void Camera::translate(Input const &input){
 }
 
 void Camera::lookAt(glm::mat4 &view){
-    view = glm::lookAt(position, target, _axis);
+    view = glm::lookAt(position, position + forwardVector, _axis);
 }
 
 void Camera::setTarget(glm::vec3 target){
-    _orientation = glm::normalize(target - position);
+    forwardVector = glm::normalize(target - position);
 
     if(_axis.x == 1.0){
-        rotation.x = asin(_orientation.x);
-        rotation.y = acos(_orientation.y / cos(rotation.x));
+        rotation.x = asin(forwardVector.x);
+        rotation.y = acos(forwardVector.y / cos(rotation.x));
 
-        if(_orientation.y < 0)
+        if(forwardVector.y < 0)
             rotation.y *= -1;
     } else if(_axis.y == 1.0){
-        rotation.x = asin(_orientation.y);
-        rotation.y = acos(_orientation.z / cos(rotation.x));
+        rotation.x = asin(forwardVector.y);
+        rotation.y = acos(forwardVector.z / cos(rotation.x));
 
-        if(_orientation.z < 0)
+        if(forwardVector.z < 0)
             rotation.y *= -1;
     } else {
-        rotation.x = asin(_orientation.z);
-        rotation.y = acos(_orientation.x / cos(rotation.x));
+        rotation.x = asin(forwardVector.z);
+        rotation.y = acos(forwardVector.x / cos(rotation.x));
 
-        if(_orientation.x < 0)
+        if(forwardVector.x < 0)
             rotation.y *= -1;
     }
-}
-
-void Camera::setPosition(glm::vec3 position){
-    Object3D::setPosition(position);
-
-    target = position + _orientation;
 }
