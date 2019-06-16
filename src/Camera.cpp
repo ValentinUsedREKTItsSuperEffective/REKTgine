@@ -1,8 +1,10 @@
 #include "Camera.h"
 
-#define M_PI 3.14159265358979323846
+#define M_PI        3.1415926535897932384626433832795
+#define M_PI_89     1.5533430342749533234620847839549
+#define M_PI_180    0.0174532925199432957692369076848
 
-Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(), _theta(0.), _phi(0.), _orientation(), _axis(up), sensibility(0.5f), speed(0.5f){
+Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(), _orientation(), _axis(up), sensibility(0.5f), speed(0.5f){
     Object3D::setPosition(position);
 
     setTarget(target);
@@ -11,29 +13,27 @@ Camera::Camera(glm::vec3 position, glm::vec3 target, glm::vec3 up) : Object3D(),
 Camera::~Camera(){}
 
 void Camera::orientate(int xRel, int yRel){
-    _phi += -yRel * sensibility;
-    _theta += -xRel * sensibility;
+    rotation.x += (-yRel * sensibility) * M_PI_180;
+    rotation.y += (-xRel * sensibility) * M_PI_180;
 
-    if(_phi > 89.)
-        _phi = 89.;
-    else if(_phi < -89.)
-        _phi = -89.;
-
-    float radPhi = _phi * M_PI / 180;
-    float radTheta = _theta * M_PI / 180;
+    if(rotation.x > M_PI_89){
+        rotation.x = M_PI_89;
+    } else if(rotation.x < -M_PI_89){
+        rotation.x = -M_PI_89;
+    }
 
     if(_axis.x == 1.0){
-        _orientation.x = sin(radPhi);
-        _orientation.y = cos(radPhi) * cos(radTheta);
-        _orientation.z = cos(radPhi) * sin(radTheta);
+        _orientation.x = sin(rotation.x);
+        _orientation.y = cos(rotation.x) * cos(rotation.y);
+        _orientation.z = cos(rotation.x) * sin(rotation.y);
     } else if(_axis.y == 1.0){
-        _orientation.x = cos(radPhi) * sin(radTheta);
-        _orientation.y = sin(radPhi);
-        _orientation.z = cos(radPhi) * cos(radTheta);
+        _orientation.x = cos(rotation.x) * sin(rotation.y);
+        _orientation.y = sin(rotation.x);
+        _orientation.z = cos(rotation.x) * cos(rotation.y);
     } else {
-        _orientation.x = cos(radPhi) * cos(radTheta);
-        _orientation.y = cos(radPhi) * sin(radTheta);
-        _orientation.z = sin(radPhi);
+        _orientation.x = cos(rotation.x) * cos(rotation.y);
+        _orientation.y = cos(rotation.x) * sin(rotation.y);
+        _orientation.z = sin(rotation.x);
     }
 
     sideDisplacement = glm::normalize(glm::cross(_axis, _orientation));
@@ -71,27 +71,24 @@ void Camera::setTarget(glm::vec3 target){
     _orientation = glm::normalize(target - position);
 
     if(_axis.x == 1.0){
-        _phi = asin(_orientation.x);
-        _theta = acos(_orientation.y / cos(_phi));
+        rotation.x = asin(_orientation.x);
+        rotation.y = acos(_orientation.y / cos(rotation.x));
 
         if(_orientation.y < 0)
-            _theta *= -1;
+            rotation.y *= -1;
     } else if(_axis.y == 1.0){
-        _phi = asin(_orientation.y);
-        _theta = acos(_orientation.z / cos(_phi));
+        rotation.x = asin(_orientation.y);
+        rotation.y = acos(_orientation.z / cos(rotation.x));
 
         if(_orientation.z < 0)
-            _theta *= -1;
+            rotation.y *= -1;
     } else {
-        _phi = asin(_orientation.z);
-        _theta = acos(_orientation.x / cos(_phi));
+        rotation.x = asin(_orientation.z);
+        rotation.y = acos(_orientation.x / cos(rotation.x));
 
         if(_orientation.x < 0)
-            _theta *= -1;
+            rotation.y *= -1;
     }
-
-    _phi = _phi * 180. / M_PI;
-    _theta = _theta * 180. / M_PI;
 }
 
 void Camera::setPosition(glm::vec3 position){

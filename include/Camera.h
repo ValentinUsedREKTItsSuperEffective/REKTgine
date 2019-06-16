@@ -24,8 +24,6 @@ class Camera : public Object3D {
         virtual void setPosition(glm::vec3 position);
 
     private:
-        float _theta;
-        float _phi;
         glm::vec3 _orientation;
         glm::vec3 _axis;
         glm::vec3 sideDisplacement;
