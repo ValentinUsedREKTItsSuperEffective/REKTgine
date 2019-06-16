@@ -18,6 +18,7 @@ class Object3D{
         void addRotationFromEuler(glm::vec3 euler);
         void setRotationFromEuler(glm::vec3 euler);
         void setScale(glm::vec3 scale);
+        void addScale(glm::vec3 scale);
     protected:
         void combineTransformations();
 };

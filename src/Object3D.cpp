@@ -15,6 +15,18 @@ void Object3D::setPosition(glm::vec3 p){
     combineTransformations();
 }
 
+void Object3D::setScale(glm::vec3 s){
+    scale = s;
+
+    combineTransformations();
+}
+
+void Object3D::addScale(glm::vec3 s){
+    scale += s;
+
+    combineTransformations();
+}
+
 void Object3D::setRotationFromEuler(glm::vec3 euler){
     rotation = euler;
 
@@ -28,6 +40,8 @@ void Object3D::addRotationFromEuler(glm::vec3 euler){
 }
 
 void Object3D::combineTransformations(){
+    glm::mat4 scaleMatrix = glm::scale(scale);
+
     float mat[16];
     float A = cos(rotation.x);
     float B = sin(rotation.x);
@@ -55,5 +69,5 @@ void Object3D::combineTransformations(){
 
     glm::mat4 translationMatrix = glm::translate(glm::mat4(1.f), position);
 
-    matrix = translationMatrix * rotationMatrix;
+    matrix = translationMatrix * rotationMatrix * scaleMatrix;
 }
