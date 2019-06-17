@@ -58,6 +58,6 @@ void Camera::translate(Input const &input){
     }
 }
 
-void Camera::lookAt(){
-    matrix = glm::lookAt(position, position + direction, up);
+glm::mat4 Camera::getViewMatrix(){
+    return glm::lookAt(position, position + direction, up);
 }
