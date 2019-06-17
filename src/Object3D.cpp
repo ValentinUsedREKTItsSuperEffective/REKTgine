@@ -15,6 +15,12 @@ void Object3D::setPosition(glm::vec3 p){
     combineTransformations();
 }
 
+void Object3D::addPosition(glm::vec3 p){
+    position += p;
+
+    combineTransformations();
+}
+
 void Object3D::setScale(glm::vec3 s){
     scale = s;
 

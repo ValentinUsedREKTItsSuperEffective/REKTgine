@@ -4,7 +4,7 @@
 #define M_PI_89     1.5533430342749533234620847839549
 #define M_PI_180    0.0174532925199432957692369076848
 
-Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), direction(glm::vec3()), up(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.5f){
+Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), direction(glm::vec3()), worldUp(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.5f){
     setPosition(position);
 
     direction = glm::normalize(target - position);
@@ -15,7 +15,8 @@ Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), direction(glm
     if(direction.z < 0)
         rotation.y *= -1;
 
-    right = glm::normalize(glm::cross(up, direction));
+    right = glm::normalize(glm::cross(direction, worldUp));
+    up = glm::normalize(glm::cross(right, direction));
 }
 
 Camera::~Camera(){}
@@ -33,7 +34,8 @@ void Camera::orientate(int xRel, int yRel){
     direction.y = sin(rotation.x);
     direction.z = cos(rotation.x) * cos(rotation.y);
 
-    right = glm::normalize(glm::cross(up, direction));
+    right = glm::normalize(glm::cross(direction, worldUp));
+    up = glm::normalize(glm::cross(right, direction));
 }
 
 void Camera::translate(Input const &input){
@@ -42,19 +44,19 @@ void Camera::translate(Input const &input){
     }
 
     if(input.getKey(SDL_SCANCODE_UP)){
-        setPosition(position + direction * speed);
+        addPosition(direction * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_DOWN)){
-        setPosition(position - direction * speed);
+        addPosition(-direction * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_LEFT)){
-        setPosition(position + right * speed);
+        addPosition(-right * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_RIGHT)){
-        setPosition(position - right * speed);
+        addPosition(right * speed);
     }
 }
 
