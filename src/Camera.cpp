@@ -4,16 +4,18 @@
 #define M_PI_89     1.5533430342749533234620847839549
 #define M_PI_180    0.0174532925199432957692369076848
 
-Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), forwardVector(glm::vec3()), up(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.5f){
+Camera::Camera(glm::vec3 position, glm::vec3 target) : Object3D(), direction(glm::vec3()), up(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.5f){
     setPosition(position);
 
-    forwardVector = glm::normalize(target - position);
+    direction = glm::normalize(target - position);
 
-    rotation.x = asin(forwardVector.y);
-    rotation.y = acos(forwardVector.z / cos(rotation.x));
+    rotation.x = asin(direction.y);
+    rotation.y = acos(direction.z / cos(rotation.x));
 
-    if(forwardVector.z < 0)
+    if(direction.z < 0)
         rotation.y *= -1;
+
+    right = glm::normalize(glm::cross(up, direction));
 }
 
 Camera::~Camera(){}
@@ -27,11 +29,11 @@ void Camera::orientate(int xRel, int yRel){
         rotation.x = -M_PI_89;
     }
 
-    forwardVector.x = cos(rotation.x) * sin(rotation.y);
-    forwardVector.y = sin(rotation.x);
-    forwardVector.z = cos(rotation.x) * cos(rotation.y);
+    direction.x = cos(rotation.x) * sin(rotation.y);
+    direction.y = sin(rotation.x);
+    direction.z = cos(rotation.x) * cos(rotation.y);
 
-    sideDisplacement = glm::normalize(glm::cross(up, forwardVector));
+    right = glm::normalize(glm::cross(up, direction));
 }
 
 void Camera::translate(Input const &input){
@@ -40,22 +42,22 @@ void Camera::translate(Input const &input){
     }
 
     if(input.getKey(SDL_SCANCODE_UP)){
-        setPosition(position + forwardVector * speed);
+        setPosition(position + direction * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_DOWN)){
-        setPosition(position - forwardVector * speed);
+        setPosition(position - direction * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_LEFT)){
-        setPosition(position + sideDisplacement * speed);
+        setPosition(position + right * speed);
     }
 
     if(input.getKey(SDL_SCANCODE_RIGHT)){
-        setPosition(position - sideDisplacement * speed);
+        setPosition(position - right * speed);
     }
 }
 
 void Camera::lookAt(){
-    matrix = glm::lookAt(position, position + forwardVector, up);
+    matrix = glm::lookAt(position, position + direction, up);
 }

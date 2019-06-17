@@ -21,12 +21,10 @@ class Camera : public Object3D {
         void translate(Input const &input);
         void lookAt();
 
-    protected:
-        glm::vec3 up;
-
     private:
-        glm::vec3 forwardVector;
-        glm::vec3 sideDisplacement;
+        glm::vec3 direction;
+        glm::vec3 right;
+        glm::vec3 up;
 };
 
 #endif // CAMERA_H
