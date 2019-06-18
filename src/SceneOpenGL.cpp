@@ -128,12 +128,8 @@ void SceneOpenGL::ExampleOne(){
     phongCube->useLight(ambientLight);
     crates.push_back(phongCube);
 
-    // matrix
-    glm::mat4 projection;
-    projection = glm::perspective(70.0, (double)_width/_height, 1.0, 100.0);
-
      // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0));
+    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 0.1, 100.0);
     _input.showCursor(false);
     _input.captureCursor(true);
 
@@ -159,10 +155,10 @@ void SceneOpenGL::ExampleOne(){
         phongMat.setViewPosition(camera.position);
         phongCube->addRotationFromEuler(glm::vec3(0.01, 0., 0.));
 
-        lightCube.display(projection, view);
+        lightCube.display(camera.projectionMatrix, view);
 
         for(int i = 0; i < 10; i++){
-            crates[i]->display(projection, view);
+            crates[i]->display(camera.projectionMatrix, view);
         }
 
         SDL_GL_SwapWindow(_window);
@@ -193,18 +189,8 @@ void SceneOpenGL::ExampleTwo(){
     suzanne.load();
     suzanne.useLight(light);
 
-    // load texture
-
-    // create shader
-
-    // matrix
-    glm::mat4 projection, modelView;
-    // TODO : envoyer les matrices de projection et de vue une seule fois et pas à chaque appel de la fonction display
-
-    projection = glm::perspective(70.0,(double)_width/_height,1.0,100.0);
-
     // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0));
+    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 1.0, 100.0);
     _input.showCursor(false);
     _input.captureCursor(true);
 
@@ -228,9 +214,9 @@ void SceneOpenGL::ExampleTwo(){
         view = camera.getViewMatrix();
 
         glm::mat4 model;
-        cube.display(projection, view);
+        cube.display(camera.projectionMatrix, view);
 
-        suzanne.display(projection, view);
+        suzanne.display(camera.projectionMatrix, view);
 
         SDL_GL_SwapWindow(_window);
 
