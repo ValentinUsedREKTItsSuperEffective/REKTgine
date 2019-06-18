@@ -4,7 +4,7 @@
 #define M_PI_89     1.5533430342749533234620847839549
 #define M_PI_180    0.0174532925199432957692369076848
 
-Camera::Camera(glm::vec3 position, glm::vec3 target, double fov, double aspect, double near, double far) : Object3D(), direction(glm::vec3()), worldUp(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.5f){
+Camera::Camera(glm::vec3 position, glm::vec3 target, double fov, double aspect, double near, double far) : Object3D(), direction(glm::vec3()), worldUp(glm::vec3(0.0, 1.0, 0.0)), sensibility(0.5f), speed(0.25f){
     setPosition(position);
 
     direction = glm::normalize(target - position);
