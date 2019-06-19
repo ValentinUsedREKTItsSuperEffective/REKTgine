@@ -134,12 +134,10 @@ void SceneOpenGL::ExampleOne(){
     _input.captureCursor(true);
 
     glm::mat4 view;
-    double rt = 0.0;
 
      while(!_input.isEnd){
 
         tic = SDL_GetTicks();
-        rt += 0.01;
 
         _input.updateEvent();
 
@@ -157,8 +155,8 @@ void SceneOpenGL::ExampleOne(){
         phongMat.setViewPosition(camera.position);
         phongCube->addRotationFromEuler(glm::vec3(0.01, 0., 0.));
 
-        ambientLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, rt, 0.0));
-        lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, rt, 0.0));
+        ambientLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
+        lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.display(camera.projectionMatrix, view);
 
         for(int i = 0; i < 10; i++){

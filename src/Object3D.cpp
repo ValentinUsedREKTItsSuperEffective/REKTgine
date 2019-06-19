@@ -48,9 +48,12 @@ void Object3D::addRotationFromEuler(glm::vec3 euler){
 void Object3D::rotateAroundPoint(glm::vec3 point, glm::vec3 euler){
     combineTransformations();
 
-    matrix = glm::translate(point - position) * eulerToMat4(euler) * glm::translate(position - point) * matrix;
+    matrix = glm::translate(point) * eulerToMat4(euler) * glm::translate(-point) * matrix;
 
-    // TODO : Actualize position
+    position.x = matrix[3][0];
+    position.y = matrix[3][1];
+    position.z = matrix[3][2];
+
     // TODO : Actualize Euler
 }
 

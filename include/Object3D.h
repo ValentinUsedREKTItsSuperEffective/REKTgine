@@ -18,7 +18,7 @@ class Object3D{
         virtual void addPosition(glm::vec3 position);
         void addRotationFromEuler(glm::vec3 euler);
         void setRotationFromEuler(glm::vec3 euler);
-        void rotateAroundPoint(glm::vec3 point, glm::vec3 euler);
+        virtual void rotateAroundPoint(glm::vec3 point, glm::vec3 euler);
         void setScale(glm::vec3 scale);
         void addScale(glm::vec3 scale);
     protected:

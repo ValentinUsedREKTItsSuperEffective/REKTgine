@@ -16,6 +16,12 @@ void Light::addPosition(glm::vec3 position){
     notifyAllSubscribers();
 }
 
+void Light::rotateAroundPoint(glm::vec3 point, glm::vec3 euler){
+    Object3D::rotateAroundPoint(point, euler);
+
+    notifyAllSubscribers();
+}
+
 void Light::subscribeProgram(GLuint programID){
     lightObservers.push_back(programID);
 
