@@ -152,7 +152,6 @@ void SceneOpenGL::ExampleOne(){
         // Camera location
         view = camera.getViewMatrix();
 
-        phongMat.setViewPosition(camera.position);
         phongCube->addRotationFromEuler(glm::vec3(0.01, 0., 0.));
 
         ambientLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));

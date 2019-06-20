@@ -4,6 +4,7 @@
 in vec3 position;
 in vec3 normal;
 in vec2 coordTexture;
+in vec3 lightPosition;
 
 // Uniform
 uniform sampler2D colorTex;
@@ -11,10 +12,6 @@ uniform vec3 color;
 
 uniform vec3 ambientColor;
 uniform float ambientIntensity;
-
-uniform vec3 lightPosition;
-
-uniform vec3 viewPosition;
 
 // Sortie
 out vec4 outColor;
@@ -30,12 +27,11 @@ void main(){
     vec3 specular = vec3(0.0f);
     if(dot(lightDir, N) >= 0.0f){
         vec3 R = reflect(-lightDir, N);
-        vec3 viewDir = normalize(viewPosition - position);
+        vec3 viewDir = normalize(-position);
         float specularStrengh = 0.5;
         float shininess = 256;
         specular = vec3(1.0) * specularStrengh * pow(max(0.0, dot(viewDir, R)), shininess);
     }
 
     outColor = texture(colorTex, coordTexture) * vec4(color * (ambient + diffuse + specular), 1);
-    //outColor = vec4(max(0.0, dot(viewDir, R)), 0 ,0 , 1);
 }

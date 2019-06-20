@@ -28,12 +28,3 @@ void PhongMaterial::useLight(Light &light){
 
     light.subscribeProgram(shader.programID);
 }
-
-void PhongMaterial::setViewPosition(glm::vec3 view){
-    glUseProgram(shader.programID);
-
-    float viewPosition[3] = {view.x, view.y, view.z};
-    glUniform3fv(glGetUniformLocation(shader.programID, "viewPosition"), 1, viewPosition);
-
-    glUseProgram(0);
-}

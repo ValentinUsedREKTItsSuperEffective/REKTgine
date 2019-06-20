@@ -34,7 +34,7 @@ void Light::notifySubscriber(GLuint programID){
     glUseProgram(programID);
 
     float ligthPosition[3] = {position.x, position.y, position.z};
-    glUniform3fv(glGetUniformLocation(programID, "lightPosition"), 1, ligthPosition);
+    glUniform3fv(glGetUniformLocation(programID, "vLightPosition"), 1, ligthPosition);
 }
 
 void Light::notifyAllSubscribers(){
