@@ -29,9 +29,8 @@ uniform Light light;
 out vec4 outColor;
 
 void main(){
-    vec3 ambient = light.color * material.ambient * light.ambient;
+    vec3 ambient = material.ambient * light.ambient;
 
-    // TODO : Use a light color for  the diffuse and specular components
     vec3 N = normalize(normal);
     vec3 lightDir = normalize(lightPosition - position);
     vec3 diffuse = vec3(1.0) * material.diffuse * max(0.0, dot(lightDir, N));
@@ -44,5 +43,5 @@ void main(){
         specular = vec3(1.0) * specularStrengh * material.specular * pow(max(0.0, dot(viewDir, R)), material.shininess);
     }
 
-    outColor = texture(colorTex, coordTexture) * vec4(color * (ambient + diffuse + specular), 1);
+    outColor = vec4(light.color, 1) * texture(colorTex, coordTexture) * vec4(color * (ambient + diffuse + specular), 1);
 }
