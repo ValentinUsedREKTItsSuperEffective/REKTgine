@@ -7,6 +7,11 @@ struct Material {
     float shininess;
 };
 
+struct Light {
+    vec3 color;
+    vec3 ambient;
+};
+
 // Entrée
 in vec3 position;
 in vec3 normal;
@@ -17,16 +22,14 @@ in vec3 lightPosition;
 uniform sampler2D colorTex;
 uniform vec3 color;
 
-uniform vec3 ambientColor;
-uniform float ambientIntensity;
-
 uniform Material material;
+uniform Light light;
 
 // Sortie
 out vec4 outColor;
 
 void main(){
-    vec3 ambient = ambientColor * material.ambient * ambientIntensity;
+    vec3 ambient = light.color * material.ambient * light.ambient;
 
     // TODO : Use a light color for  the diffuse and specular components
     vec3 N = normalize(normal);

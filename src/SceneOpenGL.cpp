@@ -112,7 +112,7 @@ void SceneOpenGL::ExampleOne(){
     }
 
     // TODO : Make the difference between ambient light and point light
-    Light ambientLight(glm::vec3(1.f, 1.f, 1.f), 0.1f);
+    Light ambientLight(glm::vec3(1.f), glm::vec3(0.1f));
     ambientLight.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
     BaseMaterial lightMat;
@@ -181,7 +181,7 @@ void SceneOpenGL::ExampleTwo(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
     // Load mesh
-    Light light(glm::vec3(1.f), 0.1f);
+    Light light(glm::vec3(1.f), glm::vec3(0.1f));
 
     BaseMaterial mat;
     Cube cube(0.1f, &mat);
