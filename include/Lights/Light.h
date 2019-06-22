@@ -9,7 +9,7 @@
 
 class Light : public Object3D {
     public:
-        glm::vec3 lightColor;
+        glm::vec3 color;
         glm::vec3 ambient;
 
         Light(glm::vec3 color, glm::vec3 ambient);

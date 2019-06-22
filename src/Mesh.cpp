@@ -129,7 +129,7 @@ void Mesh::useLight(Light &light) {
 
         glBindVertexArray(_vao);
 
-            glUniform3fv(glGetUniformLocation(_shader.programID, "lightColor"), 1, glm::value_ptr(light.lightColor));
+            glUniform3fv(glGetUniformLocation(_shader.programID, "lightColor"), 1, glm::value_ptr(light.color));
 
         glBindVertexArray(0);
 

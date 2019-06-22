@@ -1,6 +1,6 @@
 #include "Lights/Light.h"
 
-Light::Light(glm::vec3 color, glm::vec3 amb) : Object3D(), lightColor(color), ambient(amb) {
+Light::Light(glm::vec3 color, glm::vec3 amb) : Object3D(), color(color), ambient(amb) {
     lightObservers = {};
 }
 
