@@ -23,8 +23,7 @@ void BaseMaterial::loadShader(){
 void BaseMaterial::update(){
     glUseProgram(shader.programID);
 
-    float toFloat3[3] = {color.x, color.y, color.z};
-    glUniform3fv(glGetUniformLocation(shader.programID, "color"), 1, toFloat3);
+    glUniform3fv(glGetUniformLocation(shader.programID, "color"), 1, glm::value_ptr(color));
 
     glUniform1i(glGetUniformLocation(shader.programID, "colorTex"), 0);
 }

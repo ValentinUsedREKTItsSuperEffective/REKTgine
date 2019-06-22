@@ -25,8 +25,7 @@ void PhongMaterial::update(){
 void PhongMaterial::useLight(Light &light){
     glUseProgram(shader.programID);
 
-    float toFloat3[3] = {light.lightColor.x, light.lightColor.y, light.lightColor.z};
-    glUniform3fv(glGetUniformLocation(shader.programID, "light.color"), 1, toFloat3);
+    glUniform3fv(glGetUniformLocation(shader.programID, "light.color"), 1, glm::value_ptr(light.lightColor));
 
     glUniform3fv(glGetUniformLocation(shader.programID, "light.ambient"), 1, glm::value_ptr(light.ambient));
 
