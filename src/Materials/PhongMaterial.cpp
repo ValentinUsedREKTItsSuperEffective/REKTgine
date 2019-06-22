@@ -26,8 +26,8 @@ void PhongMaterial::useLight(Light &light){
     glUseProgram(shader.programID);
 
     glUniform3fv(glGetUniformLocation(shader.programID, "light.color"), 1, glm::value_ptr(light.color));
-
     glUniform3fv(glGetUniformLocation(shader.programID, "light.ambient"), 1, glm::value_ptr(light.ambient));
+    glUniform3fv(glGetUniformLocation(shader.programID, "light.diffuse"), 1, glm::value_ptr(light.diffuse));
 
     glUseProgram(0);
 

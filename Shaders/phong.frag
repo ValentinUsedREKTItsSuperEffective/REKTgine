@@ -10,6 +10,7 @@ struct Material {
 struct Light {
     vec3 color;
     vec3 ambient;
+    vec3 diffuse;
 };
 
 // Entrée
@@ -33,7 +34,7 @@ void main(){
 
     vec3 N = normalize(normal);
     vec3 lightDir = normalize(lightPosition - position);
-    vec3 diffuse = vec3(1.0) * material.diffuse * max(0.0, dot(lightDir, N));
+    vec3 diffuse = vec3(1.0) * material.diffuse * max(0.0, dot(lightDir, N)) * light.diffuse;
 
     vec3 specular = vec3(0.0f);
     if(dot(lightDir, N) >= 0.0f){
