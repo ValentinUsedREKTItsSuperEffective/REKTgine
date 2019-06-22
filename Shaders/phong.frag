@@ -11,6 +11,7 @@ struct Light {
     vec3 color;
     vec3 ambient;
     vec3 diffuse;
+    vec3 specular;
 };
 
 // Entrée
@@ -41,7 +42,7 @@ void main(){
         vec3 R = reflect(-lightDir, N);
         vec3 viewDir = normalize(-position);
         float specularStrengh = 0.5;
-        specular = vec3(1.0) * specularStrengh * material.specular * pow(max(0.0, dot(viewDir, R)), material.shininess);
+        specular = vec3(1.0) * specularStrengh * material.specular * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
     }
 
     outColor = vec4(light.color, 1) * texture(colorTex, coordTexture) * vec4(color * (ambient + diffuse + specular), 1);

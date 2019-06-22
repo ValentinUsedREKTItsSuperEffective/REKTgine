@@ -1,6 +1,6 @@
 #include "Lights/Light.h"
 
-Light::Light(glm::vec3 color, glm::vec3 amb, glm::vec3 dif) : Object3D(), color(color), ambient(amb), diffuse(dif) {
+Light::Light(glm::vec3 color, glm::vec3 amb, glm::vec3 dif, glm::vec3 spec) : Object3D(), color(color), ambient(amb), diffuse(dif), specular(spec) {
     lightObservers = {};
 }
 
