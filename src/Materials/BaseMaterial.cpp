@@ -23,15 +23,10 @@ void BaseMaterial::loadShader(){
 void BaseMaterial::update(){
     glUseProgram(shader.programID);
 
-    GLuint colorLoc = glGetUniformLocation(shader.programID, "color");
     float toFloat3[3] = {color.x, color.y, color.z};
-    glUniform3fv(colorLoc, 1, toFloat3);
+    glUniform3fv(glGetUniformLocation(shader.programID, "color"), 1, toFloat3);
 
     glUniform1i(glGetUniformLocation(shader.programID, "colorTex"), 0);
-
-    glUseProgram(0);
-
-    needUpdate = false;
 }
 
 void BaseMaterial::bindTextures(){

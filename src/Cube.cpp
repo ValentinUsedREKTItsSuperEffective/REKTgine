@@ -204,6 +204,7 @@ void Cube::load(){
 void Cube::display(glm::mat4 &projection, glm::mat4 &view){
     if(material->needUpdate){
         material->update();
+        material->needUpdate = false;
     }
 
     // Bind Textures
