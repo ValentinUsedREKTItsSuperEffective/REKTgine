@@ -14,7 +14,7 @@ struct PhongMaterialParameters : public BaseMaterialParameters {
 
 class PhongMaterial : public BaseMaterial {
     public:
-        glm::vec3 ambient;
+        glm::vec3 ambient; // Same as color ?
         glm::vec3 diffuse;
         glm::vec3 specular;
         float shininess;

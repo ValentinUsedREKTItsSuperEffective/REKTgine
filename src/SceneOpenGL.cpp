@@ -95,8 +95,7 @@ void SceneOpenGL::ExampleOne(){
       glm::vec3( 2.4f, -0.4f, -3.5f),
       glm::vec3(-1.7f,  3.0f, -7.5f),
       glm::vec3( 1.3f, -2.0f, -2.5f),
-      glm::vec3( 1.5f,  2.0f, -2.5f),
-      glm::vec3( 1.5f,  0.2f, -1.5f)
+      glm::vec3( 1.5f,  2.0f, -2.5f)
     };
 
     BaseMaterialParameters param;
@@ -104,7 +103,7 @@ void SceneOpenGL::ExampleOne(){
     BaseMaterial mat(param);
 
     vector<Cube*> crates;
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < 8; i++){
         Cube* crate = new Cube(1.f, &mat);
         crate->load();
         crate->setPosition(cubePositions[i]);
@@ -119,14 +118,31 @@ void SceneOpenGL::ExampleOne(){
     Cube lightCube(0.1f, &lightMat);
     lightCube.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
+    // Red Cube
     PhongMaterialParameters phongParam;
-    phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
+    phongParam.color = glm::vec3(1.0f, 1.0f, 1.0f);
+    phongParam.ambient = glm::vec3(1.0f, 0.5f, 0.31f);
+    phongParam.diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
+    phongParam.specular = glm::vec3(0.5f, 0.5f, 0.5f);
     PhongMaterial phongMat(phongParam);
     Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
     phongCube->useLight(ambientLight);
     crates.push_back(phongCube);
+
+    // Emerald Cube
+    PhongMaterialParameters phongParamEmerald;
+    phongParamEmerald.color = glm::vec3(1.0f, 1.0f, 1.0f);
+    phongParamEmerald.ambient = glm::vec3(0.0215f, 0.1745f, 0.0215f);
+    phongParamEmerald.diffuse = glm::vec3(0.07568f, 0.61424f, 0.07568f);
+    phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
+    PhongMaterial phongMatE(phongParamEmerald);
+    Cube* emeraldCube = new Cube(2.f, &phongMatE);
+    emeraldCube->load();
+    emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
+    emeraldCube->useLight(ambientLight);
+    crates.push_back(emeraldCube);
 
      // create camera
     Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 0.1, 100.0);
