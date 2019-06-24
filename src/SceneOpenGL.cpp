@@ -94,8 +94,7 @@ void SceneOpenGL::ExampleOne(){
       glm::vec3(-3.8f, -2.0f, -12.3f),
       glm::vec3( 2.4f, -0.4f, -3.5f),
       glm::vec3(-1.7f,  3.0f, -7.5f),
-      glm::vec3( 1.3f, -2.0f, -2.5f),
-      glm::vec3( 1.5f,  2.0f, -2.5f)
+      glm::vec3( 1.3f, -2.0f, -2.5f)
     };
 
     BaseMaterialParameters param;
@@ -103,7 +102,7 @@ void SceneOpenGL::ExampleOne(){
     BaseMaterial mat(param);
 
     vector<Cube*> crates;
-    for(int i = 0; i < 8; i++){
+    for(int i = 0; i < 7; i++){
         Cube* crate = new Cube(1.f, &mat);
         crate->load();
         crate->setPosition(cubePositions[i]);
@@ -143,6 +142,20 @@ void SceneOpenGL::ExampleOne(){
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
     emeraldCube->useLight(ambientLight);
     crates.push_back(emeraldCube);
+
+    // Textured Cube
+    PhongMaterialParameters phongParamTex;
+    phongParamTex.textureSrc = "Ressources/container2.png";
+    phongParamTex.color = glm::vec3(1.0f, 1.0f, 1.0f);
+    phongParamTex.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
+    phongParamTex.diffuse = glm::vec3(0.07568f, 0.61424f, 0.07568f);
+    phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
+    PhongMaterial phongMatTex(phongParamTex);
+    Cube* texCube = new Cube(2.f, &phongMatTex);
+    texCube->load();
+    texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
+    texCube->useLight(ambientLight);
+    crates.push_back(texCube);
 
      // create camera
     Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 0.1, 100.0);
