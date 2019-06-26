@@ -1,6 +1,9 @@
 #version 330 core
 
 struct Material {
+    sampler2D map;
+    vec3 color;
+
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -21,9 +24,6 @@ in vec2 coordTexture;
 in vec3 lightPosition;
 
 // Uniform
-uniform sampler2D colorTex;
-uniform vec3 color;
-
 uniform Material material;
 uniform Light light;
 
@@ -45,5 +45,5 @@ void main(){
         specular = vec3(1.0) * specularStrengh * material.specular * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
     }
 
-    outColor = vec4(light.color, 1) * texture(colorTex, coordTexture) * vec4(color * (ambient + diffuse + specular), 1);
+    outColor = vec4(light.color, 1) * texture(material.map, coordTexture) * vec4(material.color * (ambient + diffuse + specular), 1);
 }
