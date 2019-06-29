@@ -144,6 +144,7 @@ void SceneOpenGL::ExampleOne(){
     PhongMaterialParameters phongParamTex;
     phongParamTex.textureSrc = "Ressources/container2.png";
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
+    phongParamTex.specularMapSrc = "Ressources/container2_specular.png";
     PhongMaterial phongMatTex(phongParamTex);
     Cube* texCube = new Cube(2.f, &phongMatTex);
     texCube->load();

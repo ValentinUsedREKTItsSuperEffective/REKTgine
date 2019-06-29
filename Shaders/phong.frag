@@ -5,6 +5,8 @@ struct Material {
     vec3 color;
 
     vec3 ambient;
+
+    sampler2D specularMap;
     vec3 specular;
     float shininess;
 };
@@ -40,7 +42,7 @@ void main(){
     if(dot(lightDir, N) >= 0.0f){
         vec3 R = reflect(-lightDir, N);
         vec3 viewDir = normalize(-position);
-        specular = material.specular * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
+        specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
     }
 
     outColor = vec4((ambient + diffuse + specular), 1);
