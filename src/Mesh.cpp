@@ -124,14 +124,4 @@ void Mesh::updateVBO(void *data, int sizeBytes, int offset){
 }
 
 
-void Mesh::useLight(Light &light) {
-    glUseProgram(_shader.programID);
-
-        glBindVertexArray(_vao);
-
-            glUniform3fv(glGetUniformLocation(_shader.programID, "lightColor"), 1, glm::value_ptr(light.color));
-
-        glBindVertexArray(0);
-
-    glUseProgram(0);
-}
+void Mesh::useLight(Light &light) {}
