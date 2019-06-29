@@ -1,10 +1,10 @@
 #include "Materials/PhongMaterial.h"
 
-PhongMaterial::PhongMaterial() : BaseMaterial(), ambient(glm::vec3(1.f)), diffuse(glm::vec3(1.f)), specular(glm::vec3(1.f)), shininess(32.f) {}
+PhongMaterial::PhongMaterial() : BaseMaterial(), ambient(glm::vec3(1.f)), specular(glm::vec3(1.f)), shininess(32.f) {}
 
-PhongMaterial::PhongMaterial(PhongMaterialParameters p) : BaseMaterial(p), diffuse(p.diffuse), specular(p.specular), shininess(p.shininess) {
+PhongMaterial::PhongMaterial(PhongMaterialParameters p) : BaseMaterial(p), specular(p.specular), shininess(p.shininess) {
     if(p.ambient == glm::vec3(1.f)){
-        ambient = p.diffuse;
+        ambient = p.color;
     } else {
         ambient = p.ambient;
     }
@@ -21,9 +21,7 @@ void PhongMaterial::update(){
     BaseMaterial::update();
 
     glUniform3fv(glGetUniformLocation(shader.programID, "material.ambient"), 1, glm::value_ptr(ambient));
-    glUniform3fv(glGetUniformLocation(shader.programID, "material.diffuse"), 1, glm::value_ptr(diffuse));
     glUniform3fv(glGetUniformLocation(shader.programID, "material.specular"), 1, glm::value_ptr(specular));
-
     glUniform1f(glGetUniformLocation(shader.programID, "material.shininess"), shininess);
 }
 

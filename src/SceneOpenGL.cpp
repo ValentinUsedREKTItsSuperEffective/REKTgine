@@ -119,8 +119,7 @@ void SceneOpenGL::ExampleOne(){
 
     // Red Cube
     PhongMaterialParameters phongParam;
-    phongParam.color = glm::vec3(1.0f, 1.0f, 1.0f);
-    phongParam.diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
+    phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     phongParam.specular = glm::vec3(0.5f, 0.5f, 0.5f);
     PhongMaterial phongMat(phongParam);
     Cube* phongCube = new Cube(5.f, &phongMat);
@@ -131,9 +130,8 @@ void SceneOpenGL::ExampleOne(){
 
     // Emerald Cube
     PhongMaterialParameters phongParamEmerald;
-    phongParamEmerald.color = glm::vec3(1.0f, 1.0f, 1.0f);
+    phongParamEmerald.color = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamEmerald.ambient = glm::vec3(0.0215f, 0.1745f, 0.0215f);
-    phongParamEmerald.diffuse = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     PhongMaterial phongMatE(phongParamEmerald);
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
@@ -145,8 +143,6 @@ void SceneOpenGL::ExampleOne(){
     // Textured Cube
     PhongMaterialParameters phongParamTex;
     phongParamTex.textureSrc = "Ressources/container2.png";
-    phongParamTex.color = glm::vec3(1.0f, 1.0f, 1.0f);
-    phongParamTex.diffuse = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     PhongMaterial phongMatTex(phongParamTex);
     Cube* texCube = new Cube(2.f, &phongMatTex);
