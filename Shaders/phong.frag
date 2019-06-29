@@ -9,6 +9,8 @@ struct Material {
     sampler2D specularMap;
     vec3 specular;
     float shininess;
+
+    sampler2D emissiveMap;
 };
 
 struct Light {
@@ -45,5 +47,7 @@ void main(){
         specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
     }
 
-    outColor = vec4((ambient + diffuse + specular), 1);
+    vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
+
+    outColor = vec4((ambient + diffuse + specular + emissive), 1);
 }

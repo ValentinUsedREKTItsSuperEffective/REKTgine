@@ -9,6 +9,7 @@ struct PhongMaterialParameters : public BaseMaterialParameters {
     glm::vec3 specular = glm::vec3(1.f);
     std::string specularMapSrc = "";
     float shininess = 32.f;
+    std::string emissiveMapSrc = "";
 };
 
 class PhongMaterial : public BaseMaterial {
@@ -17,6 +18,7 @@ class PhongMaterial : public BaseMaterial {
         glm::vec3 specular;
         Texture specularMap;
         float shininess;
+        Texture emissiveMap;
 
         PhongMaterial();
         PhongMaterial(PhongMaterialParameters parameters);
