@@ -120,7 +120,6 @@ void SceneOpenGL::ExampleOne(){
     // Red Cube
     PhongMaterialParameters phongParam;
     phongParam.color = glm::vec3(1.0f, 1.0f, 1.0f);
-    phongParam.ambient = glm::vec3(1.0f, 0.5f, 0.31f);
     phongParam.diffuse = glm::vec3(1.0f, 0.5f, 0.31f);
     phongParam.specular = glm::vec3(0.5f, 0.5f, 0.5f);
     PhongMaterial phongMat(phongParam);
@@ -147,7 +146,6 @@ void SceneOpenGL::ExampleOne(){
     PhongMaterialParameters phongParamTex;
     phongParamTex.textureSrc = "Ressources/container2.png";
     phongParamTex.color = glm::vec3(1.0f, 1.0f, 1.0f);
-    phongParamTex.ambient = glm::vec3(1.0f, 1.0f, 1.0f);
     phongParamTex.diffuse = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     PhongMaterial phongMatTex(phongParamTex);
