@@ -58,6 +58,7 @@ void PhongMaterial::bindTextures(){
 }
 
 // ONLY FOR ONE TYPE OF LIGHT CASTER !
+// TODO : Move to light. Same than subscribeProgram.
 void PhongMaterial::useLight(Light &light){
     glUseProgram(shader.programID);
 

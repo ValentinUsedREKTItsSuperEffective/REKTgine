@@ -7,6 +7,7 @@
 
 #include "Object3D.h"
 
+// TODO : Make it abstract
 class Light : public Object3D {
     public:
         glm::vec3 ambient;
