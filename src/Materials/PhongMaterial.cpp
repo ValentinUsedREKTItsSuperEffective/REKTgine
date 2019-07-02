@@ -26,6 +26,7 @@ PhongMaterial::PhongMaterial(PhongMaterialParameters p) : BaseMaterial(p), specu
         emissiveMap = Texture(p.emissiveMapSrc);
     } else {
         emissiveMap = Texture();
+        emissiveMap.colorByDefault = glm::vec3();
     }
     emissiveMap.load();
 }

@@ -1,10 +1,10 @@
 #include "Texture.h"
 
-Texture::Texture() : textureID(0), src(""){}
+Texture::Texture() : textureID(0), colorByDefault(glm::vec3(1.0f)), src(""){}
 
-Texture::Texture(std::string src) : textureID(0), src(src){}
+Texture::Texture(std::string src) : textureID(0), colorByDefault(glm::vec3(1.0f)), src(src){}
 
-Texture::Texture(const Texture &texture){
+Texture::Texture(const Texture &texture) : colorByDefault(glm::vec3(1.0f)){
     src = texture.src;
     load();
 }
@@ -82,7 +82,7 @@ bool Texture::load(){
         img = SDL_CreateRGBSurface(0, 1, 1, 32, 0, 0, 0, 0);
 
         SDL_LockSurface(img);
-        SDL_FillRect(img, NULL, SDL_MapRGB(img->format, 255, 255, 255));
+        SDL_FillRect(img, NULL, SDL_MapRGB(img->format, colorByDefault.x * 255, colorByDefault.y * 255, colorByDefault.z * 255));
         SDL_UnlockSurface(img);
 
         data = img->pixels;

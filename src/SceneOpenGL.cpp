@@ -133,6 +133,7 @@ void SceneOpenGL::ExampleOne(){
     phongParamEmerald.color = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamEmerald.ambient = glm::vec3(0.0215f, 0.1745f, 0.0215f);
     phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
+    phongParamEmerald.emissiveMapSrc = "Ressources/matrix.jpg";
     PhongMaterial phongMatE(phongParamEmerald);
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
     emeraldCube->load();

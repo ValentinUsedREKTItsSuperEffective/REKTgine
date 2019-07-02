@@ -2,16 +2,17 @@
 #define TEXTURE_H
 
 #include <GL/glew.h>
+#include <glm/glm.hpp>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include <string>
 
-class Texture
-{
+class Texture{
     public:
         GLuint textureID;
+        glm::vec3 colorByDefault;
 
         Texture();
         Texture(std::string src);
