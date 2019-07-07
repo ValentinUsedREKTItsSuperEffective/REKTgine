@@ -19,6 +19,10 @@ struct Light {
     vec3 specular;
 };
 
+struct DirectionalLight {
+    vec3 direction;
+};
+
 // Entrée
 in vec3 position;
 in vec3 normal;
@@ -28,6 +32,7 @@ in vec3 lightPosition;
 // Uniform
 uniform Material material;
 uniform Light light;
+uniform DirectionalLight directionalLight;
 
 // Sortie
 out vec4 outColor;
@@ -37,7 +42,8 @@ void main(){
     vec3 ambient = color * material.ambient * light.ambient;
 
     vec3 N = normalize(normal);
-    vec3 lightDir = normalize(lightPosition - position);
+    // vec3 lightDir = normalize(lightPosition - position);
+    vec3 lightDir = normalize(-directionalLight.direction);
     vec3 diffuse = color * max(0.0, dot(lightDir, N)) * light.diffuse;
 
     vec3 specular = vec3(0.0f);

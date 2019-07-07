@@ -19,6 +19,8 @@
 #include <iostream>
 #include <string>
 
+using namespace glm;
+
 class SceneOpenGL
 {
     public:

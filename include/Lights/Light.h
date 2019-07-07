@@ -19,7 +19,7 @@ class Light : public Object3D {
         virtual void addPosition(glm::vec3 position);
         virtual void rotateAroundPoint(glm::vec3 point, glm::vec3 euler);
 
-        void subscribeProgram(GLuint programID);
+        virtual void subscribeProgram(GLuint programID);
 
     protected:
         std::list<GLuint> lightObservers;
