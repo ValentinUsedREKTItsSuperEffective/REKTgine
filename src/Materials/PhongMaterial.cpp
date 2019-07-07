@@ -63,11 +63,7 @@ void PhongMaterial::bindTextures(){
 void PhongMaterial::useLight(Light &light){
     glUseProgram(shader.programID);
 
-    glUniform3fv(glGetUniformLocation(shader.programID, "light.ambient"), 1, glm::value_ptr(light.ambient));
-    glUniform3fv(glGetUniformLocation(shader.programID, "light.diffuse"), 1, glm::value_ptr(light.diffuse));
-    glUniform3fv(glGetUniformLocation(shader.programID, "light.specular"), 1, glm::value_ptr(light.specular));
+    light.subscribeProgram(shader.programID);
 
     glUseProgram(0);
-
-    light.subscribeProgram(shader.programID);
 }

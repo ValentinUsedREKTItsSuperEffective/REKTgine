@@ -25,9 +25,11 @@ void Light::rotateAroundPoint(glm::vec3 point, glm::vec3 euler){
 void Light::subscribeProgram(GLuint programID){
     lightObservers.push_back(programID);
 
-    notifySubscriber(programID);
+    glUniform3fv(glGetUniformLocation(programID, "light.ambient"), 1, glm::value_ptr(ambient));
+    glUniform3fv(glGetUniformLocation(programID, "light.diffuse"), 1, glm::value_ptr(diffuse));
+    glUniform3fv(glGetUniformLocation(programID, "light.specular"), 1, glm::value_ptr(specular));
 
-    glUseProgram(0);
+    notifySubscriber(programID);
 }
 
 void Light::notifySubscriber(GLuint programID){
