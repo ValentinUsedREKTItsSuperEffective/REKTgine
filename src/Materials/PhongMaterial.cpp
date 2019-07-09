@@ -67,3 +67,12 @@ void PhongMaterial::useLight(Light &light){
 
     glUseProgram(0);
 }
+
+void PhongMaterial::setViewPosition(glm::vec3 view){
+    glUseProgram(shader.programID);
+
+    float viewPosition[3] = {view.x, view.y, view.z};
+    glUniform3fv(glGetUniformLocation(shader.programID, "cameraPosition"), 1, viewPosition);
+
+    glUseProgram(0);
+}
