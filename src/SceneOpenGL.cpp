@@ -1,6 +1,6 @@
 #include "SceneOpenGL.h"
-#include "Lights/Light.h"
 #include "Lights/DirectionalLight.h"
+#include "Lights/PointLight.h"
 #include "Materials/PhongMaterial.h"
 
 #include "glm/ext.hpp"
@@ -111,8 +111,8 @@ void SceneOpenGL::ExampleOne(){
     }
 
     // TODO : Make the difference between ambient light and point light
-    Light ambientLight(glm::vec3(1.f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.f));
-    ambientLight.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
+    PointLight pointLight(1.f, 0.09f, 0.032f, glm::vec3(1.f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.f));
+    pointLight.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
     DirectionalLight dirLight(vec3(-0.2f, -1.0f, -0.3f), vec3(1.f), vec3(0.2f), vec3(0.5f), vec3(1.f));
 
@@ -128,7 +128,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
-    phongCube->useLight(dirLight);
+    phongCube->useLight(pointLight);
     crates.push_back(phongCube);
 
     // Emerald Cube
@@ -141,7 +141,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
     emeraldCube->load();
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
-    emeraldCube->useLight(dirLight);
+    emeraldCube->useLight(pointLight);
     crates.push_back(emeraldCube);
 
     // Textured Cube
@@ -153,7 +153,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* texCube = new Cube(2.f, &phongMatTex);
     texCube->load();
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
-    texCube->useLight(dirLight);
+    texCube->useLight(pointLight);
     crates.push_back(texCube);
 
      // create camera
@@ -186,7 +186,7 @@ void SceneOpenGL::ExampleOne(){
         phongMatE.setViewPosition(camera.position);
         phongMatTex.setViewPosition(camera.position);
 
-        ambientLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
+        pointLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.display(camera.projectionMatrix, view);
 

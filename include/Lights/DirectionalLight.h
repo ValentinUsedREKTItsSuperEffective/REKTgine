@@ -3,8 +3,6 @@
 
 #include <Lights/Light.h>
 
-using namespace glm;
-
 class DirectionalLight : public Light{
     public:
         glm::vec3 direction;

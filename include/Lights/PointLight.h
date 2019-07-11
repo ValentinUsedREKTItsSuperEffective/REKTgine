@@ -5,8 +5,14 @@
 
 class PointLight : public Light{
     public:
-        PointLight(glm::vec3 color, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
+        float constant;
+        float linear;
+        float quadratic;
+
+        PointLight(float constant, float linear, float quadratic, vec3 color, vec3 ambient, vec3 diffuse, vec3 specular);
         virtual ~PointLight();
+
+        virtual void subscribeProgram(GLuint programID);
 };
 
 #endif // POINTLIGHT_H
