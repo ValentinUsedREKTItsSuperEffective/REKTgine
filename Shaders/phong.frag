@@ -38,7 +38,7 @@ uniform DirectionalLight directionalLight;
 // Sortie
 out vec4 outColor;
 
-void main(){
+vec3 computeDirectionalLightComponents(){
     vec3 color = material.color * texture(material.map, coordTexture).rgb;
     vec3 ambient = color * material.ambient * light.ambient;
 
@@ -54,7 +54,14 @@ void main(){
         specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
     }
 
+    return ambient + diffuse + specular;
+}
+
+void main(){
+
+    vec3 dirComponents = computeDirectionalLightComponents();
+
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 
-    outColor = vec4((ambient + diffuse + specular + emissive), 1);
+    outColor = vec4((dirComponents + emissive), 1);
 }
