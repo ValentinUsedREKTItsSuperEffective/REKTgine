@@ -1,6 +1,7 @@
 #include "SceneOpenGL.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
+#include "Lights/Spotlight.h"
 #include "Materials/PhongMaterial.h"
 
 #include "glm/ext.hpp"
@@ -88,6 +89,11 @@ void SceneOpenGL::ExampleOne(){
     unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
 
+     // create camera
+    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 0.1, 100.0);
+    _input.showCursor(false);
+    _input.captureCursor(true);
+
     glm::vec3 cubePositions[] = {
       glm::vec3( 0.0f,  0.0f,  0.0f),
       glm::vec3( 2.0f,  5.0f, -15.0f),
@@ -116,6 +122,9 @@ void SceneOpenGL::ExampleOne(){
 
     DirectionalLight dirLight(vec3(-0.2f, -1.0f, -0.3f), vec3(1.f), vec3(0.2f), vec3(0.5f), vec3(1.f));
 
+    Spotlight spotlight(1.f, 0.027f, 0.0028f, vec3(0.f,  0.f, 1.f), radians(12.5f), vec3(1.f), vec3(0.2f), vec3(0.5f), vec3(1.f));
+    spotlight.setPosition(vec3(1.5f, 2.0f, 0.0f));
+
     BaseMaterial lightMat;
     Cube lightCube(0.1f, &lightMat);
     lightCube.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
@@ -128,7 +137,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
-    phongCube->useLight(pointLight);
+    phongCube->useLight(spotlight);
     crates.push_back(phongCube);
 
     // Emerald Cube
@@ -141,7 +150,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
     emeraldCube->load();
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
-    emeraldCube->useLight(pointLight);
+    emeraldCube->useLight(spotlight);
     crates.push_back(emeraldCube);
 
     // Textured Cube
@@ -153,13 +162,14 @@ void SceneOpenGL::ExampleOne(){
     Cube* texCube = new Cube(2.f, &phongMatTex);
     texCube->load();
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
-    texCube->useLight(pointLight);
+    texCube->useLight(spotlight);
     crates.push_back(texCube);
 
-     // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 0.1, 100.0);
-    _input.showCursor(false);
-    _input.captureCursor(true);
+    Cube* texCubeBis = new Cube(2.f, &phongMatTex);
+    texCubeBis->load();
+    texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
+    texCubeBis->useLight(spotlight);
+    crates.push_back(texCubeBis);
 
     glm::mat4 view;
 
@@ -190,7 +200,7 @@ void SceneOpenGL::ExampleOne(){
         lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.display(camera.projectionMatrix, view);
 
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 11; i++){
             crates[i]->display(camera.projectionMatrix, view);
         }
 

@@ -1,5 +1,12 @@
 #include "Lights/Spotlight.h"
 
-Spotlight::Spotlight(glm::vec3 col, glm::vec3 amb, glm::vec3 dif, glm::vec3 spec) : Light(col, amb, dif, spec){}
+Spotlight::Spotlight(float constant, float linear, float quad, vec3 dir, float angle, vec3 col, vec3 amb, vec3 dif, vec3 spec) : PointLight(constant, linear, quad, col, amb, dif, spec), direction(dir), angle(angle){}
 
 Spotlight::~Spotlight(){}
+
+void Spotlight::subscribeProgram(GLuint programID){
+    PointLight::subscribeProgram(programID);
+
+    glUniform3fv(glGetUniformLocation(programID, "spotlight.direction"), 1, value_ptr(direction));
+    glUniform1f(glGetUniformLocation(programID, "spotlight.cutAngle"), cos(angle));
+}

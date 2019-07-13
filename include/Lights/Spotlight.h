@@ -1,12 +1,17 @@
 #ifndef SPOTLIGHT_H
 #define SPOTLIGHT_H
 
-#include <Lights/Light.h>
+#include <Lights/PointLight.h>
 
-class Spotlight : public Light{
+class Spotlight : public PointLight{
     public:
-        Spotlight(glm::vec3 color, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
+        vec3 direction;
+        float angle;
+
+        Spotlight(float constant, float linear, float quad, vec3 direction, float angle, vec3 color, vec3 ambient, vec3 diffuse, vec3 specular);
         virtual ~Spotlight();
+
+        virtual void subscribeProgram(GLuint programID);
 };
 
 #endif // SPOTLIGHT_H
