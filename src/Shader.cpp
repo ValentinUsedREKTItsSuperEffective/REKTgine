@@ -3,11 +3,9 @@
 #include <iostream>
 #include <fstream>
 
-Shader::Shader() : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(""), fragSrc(""){
-}
+Shader::Shader() : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(""), fragSrc(""){}
 
-Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){
-}
+Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){}
 
 Shader::~Shader(){
     glDeleteShader(vertShaderID);
@@ -75,4 +73,16 @@ bool Shader::compile(GLuint &shader, GLenum type, std::string const &fileSrc){
     }
 
     return true;
+}
+
+void Shader::bindFloat(const std::string &location, float f) const {
+    glUniform1f(glGetUniformLocation(programID, location.c_str()), f);
+}
+
+void Shader::bindInt(const std::string &location, int i) const {
+    glUniform1i(glGetUniformLocation(programID, location.c_str()), i);
+}
+
+void Shader::bindFloat3(const std::string &location, vec3 f) const {
+    glUniform3fv(glGetUniformLocation(programID, location.c_str()), 1, value_ptr(f));
 }

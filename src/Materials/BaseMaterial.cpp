@@ -23,9 +23,8 @@ void BaseMaterial::loadShader(){
 void BaseMaterial::update(){
     glUseProgram(shader.programID);
 
-    glUniform3fv(glGetUniformLocation(shader.programID, "material.color"), 1, glm::value_ptr(color));
-
-    glUniform1i(glGetUniformLocation(shader.programID, "material.map"), 0);
+    shader.bindFloat3("material.color", color);
+    shader.bindInt("material.map", 0);
 }
 
 void BaseMaterial::bindTextures(){

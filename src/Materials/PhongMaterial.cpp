@@ -41,11 +41,11 @@ void PhongMaterial::loadShader(){
 void PhongMaterial::update(){
     BaseMaterial::update();
 
-    glUniform3fv(glGetUniformLocation(shader.programID, "material.ambient"), 1, glm::value_ptr(ambient));
-    glUniform3fv(glGetUniformLocation(shader.programID, "material.specular"), 1, glm::value_ptr(specular));
-    glUniform1i(glGetUniformLocation(shader.programID, "material.specularMap"), 1);
-    glUniform1f(glGetUniformLocation(shader.programID, "material.shininess"), shininess);
-    glUniform1i(glGetUniformLocation(shader.programID, "material.emissiveMap"), 2);
+    shader.bindFloat3("material.ambient", ambient);
+    shader.bindFloat3("material.specular", specular);
+    shader.bindInt("material.specularMap", 1);
+    shader.bindFloat("material.shininess", shininess);
+    shader.bindInt("material.emissiveMap", 2);
 }
 
 void PhongMaterial::bindTextures(){
@@ -71,8 +71,7 @@ void PhongMaterial::useLight(Light &light){
 void PhongMaterial::setViewPosition(glm::vec3 view){
     glUseProgram(shader.programID);
 
-    float viewPosition[3] = {view.x, view.y, view.z};
-    glUniform3fv(glGetUniformLocation(shader.programID, "cameraPosition"), 1, viewPosition);
+    shader.bindFloat3("cameraPosition", view);
 
     glUseProgram(0);
 }
