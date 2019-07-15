@@ -124,7 +124,7 @@ vec3 computeSpotlightComponents(){
 
 void main(){
 
-    vec3 pointComponents = computeSpotlightComponents();
+    vec3 pointComponents = computePointLightComponents();
 
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 

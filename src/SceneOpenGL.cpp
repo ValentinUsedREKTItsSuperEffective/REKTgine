@@ -137,7 +137,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
-    phongCube->useLight(spotlight);
+    phongCube->useLight(pointLight);
     crates.push_back(phongCube);
 
     // Emerald Cube
@@ -150,7 +150,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
     emeraldCube->load();
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
-    emeraldCube->useLight(spotlight);
+    emeraldCube->useLight(pointLight);
     crates.push_back(emeraldCube);
 
     // Textured Cube
@@ -162,13 +162,13 @@ void SceneOpenGL::ExampleOne(){
     Cube* texCube = new Cube(2.f, &phongMatTex);
     texCube->load();
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
-    texCube->useLight(spotlight);
+    texCube->useLight(pointLight);
     crates.push_back(texCube);
 
     Cube* texCubeBis = new Cube(2.f, &phongMatTex);
     texCubeBis->load();
     texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
-    texCubeBis->useLight(spotlight);
+    texCubeBis->useLight(pointLight);
     crates.push_back(texCubeBis);
 
     glm::mat4 view;
