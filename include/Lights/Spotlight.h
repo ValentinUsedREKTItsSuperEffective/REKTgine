@@ -6,9 +6,10 @@
 class Spotlight : public PointLight{
     public:
         vec3 direction;
-        float angle;
+        float cutAngle;
+        float outAngle;
 
-        Spotlight(float constant, float linear, float quad, vec3 direction, float angle, vec3 color, vec3 ambient, vec3 diffuse, vec3 specular);
+        Spotlight(float constant, float linear, float quad, vec3 direction, float cutAngle, float outAngle, vec3 color, vec3 ambient, vec3 diffuse, vec3 specular);
         virtual ~Spotlight();
 
         virtual void subscribeProgram(GLuint programID);

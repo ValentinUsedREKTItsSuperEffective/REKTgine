@@ -33,6 +33,7 @@ struct PointLight {
 struct Spotlight {
     vec3 direction;
     float cutAngle;
+    float outAngle;
 };
 
 // Entrée
@@ -102,21 +103,21 @@ vec3 computeSpotlightComponents(){
 
     vec3 contribution = ambient * attenuation;
 
-    float theta = dot(lightDir, normalize(spotlight.direction));
+    vec3 N = normalize(normal);
+    vec3 diffuse = color * max(0.0, dot(lightDir, N)) * light.diffuse;
 
-    if(theta > spotlight.cutAngle){
-        vec3 N = normalize(normal);
-        vec3 diffuse = color * max(0.0, dot(lightDir, N)) * light.diffuse;
-
-        vec3 specular = vec3(0.0f);
-        if(dot(lightDir, N) >= 0.0f){
-            vec3 R = reflect(-lightDir, N);
-            vec3 viewDir = normalize(cameraPosition - position);
-            specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
-        }
-
-        contribution += (diffuse + specular) * attenuation;
+    vec3 specular = vec3(0.0f);
+    if(dot(lightDir, N) >= 0.0f){
+        vec3 R = reflect(-lightDir, N);
+        vec3 viewDir = normalize(cameraPosition - position);
+        specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
     }
+
+    float theta = dot(lightDir, normalize(-spotlight.direction));
+    float epsilon = spotlight.cutAngle - spotlight.outAngle;
+    float intensity = clamp((theta - spotlight.outAngle) / epsilon, 0.0, 1.0);
+
+    contribution += (diffuse + specular) * attenuation * intensity;;
 
     return contribution;
 }
