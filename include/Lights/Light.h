@@ -12,14 +12,14 @@ using namespace glm;
 // TODO : Make it abstract
 class Light : public Object3D {
     public:
-        glm::vec3 ambient;
-        glm::vec3 diffuse;
-        glm::vec3 specular;
+        vec3 ambient;
+        vec3 diffuse;
+        vec3 specular;
 
-        Light(glm::vec3 color, glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular);
-        virtual void setPosition(glm::vec3 position);
-        virtual void addPosition(glm::vec3 position);
-        virtual void rotateAroundPoint(glm::vec3 point, glm::vec3 euler);
+        Light(vec3 color, vec3 ambient, vec3 diffuse, vec3 specular);
+        virtual void setPosition(vec3 position);
+        virtual void addPosition(vec3 position);
+        virtual void rotateAroundPoint(vec3 point, vec3 euler);
 
         virtual void subscribeProgram(GLuint programID);
 
