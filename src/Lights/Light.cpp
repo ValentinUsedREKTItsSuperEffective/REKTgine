@@ -26,10 +26,6 @@ void Light::subscribeProgram(GLuint programID){
     lightObservers.push_back(programID);
 
     glUniform3fv(glGetUniformLocation(programID, "light.position"), 1, value_ptr(position));
-
-    glUniform3fv(glGetUniformLocation(programID, "light.ambient"), 1, value_ptr(ambient));
-    glUniform3fv(glGetUniformLocation(programID, "light.diffuse"), 1, value_ptr(diffuse));
-    glUniform3fv(glGetUniformLocation(programID, "light.specular"), 1, value_ptr(specular));
 }
 
 void Light::notifySubscriber(GLuint programID){
