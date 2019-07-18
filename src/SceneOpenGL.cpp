@@ -117,12 +117,12 @@ void SceneOpenGL::ExampleOne(){
     }
 
     // TODO : Make the difference between ambient light and point light
-    PointLight pointLight(1.f, 0.09f, 0.032f, glm::vec3(1.f), glm::vec3(0.2f), glm::vec3(0.5f), glm::vec3(1.f));
+    PointLight pointLight(1.f, 0.09f, 0.032f, glm::vec3(1.f), glm::vec3(0.05f), glm::vec3(0.3f), glm::vec3(1.f));
     pointLight.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
-    DirectionalLight dirLight(vec3(-0.2f, -1.0f, -0.3f), vec3(1.f), vec3(0.2f), vec3(0.5f), vec3(1.f));
+    DirectionalLight dirLight(vec3(-0.2f, -1.0f, -0.3f), vec3(1.f), vec3(0.1f), vec3(0.4f), vec3(1.f));
 
-    Spotlight spotlight(1.f, 0.027f, 0.0028f, vec3(0.f,  0.f, -1.f), radians(12.5f), radians(15.f), vec3(1.f), vec3(0.2f), vec3(0.5f), vec3(1.f));
+    Spotlight spotlight(1.f, 0.027f, 0.0028f, vec3(0.f,  0.f, -1.f), radians(12.5f), radians(15.f), vec3(1.f), vec3(0.2f), vec3(0.4f), vec3(1.f));
     spotlight.setPosition(vec3(1.5f, 2.0f, 0.0f));
 
     BaseMaterial lightMat;
@@ -137,6 +137,8 @@ void SceneOpenGL::ExampleOne(){
     Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
+    phongCube->useLight(pointLight);
+    phongCube->useLight(dirLight);
     phongCube->useLight(spotlight);
     crates.push_back(phongCube);
 
@@ -150,6 +152,8 @@ void SceneOpenGL::ExampleOne(){
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
     emeraldCube->load();
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
+    emeraldCube->useLight(pointLight);
+    emeraldCube->useLight(dirLight);
     emeraldCube->useLight(spotlight);
     crates.push_back(emeraldCube);
 
@@ -162,12 +166,16 @@ void SceneOpenGL::ExampleOne(){
     Cube* texCube = new Cube(2.f, &phongMatTex);
     texCube->load();
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
+    texCube->useLight(pointLight);
+    texCube->useLight(dirLight);
     texCube->useLight(spotlight);
     crates.push_back(texCube);
 
     Cube* texCubeBis = new Cube(2.f, &phongMatTex);
     texCubeBis->load();
     texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
+    texCubeBis->useLight(pointLight);
+    texCubeBis->useLight(dirLight);
     texCubeBis->useLight(spotlight);
     crates.push_back(texCubeBis);
 

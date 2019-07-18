@@ -16,6 +16,10 @@ void Spotlight::subscribeProgram(GLuint programID){
     glUniform3fv(glGetUniformLocation(programID, "spotlight.direction"), 1, value_ptr(direction));
     glUniform1f(glGetUniformLocation(programID, "spotlight.cutAngle"), cos(cutAngle));
     glUniform1f(glGetUniformLocation(programID, "spotlight.outAngle"), cos(outAngle));
+
+    glUniform1f(glGetUniformLocation(programID, "spotlight.constant"), constant);
+    glUniform1f(glGetUniformLocation(programID, "spotlight.linear"), linear);
+    glUniform1f(glGetUniformLocation(programID, "spotlight.quadratic"), quadratic);
 }
 
 void Spotlight::notifySubscriber(GLuint programID){

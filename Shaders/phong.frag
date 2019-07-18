@@ -43,6 +43,10 @@ struct Spotlight {
     vec3 direction;
     float cutAngle;
     float outAngle;
+
+    float constant;
+    float linear;
+    float quadratic;
 };
 
 // Entrée
@@ -100,11 +104,11 @@ vec3 computePointLightComponents(){
 }
 
 vec3 computeSpotlightComponents(){
-    vec3 nonNormalizedLightDir = pointLight.position - position;
+    vec3 nonNormalizedLightDir = spotlight.position - position;
     vec3 lightDir = normalize(nonNormalizedLightDir);
 
     float dist = length(nonNormalizedLightDir);
-    float attenuation = 1.0 / (pointLight.constant + pointLight.linear * dist + pointLight.quadratic * dist * dist);
+    float attenuation = 1.0 / (spotlight.constant + spotlight.linear * dist + spotlight.quadratic * dist * dist);
 
     vec3 color = material.color * texture(material.map, coordTexture).rgb;
     vec3 ambient = color * material.ambient * spotlight.ambient;
@@ -134,8 +138,8 @@ void main(){
 
     vec3 pointComponents;
     pointComponents = computeDirectionalLightComponents();
-    pointComponents = computePointLightComponents();
-    pointComponents = computeSpotlightComponents();
+    pointComponents += computePointLightComponents();
+    pointComponents += computeSpotlightComponents();
 
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 
