@@ -78,7 +78,9 @@ int main(int argc, char **argv){
 
         //Boucle principale
         scene.ExampleOne();
+
     } else {
+
         // raytracing
         // This is the implementation of the 3 documents : Raytracing in a Week-end, the next week-end, and the rest of your life by Peter Shirley
         int x = 400;

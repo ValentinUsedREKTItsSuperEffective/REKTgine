@@ -137,7 +137,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* phongCube = new Cube(5.f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
-    phongCube->useLight(pointLight);
+    phongCube->useLight(spotlight);
     crates.push_back(phongCube);
 
     // Emerald Cube
@@ -150,7 +150,7 @@ void SceneOpenGL::ExampleOne(){
     Cube* emeraldCube = new Cube(2.f, &phongMatE);
     emeraldCube->load();
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
-    emeraldCube->useLight(pointLight);
+    emeraldCube->useLight(spotlight);
     crates.push_back(emeraldCube);
 
     // Textured Cube
@@ -162,13 +162,13 @@ void SceneOpenGL::ExampleOne(){
     Cube* texCube = new Cube(2.f, &phongMatTex);
     texCube->load();
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
-    texCube->useLight(pointLight);
+    texCube->useLight(spotlight);
     crates.push_back(texCube);
 
     Cube* texCubeBis = new Cube(2.f, &phongMatTex);
     texCubeBis->load();
     texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
-    texCubeBis->useLight(pointLight);
+    texCubeBis->useLight(spotlight);
     crates.push_back(texCubeBis);
 
     glm::mat4 view;
@@ -216,57 +216,4 @@ void SceneOpenGL::ExampleOne(){
     for(int i = 0; i<10; i++){
         delete crates[i];
     }
-}
-
-void SceneOpenGL::ExampleTwo(){
-    unsigned int frameRate = 1000 / 60;
-    Uint32 tic(0), tac(0), timeSpend(0);
-
-    // Load mesh
-    Light light(glm::vec3(1.f), glm::vec3(0.1f), glm::vec3(1.f), glm::vec3(1.f));
-
-    BaseMaterial mat;
-    Cube cube(0.1f, &mat);
-
-    Mesh suzanne("Ressources/suzanne.obj","Shaders/default.vert", "Shaders/blinnPhong.frag", "Ressources/uvmap.tga");
-    suzanne.load();
-    suzanne.useLight(light);
-
-    // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 1.0, 100.0);
-    _input.showCursor(false);
-    _input.captureCursor(true);
-
-    glm::mat4 view;
-
-    while(!_input.isEnd){
-
-        tic = SDL_GetTicks();
-
-        _input.updateEvent();
-
-        if(_input.getKey(SDL_SCANCODE_ESCAPE))
-            break;
-
-        camera.translate(_input);
-
-        // Clean buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        // Camera location
-        view = camera.getViewMatrix();
-
-        glm::mat4 model;
-        cube.display(camera.projectionMatrix, view);
-
-        suzanne.display(camera.projectionMatrix, view);
-
-        SDL_GL_SwapWindow(_window);
-
-        tac = SDL_GetTicks();
-        timeSpend = tac - tic;
-        if(timeSpend < frameRate)
-            SDL_Delay(frameRate-timeSpend);
-    }
-
 }

@@ -13,10 +13,6 @@ struct Material {
     sampler2D emissiveMap;
 };
 
-struct Light {
-    vec3 position;
-};
-
 struct DirectionalLight {
     vec3 direction;
 
@@ -26,6 +22,8 @@ struct DirectionalLight {
 };
 
 struct PointLight {
+    vec3 position;
+
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -36,6 +34,8 @@ struct PointLight {
 };
 
 struct Spotlight {
+    vec3 position;
+
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -53,7 +53,6 @@ in vec2 coordTexture;
 // Uniform
 uniform vec3 cameraPosition;
 uniform Material material;
-uniform Light light;
 uniform DirectionalLight directionalLight;
 uniform PointLight pointLight;
 uniform Spotlight spotlight;
@@ -80,14 +79,14 @@ vec3 computeDirectionalLightComponents(){
 }
 
 vec3 computePointLightComponents(){
-    float dist = length(light.position - position);
+    float dist = length(pointLight.position - position);
     float attenuation = 1.0 / (pointLight.constant + pointLight.linear * dist + pointLight.quadratic * dist * dist);
 
     vec3 color = material.color * texture(material.map, coordTexture).rgb;
     vec3 ambient = color * material.ambient * pointLight.ambient;
 
     vec3 N = normalize(normal);
-    vec3 lightDir = normalize(light.position - position);
+    vec3 lightDir = normalize(pointLight.position - position);
     vec3 diffuse = color * max(0.0, dot(lightDir, N)) * pointLight.diffuse;
 
     vec3 specular = vec3(0.0f);
@@ -101,7 +100,7 @@ vec3 computePointLightComponents(){
 }
 
 vec3 computeSpotlightComponents(){
-    vec3 nonNormalizedLightDir = light.position - position;
+    vec3 nonNormalizedLightDir = pointLight.position - position;
     vec3 lightDir = normalize(nonNormalizedLightDir);
 
     float dist = length(nonNormalizedLightDir);
@@ -135,8 +134,8 @@ void main(){
 
     vec3 pointComponents;
     pointComponents = computeDirectionalLightComponents();
-    pointComponents = computeSpotlightComponents();
     pointComponents = computePointLightComponents();
+    pointComponents = computeSpotlightComponents();
 
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 

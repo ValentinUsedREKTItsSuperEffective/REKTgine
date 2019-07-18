@@ -24,14 +24,6 @@ void Light::rotateAroundPoint(vec3 point, vec3 euler){
 
 void Light::subscribeProgram(GLuint programID){
     lightObservers.push_back(programID);
-
-    glUniform3fv(glGetUniformLocation(programID, "light.position"), 1, value_ptr(position));
-}
-
-void Light::notifySubscriber(GLuint programID){
-    glUseProgram(programID);
-
-    glUniform3fv(glGetUniformLocation(programID, "light.position"), 1, value_ptr(position));
 }
 
 void Light::notifyAllSubscribers(){

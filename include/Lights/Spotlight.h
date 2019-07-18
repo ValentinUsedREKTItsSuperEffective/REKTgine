@@ -13,6 +13,9 @@ class Spotlight : public PointLight{
         virtual ~Spotlight();
 
         virtual void subscribeProgram(GLuint programID);
+
+    protected:
+        virtual void notifySubscriber(GLuint programID);
 };
 
 #endif // SPOTLIGHT_H

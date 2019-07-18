@@ -9,7 +9,6 @@
 
 using namespace glm;
 
-// TODO : Make it abstract
 class Light : public Object3D {
     public:
         vec3 ambient;
@@ -26,7 +25,7 @@ class Light : public Object3D {
     protected:
         std::list<GLuint> lightObservers;
 
-        void notifySubscriber(GLuint programID);
+        virtual void notifySubscriber(GLuint programID) = 0;
         void notifyAllSubscribers();
 };
 

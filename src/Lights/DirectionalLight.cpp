@@ -13,3 +13,5 @@ void DirectionalLight::subscribeProgram(GLuint programID){
     glUniform3fv(glGetUniformLocation(programID, "directionalLight.diffuse"), 1, value_ptr(diffuse));
     glUniform3fv(glGetUniformLocation(programID, "directionalLight.specular"), 1, value_ptr(specular));
 }
+
+void DirectionalLight::notifySubscriber(GLuint programID){}

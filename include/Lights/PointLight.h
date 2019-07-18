@@ -13,6 +13,9 @@ class PointLight : public Light{
         virtual ~PointLight();
 
         virtual void subscribeProgram(GLuint programID);
+
+    protected:
+        virtual void notifySubscriber(GLuint programID);
 };
 
 #endif // POINTLIGHT_H

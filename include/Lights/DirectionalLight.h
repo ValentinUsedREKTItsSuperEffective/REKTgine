@@ -11,6 +11,9 @@ class DirectionalLight : public Light{
         virtual ~DirectionalLight();
 
         virtual void subscribeProgram(GLuint programID);
+
+    protected:
+        virtual void notifySubscriber(GLuint programID);
 };
 
 #endif // DIRECTIONALLIGHT_H
