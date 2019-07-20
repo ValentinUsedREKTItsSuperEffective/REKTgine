@@ -86,3 +86,7 @@ void Shader::bindInt(const std::string &location, int i) const {
 void Shader::bindFloat3(const std::string &location, vec3 f) const {
     glUniform3fv(glGetUniformLocation(programID, location.c_str()), 1, value_ptr(f));
 }
+
+void Shader::bindMat4(const std::string &location, mat4 m) const {
+   glUniformMatrix4fv(glGetUniformLocation(programID, location.c_str()), 1, GL_FALSE, value_ptr(m));
+}

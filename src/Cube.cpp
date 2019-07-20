@@ -7,53 +7,54 @@
 #endif
 
 Cube::Cube(float dim, BaseMaterial *mat) : Object3D(), material(mat), vbo(0){
-    dim /= 2.f;
+    dim *= 0.5f;
 
-    float positionsTmp[] = {
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
+    auto tmpList = std::initializer_list<float>({
+        -dim, -dim, -dim,
+         dim, -dim, -dim,
+         dim,  dim, -dim,
+         dim,  dim, -dim,
+        -dim,  dim, -dim,
+        -dim, -dim, -dim,
 
-        -0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
+        -dim, -dim,  dim,
+         dim, -dim,  dim,
+         dim,  dim,  dim,
+         dim,  dim,  dim,
+        -dim,  dim,  dim,
+        -dim, -dim,  dim,
 
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f, -0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
+        -dim,  dim,  dim,
+        -dim,  dim, -dim,
+        -dim, -dim, -dim,
+        -dim, -dim, -dim,
+        -dim, -dim,  dim,
+        -dim,  dim,  dim,
 
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
+         dim,  dim,  dim,
+         dim,  dim, -dim,
+         dim, -dim, -dim,
+         dim, -dim, -dim,
+         dim, -dim,  dim,
+         dim,  dim,  dim,
 
-        -0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f, -0.5f,
-         0.5f, -0.5f,  0.5f,
-         0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f,  0.5f,
-        -0.5f, -0.5f, -0.5f,
+        -dim, -dim, -dim,
+         dim, -dim, -dim,
+         dim, -dim,  dim,
+         dim, -dim,  dim,
+        -dim, -dim,  dim,
+        -dim, -dim, -dim,
 
-        -0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f, -0.5f,
-         0.5f,  0.5f,  0.5f,
-         0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f,  0.5f,
-        -0.5f,  0.5f, -0.5f
-    };
+        -dim,  dim, -dim,
+         dim,  dim, -dim,
+         dim,  dim,  dim,
+         dim,  dim,  dim,
+        -dim,  dim,  dim,
+        -dim,  dim, -dim
+    });
+    std::copy(tmpList.begin(), tmpList.end(), positions);
 
-    float normalTmp[] = {
+    tmpList = std::initializer_list<float>({
         0.0f,  0.0f, -1.0f,
         0.0f,  0.0f, -1.0f,
         0.0f,  0.0f, -1.0f,
@@ -95,14 +96,10 @@ Cube::Cube(float dim, BaseMaterial *mat) : Object3D(), material(mat), vbo(0){
         0.0f,  1.0f,  0.0f,
         0.0f,  1.0f,  0.0f,
         0.0f,  1.0f,  0.0f
-    };
+    });
+    std::copy(tmpList.begin(), tmpList.end(), normals);
 
-    for(int i = 0; i<108; i++){
-        positions[i] = positionsTmp[i] * dim;
-        normals[i] = normalTmp[i];
-    }
-
-    float uvsTmp[] = {
+    tmpList = std::initializer_list<float>({
         0.0f, 0.0f,
         1.0f, 0.0f,
         1.0f, 1.0f,
@@ -144,13 +141,8 @@ Cube::Cube(float dim, BaseMaterial *mat) : Object3D(), material(mat), vbo(0){
         1.0f, 0.0f,
         0.0f, 0.0f,
         0.0f, 1.0f
-    };
-
-
-
-    for(int i = 0; i<72; i++){
-        uvs[i] = uvsTmp[i];
-    }
+    });
+    std::copy(tmpList.begin(), tmpList.end(), uvs);
 
     load();
     material->loadShader();
@@ -162,8 +154,9 @@ Cube::~Cube(){
 
 void Cube::load(){
     // Geometry
-    if(glIsBuffer(vbo) == GL_TRUE)
+    if(glIsBuffer(vbo) == GL_TRUE){
         glDeleteBuffers(1, &vbo);
+    }
 
     glGenBuffers(1, &vbo);
 
@@ -201,7 +194,7 @@ void Cube::load(){
     glBindVertexArray(0);
 }
 
-void Cube::display(glm::mat4 &projection, glm::mat4 &view){
+void Cube::display(mat4 &projection, mat4 &view){
     if(material->needUpdate){
         material->update();
         material->needUpdate = false;
@@ -217,9 +210,9 @@ void Cube::display(glm::mat4 &projection, glm::mat4 &view){
 
     //Transformations
     // Matrix send to shader as Uniform after transformation
-    glUniformMatrix4fv(glGetUniformLocation(material->shader.programID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(glGetUniformLocation(material->shader.programID, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    glUniformMatrix4fv(glGetUniformLocation(material->shader.programID, "model"), 1, GL_FALSE, glm::value_ptr(matrix));
+    material->shader.bindMat4("projection", projection);
+    material->shader.bindMat4("view", view);
+    material->shader.bindMat4("model", model);
 
     // Time to draw
     glDrawArrays(GL_TRIANGLES, 0, 36);

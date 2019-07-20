@@ -22,6 +22,7 @@ class Shader{
         void bindFloat(const std::string &location, float f) const;
         void bindInt(const std::string &location, int i) const;
         void bindFloat3(const std::string &location, vec3 f) const;
+        void bindMat4(const std::string &location, mat4 m) const;
 
     private:
         GLuint vertShaderID;

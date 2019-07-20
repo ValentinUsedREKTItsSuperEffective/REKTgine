@@ -7,7 +7,7 @@
 
 class Object3D{
     public:
-        glm::mat4 matrix; // Local model matrix
+        glm::mat4 model; // Local model matrix
         glm::vec3 position;
         glm::vec3 scale;
         glm::vec3 rotation; // Euler angles

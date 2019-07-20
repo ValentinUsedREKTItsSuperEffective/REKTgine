@@ -123,7 +123,7 @@ void SceneOpenGL::ExampleOne(){
     phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     phongParam.specular = glm::vec3(0.5f, 0.5f, 0.5f);
     PhongMaterial phongMat(phongParam);
-    Cube* phongCube = new Cube(5.f, &phongMat);
+    Cube* phongCube = new Cube(2.5f, &phongMat);
     phongCube->load();
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
     phongCube->useLight(pointLight);
@@ -138,7 +138,7 @@ void SceneOpenGL::ExampleOne(){
     phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     phongParamEmerald.emissiveMapSrc = "Ressources/matrix.jpg";
     PhongMaterial phongMatE(phongParamEmerald);
-    Cube* emeraldCube = new Cube(2.f, &phongMatE);
+    Cube* emeraldCube = new Cube(1.f, &phongMatE);
     emeraldCube->load();
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
     emeraldCube->useLight(pointLight);
@@ -152,7 +152,7 @@ void SceneOpenGL::ExampleOne(){
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     phongParamTex.specularMapSrc = "Ressources/container2_specular.png";
     PhongMaterial phongMatTex(phongParamTex);
-    Cube* texCube = new Cube(2.f, &phongMatTex);
+    Cube* texCube = new Cube(1.f, &phongMatTex);
     texCube->load();
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
     texCube->useLight(pointLight);
@@ -160,7 +160,7 @@ void SceneOpenGL::ExampleOne(){
     texCube->useLight(spotlight);
     crates.push_back(texCube);
 
-    Cube* texCubeBis = new Cube(2.f, &phongMatTex);
+    Cube* texCubeBis = new Cube(1.f, &phongMatTex);
     texCubeBis->load();
     texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
     texCubeBis->useLight(pointLight);

@@ -1,7 +1,7 @@
 #include "Object3D.h"
 
 Object3D::Object3D(){
-    matrix = glm::mat4(1.f);
+    model = glm::mat4(1.f);
     position = glm::vec3(0.f);
     scale = glm::vec3(1.f);
     rotation = glm::vec3(0.f);
@@ -48,11 +48,11 @@ void Object3D::addRotationFromEuler(glm::vec3 euler){
 void Object3D::rotateAroundPoint(glm::vec3 point, glm::vec3 euler){
     combineTransformations();
 
-    matrix = glm::translate(point) * eulerToMat4(euler) * glm::translate(-point) * matrix;
+    model = glm::translate(point) * eulerToMat4(euler) * glm::translate(-point) * model;
 
-    position.x = matrix[3][0];
-    position.y = matrix[3][1];
-    position.z = matrix[3][2];
+    position.x = model[3][0];
+    position.y = model[3][1];
+    position.z = model[3][2];
 
     // TODO : Actualize Euler
 }
@@ -91,5 +91,5 @@ void Object3D::combineTransformations(){
 
     glm::mat4 translationMatrix = glm::translate(glm::mat4(1.f), position);
 
-    matrix = translationMatrix * rotationMatrix * scaleMatrix;
+    model = translationMatrix * rotationMatrix * scaleMatrix;
 }
