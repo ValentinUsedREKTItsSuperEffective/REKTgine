@@ -116,7 +116,6 @@ void SceneOpenGL::ExampleOne(){
         crates.push_back(crate);
     }
 
-    // TODO : Make the difference between ambient light and point light
     PointLight pointLight(1.f, 0.09f, 0.032f, glm::vec3(1.f), glm::vec3(0.05f), glm::vec3(0.3f), glm::vec3(1.f));
     pointLight.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
