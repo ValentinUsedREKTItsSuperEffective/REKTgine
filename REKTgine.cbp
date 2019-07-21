@@ -59,6 +59,8 @@
 		<Unit filename="Shaders/texture.vert" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Cube.h" />
+		<Unit filename="include/Geometry/CubeGeometry.h" />
+		<Unit filename="include/Geometry/Geometry.h" />
 		<Unit filename="include/Hitable.h" />
 		<Unit filename="include/HitableList.h" />
 		<Unit filename="include/Input.h" />
@@ -82,6 +84,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Cube.cpp" />
+		<Unit filename="src/Geometry/CubeGeometry.cpp" />
+		<Unit filename="src/Geometry/Geometry.cpp" />
 		<Unit filename="src/Input.cpp" />
 		<Unit filename="src/Lights/DirectionalLight.cpp" />
 		<Unit filename="src/Lights/Light.cpp" />
