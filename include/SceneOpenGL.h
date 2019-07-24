@@ -10,7 +10,6 @@
 #include <SDL2/SDL.h>
 
 #include "Shader.h"
-#include "Cube.h"
 #include "Input.h"
 #include "Texture.h"
 #include "Camera.h"

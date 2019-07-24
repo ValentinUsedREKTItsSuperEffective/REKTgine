@@ -115,10 +115,10 @@ void SceneOpenGL::ExampleOne(){
 
     CubeGeometry lightGeom(0.1f);
     BaseMaterial lightMat;
-    Cube lightCube(&lightGeom, &lightMat);
+    Mesh lightCube(&lightGeom, &lightMat);
     lightCube.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
 
-    vector<Cube*> crates;
+    vector<Mesh*> crates;
 
     // Red Cube
     CubeGeometry redGeom(2.5f);
@@ -126,7 +126,7 @@ void SceneOpenGL::ExampleOne(){
     phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     phongParam.specular = glm::vec3(0.5f, 0.5f, 0.5f);
     PhongMaterial phongMat(phongParam);
-    Cube* phongCube = new Cube(&redGeom, &phongMat);
+    Mesh* phongCube = new Mesh(&redGeom, &phongMat);
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
     phongCube->useLight(pointLight);
     phongCube->useLight(dirLight);
@@ -141,7 +141,7 @@ void SceneOpenGL::ExampleOne(){
     phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     phongParamEmerald.emissiveMapSrc = "Ressources/matrix.jpg";
     PhongMaterial phongMatE(phongParamEmerald);
-    Cube* emeraldCube = new Cube(&emeraldGeom, &phongMatE);
+    Mesh* emeraldCube = new Mesh(&emeraldGeom, &phongMatE);
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
     emeraldCube->useLight(pointLight);
     emeraldCube->useLight(dirLight);
@@ -154,14 +154,14 @@ void SceneOpenGL::ExampleOne(){
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     phongParamTex.specularMapSrc = "Ressources/container2_specular.png";
     PhongMaterial phongMatTex(phongParamTex);
-    Cube* texCube = new Cube(&emeraldGeom, &phongMatTex);
+    Mesh* texCube = new Mesh(&emeraldGeom, &phongMatTex);
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
     texCube->useLight(pointLight);
     texCube->useLight(dirLight);
     texCube->useLight(spotlight);
     crates.push_back(texCube);
 
-    Cube* texCubeBis = new Cube(&emeraldGeom, &phongMatTex);
+    Mesh* texCubeBis = new Mesh(&emeraldGeom, &phongMatTex);
     texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
     texCubeBis->useLight(pointLight);
     texCubeBis->useLight(dirLight);
@@ -169,7 +169,7 @@ void SceneOpenGL::ExampleOne(){
     crates.push_back(texCubeBis);
 
     for(int i = 0; i < 7; i++){
-        Cube* crate = new Cube(&emeraldGeom, &phongMatTex);
+        Mesh* crate = new Mesh(&emeraldGeom, &phongMatTex);
         crate->setPosition(cubePositions[i]);
         crate->setRotationFromEuler(vec3(radians(rand() * 356.f), radians(rand() * 356.f), radians(rand() * 356.f)));
         crate->useLight(pointLight);
