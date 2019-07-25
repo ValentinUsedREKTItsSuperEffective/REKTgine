@@ -1,0 +1,11 @@
+Est-ce que j'intègre Assimp maintenant ou est-ce que j'améliore la classe ObjLoader ?
+
+ - Refactor ObjLoader
+ - Faire passer les .h en .hpp
+ - Afficher les warnings pendant la compilation
+ - Ajouter les EBO dans la classe Geometry
+ - Importer sponza ou nanosuit
+ - Corriger la rotation dans Object3D::rotateAroundPoint
+ - Calculer la matrice normale en dehors phong vert
+ - Refactor la classe Scene
+ - Séparer la partie création de la fenetre et initialisation d'OpenGL de la classe Scene

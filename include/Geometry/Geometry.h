@@ -27,7 +27,6 @@ class Geometry {
     protected:
         GLuint vbo;
         GLuint vao;
-        // TODO : Add ebo
 };
 
 #endif // GEOMETRY_H
