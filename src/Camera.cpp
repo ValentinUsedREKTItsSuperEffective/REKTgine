@@ -4,10 +4,10 @@
 #define M_PI_89     1.5533430342749533234620847839549
 #define M_PI_180    0.0174532925199432957692369076848
 
-Camera::Camera(glm::vec3 position, glm::vec3 target, double fov, double aspect, double near, double far) : Object3D(), sensibility(0.5f), speed(0.25f), direction(glm::vec3()), worldUp(glm::vec3(0.0, 1.0, 0.0)){
+Camera::Camera(vec3 position, vec3 target, double fov, double aspect, double near, double far) : Object3D(), projectionMatrix(perspective(fov, aspect, near, far)), sensibility(0.5f), speed(0.25f), direction(vec3()), right(vec3()), up(vec3()), worldUp(vec3(0.0, 1.0, 0.0)){
     setPosition(position);
 
-    direction = glm::normalize(target - position);
+    direction = normalize(target - position);
 
     rotation.x = asin(direction.y);
     rotation.y = acos(direction.z / cos(rotation.x));
@@ -15,16 +15,14 @@ Camera::Camera(glm::vec3 position, glm::vec3 target, double fov, double aspect, 
     if(direction.z < 0)
         rotation.y *= -1;
 
-    right = glm::normalize(glm::cross(direction, worldUp));
-    up = glm::normalize(glm::cross(right, direction));
-
-     projectionMatrix = glm::perspective(fov, aspect, near, far);
+    right = normalize(cross(direction, worldUp));
+    up = normalize(cross(right, direction));
 }
 
 Camera::~Camera(){}
 
 void Camera::orientate(int xRel, int yRel){
-    addRotationFromEuler(glm::vec3((-yRel * sensibility) * M_PI_180, (-xRel * sensibility) * M_PI_180, 0.0));
+    addRotationFromEuler(vec3((-yRel * sensibility) * M_PI_180, (-xRel * sensibility) * M_PI_180, 0.0));
 
     if(rotation.x > M_PI_89){
         rotation.x = M_PI_89;
@@ -36,8 +34,8 @@ void Camera::orientate(int xRel, int yRel){
     direction.y = sin(rotation.x);
     direction.z = cos(rotation.x) * cos(rotation.y);
 
-    right = glm::normalize(glm::cross(direction, worldUp));
-    up = glm::normalize(glm::cross(right, direction));
+    right = normalize(cross(direction, worldUp));
+    up = normalize(cross(right, direction));
 }
 
 void Camera::translate(Input const &input){
@@ -62,6 +60,6 @@ void Camera::translate(Input const &input){
     }
 }
 
-glm::mat4 Camera::getViewMatrix(){
-    return glm::lookAt(position, position + direction, up);
+mat4 Camera::getViewMatrix(){
+    return lookAt(position, position + direction, up);
 }
