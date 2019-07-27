@@ -4,6 +4,8 @@ Geometry::Geometry(){}
 
 Geometry::~Geometry(){
     glDeleteBuffers(1, &vbo);
+    glDeleteBuffers(1, &ebo);
+    glDeleteVertexArrays(1, &vao);
 }
 
 void Geometry::load(){
@@ -28,6 +30,17 @@ void Geometry::load(){
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
+    // EBO
+    if(glIsBuffer(ebo) == GL_TRUE){
+        glDeleteBuffers(1, &ebo);
+    }
+
+    glGenBuffers(1, &ebo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+
+    auto sizeOfIndexes = indexes.size() * sizeof(unsigned short);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeOfIndexes, &indexes[0], GL_STATIC_DRAW);
+
     // VAO
     if(glIsVertexArray(vao) == GL_TRUE)
         glDeleteVertexArrays(1, &vao);
@@ -35,6 +48,7 @@ void Geometry::load(){
     glGenVertexArrays(1, &vao);
 
     glBindVertexArray(vao);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
@@ -50,6 +64,9 @@ void Geometry::load(){
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     glBindVertexArray(0);
+
+    // Don't unbind element buffer before VAO
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 void Geometry::bindVertexArray(){

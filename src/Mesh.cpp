@@ -33,7 +33,8 @@ void Mesh::display(mat4 &projection, mat4 &view){
     material->shader.bindMat4("model", model);
 
     // Time to draw
-    glDrawArrays(GL_TRIANGLES, 0, 36);
+    //glDrawArrays(GL_TRIANGLES, 0, 36);
+    glDrawElements(GL_TRIANGLES, geometry->indexes.size(), GL_UNSIGNED_SHORT, 0);
 
     glBindVertexArray(0);
 

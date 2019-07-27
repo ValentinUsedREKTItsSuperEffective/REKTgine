@@ -18,6 +18,7 @@ class Geometry {
         vector<float> positions;
         vector<float> normals;
         vector<float> uvs;
+        vector<unsigned short> indexes;
 
         Geometry();
         virtual ~Geometry();
@@ -27,6 +28,7 @@ class Geometry {
     protected:
         GLuint vbo;
         GLuint vao;
+        GLuint ebo;
 };
 
 #endif // GEOMETRY_H

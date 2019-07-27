@@ -57,6 +57,7 @@
 		<Unit filename="Shaders/phong.vert" />
 		<Unit filename="Shaders/texture.frag" />
 		<Unit filename="Shaders/texture.vert" />
+		<Unit filename="TODO.txt" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
