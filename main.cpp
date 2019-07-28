@@ -68,7 +68,7 @@ int main(int argc, char **argv){
 
     if (realtime) {
         // Notre scène
-        Scene scene("caca", 800, 600);
+        Scene scene(1200, 800);
 
         if(scene.initWindow() == false)
             return -1;

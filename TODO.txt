@@ -6,6 +6,5 @@ Est-ce que j'intègre Assimp maintenant ou est-ce que j'améliore la classe ObjL
  - Importer sponza ou nanosuit
  - Corriger la rotation dans Object3D::rotateAroundPoint
  - Calculer la matrice normale en dehors phong vert
- - Refactor la classe Scene
  - Séparer la partie création de la fenetre et initialisation d'OpenGL de la classe Scene
  - Ajouter des objets à la Scene plus facilement

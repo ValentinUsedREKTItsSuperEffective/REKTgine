@@ -1,31 +1,27 @@
+#include "glm/ext.hpp"
+
 #include "Scene.h"
+#include "Camera.h"
+#include "Mesh.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
 #include "Lights/Spotlight.h"
 #include "Materials/PhongMaterial.h"
 #include "Geometry/CubeGeometry.h"
 
-#include "glm/ext.hpp"
-
 using namespace std;
 
-Scene::Scene(std::string title, int width, int height) : _window(0), _context(0), _input(), _title(title), _width(width), _height(height)
-{
+Scene::Scene(int width, int height) : window(0), context(0), input(), width(width), height(height){}
 
-}
-
-Scene::~Scene()
-{
-    SDL_GL_DeleteContext(_context);
-    SDL_DestroyWindow(_window);
+Scene::~Scene(){
+    SDL_GL_DeleteContext(context);
+    SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
 bool Scene::initWindow(){
-
     // Initialisation de la SDL
-    if(SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
+    if(SDL_Init(SDL_INIT_VIDEO) < 0){
         std::cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
         SDL_Quit();
 
@@ -41,10 +37,9 @@ bool Scene::initWindow(){
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     // Création de la fenêtre
-    _window = SDL_CreateWindow(_title.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _width, _height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow("REKTgine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
-    if(_window == 0)
-    {
+    if(window == 0){
         std::cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << std::endl;
         SDL_Quit();
 
@@ -52,12 +47,11 @@ bool Scene::initWindow(){
     }
 
     // Création du contexte OpenGL
-    _context = SDL_GL_CreateContext(_window);
+    context = SDL_GL_CreateContext(window);
 
-    if(_context == 0)
-    {
+    if(context == 0){
         std::cout << SDL_GetError() << std::endl;
-        SDL_DestroyWindow(_window);
+        SDL_DestroyWindow(window);
         SDL_Quit();
 
         return false;
@@ -67,20 +61,17 @@ bool Scene::initWindow(){
 }
 
 bool Scene::initGL(){
-
     // Initialisation d'OpenGL
     GLenum err = glewInit();
 
     if(err != GLEW_OK){
         std::cout << "Erreur d'initialisation de GLEW : " << glewGetErrorString(err);
-        SDL_GL_DeleteContext(_context);
-        SDL_DestroyWindow(_window);
+        SDL_GL_DeleteContext(context);
+        SDL_DestroyWindow(window);
         SDL_Quit();
 
         return false;
     }
-
-    glEnable(GL_DEPTH_TEST);
 
     return true;
 }
@@ -91,9 +82,9 @@ void Scene::ExampleOne(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
      // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)_width/_height, 0.1, 100.0);
-    _input.showCursor(false);
-    _input.captureCursor(true);
+    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)width/height, 0.1, 100.0);
+    input.showCursor(false);
+    input.captureCursor(true);
 
     glm::vec3 cubePositions[] = {
       glm::vec3( 0.0f,  0.0f,  0.0f),
@@ -180,16 +171,18 @@ void Scene::ExampleOne(){
 
     glm::mat4 view;
 
-     while(!_input.isEnd){
+    glEnable(GL_DEPTH_TEST);
+
+     while(!input.isEnd){
 
         tic = SDL_GetTicks();
 
-        _input.updateEvent();
+        input.updateEvent();
 
-        if(_input.getKey(SDL_SCANCODE_ESCAPE))
+        if(input.getKey(SDL_SCANCODE_ESCAPE))
             break;
 
-        camera.translate(_input);
+        camera.translate(input);
 
         // Clean buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -211,7 +204,7 @@ void Scene::ExampleOne(){
             crates[i]->display(camera.projectionMatrix, view);
         }
 
-        SDL_GL_SwapWindow(_window);
+        SDL_GL_SwapWindow(window);
 
         tac = SDL_GetTicks();
         timeSpend = tac - tic;
