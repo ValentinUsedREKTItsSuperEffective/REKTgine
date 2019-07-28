@@ -1,4 +1,4 @@
-#include "SceneOpenGL.h"
+#include "Scene.h"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
 #include "Lights/Spotlight.h"
@@ -9,19 +9,19 @@
 
 using namespace std;
 
-SceneOpenGL::SceneOpenGL(std::string title, int width, int height) : _window(0), _context(0), _input(), _title(title), _width(width), _height(height)
+Scene::Scene(std::string title, int width, int height) : _window(0), _context(0), _input(), _title(title), _width(width), _height(height)
 {
 
 }
 
-SceneOpenGL::~SceneOpenGL()
+Scene::~Scene()
 {
     SDL_GL_DeleteContext(_context);
     SDL_DestroyWindow(_window);
     SDL_Quit();
 }
 
-bool SceneOpenGL::initWindow(){
+bool Scene::initWindow(){
 
     // Initialisation de la SDL
     if(SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -66,7 +66,7 @@ bool SceneOpenGL::initWindow(){
     return true;
 }
 
-bool SceneOpenGL::initGL(){
+bool Scene::initGL(){
 
     // Initialisation d'OpenGL
     GLenum err = glewInit();
@@ -86,7 +86,7 @@ bool SceneOpenGL::initGL(){
 }
 
 // Cubes example
-void SceneOpenGL::ExampleOne(){
+void Scene::ExampleOne(){
     unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
 

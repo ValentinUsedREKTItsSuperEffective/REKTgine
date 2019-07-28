@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "SceneOpenGL.h"
+#include "Scene.h"
 
 #include "Vector3.h"
 #include "Ray.h"
@@ -68,7 +68,7 @@ int main(int argc, char **argv){
 
     if (realtime) {
         // Notre scène
-        SceneOpenGL scene("caca", 800, 600);
+        Scene scene("caca", 800, 600);
 
         if(scene.initWindow() == false)
             return -1;

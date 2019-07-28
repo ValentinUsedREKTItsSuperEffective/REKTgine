@@ -20,11 +20,10 @@
 
 using namespace glm;
 
-class SceneOpenGL
-{
+class Scene{
     public:
-        SceneOpenGL(std::string, int, int);
-        ~SceneOpenGL();
+        Scene(std::string, int, int);
+        ~Scene();
 
         bool initWindow();
         bool initGL();
