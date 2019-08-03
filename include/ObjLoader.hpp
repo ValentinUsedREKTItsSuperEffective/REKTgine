@@ -7,11 +7,21 @@
 #include <vector>
 #include <string>
 
+#include "Geometry/Geometry.h"
+
+using namespace glm;
+
+struct FaceTriplet {
+    int positionIndex;
+    int uvIndex;
+    int normalIndex;
+};
+
 class ObjLoader{
     public:
         ObjLoader();
         ~ObjLoader();
-        bool load(std::string path, std::vector<glm::vec3> &vertices, std::vector<glm::vec2> &uvs, std::vector<glm::vec3> &normals);
+        bool load(std::string path, Geometry &geometry);
 };
 
 #endif // OBJLOADER_H

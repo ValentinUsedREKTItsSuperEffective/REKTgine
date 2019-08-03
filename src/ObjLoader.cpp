@@ -1,4 +1,4 @@
-#include "ObjLoader.h"
+#include "ObjLoader.hpp"
 
 #include <iostream>
 #include <stdio.h>
@@ -8,10 +8,10 @@ ObjLoader::ObjLoader(){}
 
 ObjLoader::~ObjLoader(){}
 
-bool ObjLoader::load(std::string path, std::vector<glm::vec3> &verticesOut, std::vector<glm::vec2> &uvsOut, std::vector<glm::vec3> &normalsOut){
-    std::vector<unsigned int> verticesIndex, uvsIndex, normalsIndex;
-    std::vector<glm::vec3> tmp_vertices, tmp_normals;
+bool ObjLoader::load(std::string path, Geometry &geometry){
+    std::vector<glm::vec3> tmp_positions, tmp_normals;
     std::vector<glm::vec2> tmp_uvs;
+    std::vector<FaceTriplet> tmp_indexes;
 
     FILE * file = fopen(path.c_str(), "r");
     if(!file){
@@ -19,55 +19,71 @@ bool ObjLoader::load(std::string path, std::vector<glm::vec3> &verticesOut, std:
         return false;
     }
 
+    glm::vec3 position, normal;
+    glm::vec2 uv;
+    int positionIndex[3], uvIndex[3], normalIndex[3];
     while(!feof(file)){
         char header[256];
         fscanf(file, "%s", header);
 
-        if(strcmp("v",header) == 0){ // vertices
-            glm::vec3 vertex;
-            fscanf(file,"%f" "%f" "%f\n", &vertex.x, &vertex.y, &vertex.z);
-            tmp_vertices.push_back(vertex);
+        if(strcmp("v", header) == 0){ // vertices
+            fscanf(file, "%f" "%f" "%f\n", &position.x, &position.y, &position.z);
+            tmp_positions.push_back(position);
         } else if(strcmp("vt",header) == 0){ // uv
-            glm::vec2 uv;
             fscanf(file, "%f %f\n", &uv.x, &uv.y);
             tmp_uvs.push_back(uv);
         } else if(strcmp("vn",header) == 0){ // normal
-            glm::vec3 normal;
             fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
             tmp_normals.push_back(normal);
         } else if(strcmp("f",header) == 0){ // face
-            int vertexIndex[3], uvIndex[3], normalIndex[3];
-            int matches = fscanf(file,"%d/%d/%d %d/%d/%d %d/%d/%d\n", &vertexIndex[0], &uvIndex[0], &normalIndex[0], &vertexIndex[1], &uvIndex[1], &normalIndex[1], &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+            int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &positionIndex[0], &uvIndex[0], &normalIndex[0], &positionIndex[1], &uvIndex[1], &normalIndex[1], &positionIndex[2], &uvIndex[2], &normalIndex[2]);
 
             if(matches != 9){
                 std::cout << "Wrong data format !" << std::endl;
                 return false;
             }
 
-            verticesIndex.push_back(vertexIndex[0]);
-            verticesIndex.push_back(vertexIndex[1]);
-            verticesIndex.push_back(vertexIndex[2]);
-            uvsIndex.push_back(uvIndex[0]);
-            uvsIndex.push_back(uvIndex[1]);
-            uvsIndex.push_back(uvIndex[2]);
-            normalsIndex.push_back(normalIndex[0]);
-            normalsIndex.push_back(normalIndex[1]);
-            normalsIndex.push_back(normalIndex[2]);
+            for(int i = 0; i < 3; i++){
+                int j = 0;
+                int duplicateIndex = -1;
+                while(duplicateIndex == -1 && j < tmp_indexes.size()){
+                    if(tmp_indexes[j].positionIndex == positionIndex[i] && tmp_indexes[j].uvIndex == uvIndex[i] && tmp_indexes[j].normalIndex == normalIndex[i]){
+                        duplicateIndex = j;
+                    }
+
+                    j++;
+                }
+
+                if(duplicateIndex == -1){
+                    FaceTriplet f;
+                    f.positionIndex = positionIndex[i];
+                    f.uvIndex = uvIndex[i];
+                    f.normalIndex = normalIndex[i];
+                    tmp_indexes.push_back(f);
+                    geometry.indexes.push_back(j);
+                } else {
+                    geometry.indexes.push_back(duplicateIndex);
+                }
+            }
         }
+    }
+
+    for(auto it = tmp_indexes.begin(); it < tmp_indexes.end(); it++){
+        geometry.positions.push_back(tmp_positions[(*it).positionIndex - 1].x);
+        geometry.positions.push_back(tmp_positions[(*it).positionIndex - 1].y);
+        geometry.positions.push_back(tmp_positions[(*it).positionIndex - 1].z);
+
+        geometry.normals.push_back(tmp_normals[(*it).normalIndex - 1].x);
+        geometry.normals.push_back(tmp_normals[(*it).normalIndex - 1].y);
+        geometry.normals.push_back(tmp_normals[(*it).normalIndex - 1].z);
+
+        geometry.uvs.push_back(tmp_uvs[(*it).uvIndex - 1].x);
+        geometry.uvs.push_back(tmp_uvs[(*it).uvIndex - 1].y);
     }
 
     fclose(file);
 
-    for(std::vector<unsigned int>::iterator it = verticesIndex.begin(); it != verticesIndex.end(); ++it){
-        verticesOut.push_back(tmp_vertices.at((*it)-1));
-    }
+    geometry.load();
 
-    for(std::vector<unsigned int>::iterator it = uvsIndex.begin(); it != uvsIndex.end(); ++it){
-        uvsOut.push_back(tmp_uvs.at((*it)-1));
-    }
-
-    for(std::vector<unsigned int>::iterator it = normalsIndex.begin(); it != normalsIndex.end(); ++it){
-        normalsOut.push_back(tmp_normals.at((*it)-1));
-    }
-
+    return true;
 }

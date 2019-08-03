@@ -15,6 +15,14 @@ void Object3D::setPosition(glm::vec3 p){
     combineTransformations();
 }
 
+void Object3D::setPosition(float x, float y, float z){
+    position.x = x;
+    position.y = y;
+    position.z = z;
+
+    combineTransformations();
+}
+
 void Object3D::addPosition(glm::vec3 p){
     position += p;
 

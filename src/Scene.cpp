@@ -8,6 +8,7 @@
 #include "Lights/Spotlight.h"
 #include "Materials/PhongMaterial.h"
 #include "Geometry/CubeGeometry.h"
+#include "ObjLoader.hpp"
 
 using namespace std;
 
@@ -169,6 +170,15 @@ void Scene::ExampleOne(){
         crates.push_back(crate);
     }
 
+    ObjLoader loader;
+    Geometry suzanneGeometry;
+    loader.load("Ressources/suzanne.obj", suzanneGeometry);
+    Mesh suzanne(&suzanneGeometry, &phongMatTex);
+    suzanne.setPosition(4.f, 0.f, 0.f);
+    suzanne.useLight(pointLight);
+    suzanne.useLight(dirLight);
+    suzanne.useLight(spotlight);
+
     glm::mat4 view;
 
     glEnable(GL_DEPTH_TEST);
@@ -203,6 +213,8 @@ void Scene::ExampleOne(){
         for(int i = 0; i < 11; i++){
             crates[i]->display(camera.projectionMatrix, view);
         }
+
+        suzanne.display(camera.projectionMatrix, view);
 
         SDL_GL_SwapWindow(window);
 

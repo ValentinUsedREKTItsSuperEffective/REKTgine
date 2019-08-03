@@ -15,6 +15,7 @@ class Object3D{
         Object3D();
         virtual ~Object3D();
         virtual void setPosition(glm::vec3 position);
+        virtual void setPosition(float x, float y, float z);
         virtual void addPosition(glm::vec3 position);
         void addRotationFromEuler(glm::vec3 euler);
         void setRotationFromEuler(glm::vec3 euler);
