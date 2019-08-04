@@ -10,6 +10,7 @@
 #include "Geometry/Geometry.h"
 
 using namespace glm;
+using namespace std;
 
 struct FaceTriplet {
     int positionIndex;
@@ -21,7 +22,7 @@ class ObjLoader{
     public:
         ObjLoader();
         ~ObjLoader();
-        bool load(std::string path, Geometry &geometry);
+        bool load(string path, Geometry &geometry);
 };
 
 #endif // OBJLOADER_H

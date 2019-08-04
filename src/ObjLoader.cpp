@@ -8,19 +8,19 @@ ObjLoader::ObjLoader(){}
 
 ObjLoader::~ObjLoader(){}
 
-bool ObjLoader::load(std::string path, Geometry &geometry){
-    std::vector<glm::vec3> tmp_positions, tmp_normals;
-    std::vector<glm::vec2> tmp_uvs;
-    std::vector<FaceTriplet> tmp_indexes;
+bool ObjLoader::load(string path, Geometry &geometry){
+    vector<vec3> tmp_positions, tmp_normals;
+    vector<vec2> tmp_uvs;
+    vector<FaceTriplet> tmp_indexes;
 
     FILE * file = fopen(path.c_str(), "r");
     if(!file){
-        std::cout<<"Error : Cannot find " << path << std::endl;
+        cout << "Error : Cannot find " << path << endl;
         return false;
     }
 
-    glm::vec3 position, normal;
-    glm::vec2 uv;
+    vec3 position, normal;
+    vec2 uv;
     int positionIndex[3], uvIndex[3], normalIndex[3];
     while(!feof(file)){
         char header[256];
@@ -29,17 +29,17 @@ bool ObjLoader::load(std::string path, Geometry &geometry){
         if(strcmp("v", header) == 0){ // vertices
             fscanf(file, "%f" "%f" "%f\n", &position.x, &position.y, &position.z);
             tmp_positions.push_back(position);
-        } else if(strcmp("vt",header) == 0){ // uv
+        } else if(strcmp("vt", header) == 0){ // uv
             fscanf(file, "%f %f\n", &uv.x, &uv.y);
             tmp_uvs.push_back(uv);
-        } else if(strcmp("vn",header) == 0){ // normal
+        } else if(strcmp("vn", header) == 0){ // normal
             fscanf(file, "%f %f %f\n", &normal.x, &normal.y, &normal.z);
             tmp_normals.push_back(normal);
-        } else if(strcmp("f",header) == 0){ // face
+        } else if(strcmp("f", header) == 0){ // face
             int matches = fscanf(file, "%d/%d/%d %d/%d/%d %d/%d/%d\n", &positionIndex[0], &uvIndex[0], &normalIndex[0], &positionIndex[1], &uvIndex[1], &normalIndex[1], &positionIndex[2], &uvIndex[2], &normalIndex[2]);
 
             if(matches != 9){
-                std::cout << "Wrong data format !" << std::endl;
+                cout << "Wrong data format !" << endl;
                 return false;
             }
 
