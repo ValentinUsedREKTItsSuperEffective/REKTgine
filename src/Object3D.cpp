@@ -1,15 +1,10 @@
 #include "Object3D.h"
 
-Object3D::Object3D(){
-    model = glm::mat4(1.f);
-    position = glm::vec3(0.f);
-    scale = glm::vec3(1.f);
-    rotation = glm::vec3(0.f);
-}
+Object3D::Object3D() : name(""), model(mat4(1.f)), position(vec3()), scale(vec3(1.f)), rotation(vec3()) {}
 
 Object3D::~Object3D(){}
 
-void Object3D::setPosition(glm::vec3 p){
+void Object3D::setPosition(vec3 p){
     position = p;
 
     combineTransformations();
@@ -23,40 +18,40 @@ void Object3D::setPosition(float x, float y, float z){
     combineTransformations();
 }
 
-void Object3D::addPosition(glm::vec3 p){
+void Object3D::addPosition(vec3 p){
     position += p;
 
     combineTransformations();
 }
 
-void Object3D::setScale(glm::vec3 s){
+void Object3D::setScale(vec3 s){
     scale = s;
 
     combineTransformations();
 }
 
-void Object3D::addScale(glm::vec3 s){
+void Object3D::addScale(vec3 s){
     scale += s;
 
     combineTransformations();
 }
 
-void Object3D::setRotationFromEuler(glm::vec3 euler){
+void Object3D::setRotationFromEuler(vec3 euler){
     rotation = euler;
 
     combineTransformations();
 }
 
-void Object3D::addRotationFromEuler(glm::vec3 euler){
+void Object3D::addRotationFromEuler(vec3 euler){
     rotation += euler;
 
     combineTransformations();
 }
 
-void Object3D::rotateAroundPoint(glm::vec3 point, glm::vec3 euler){
+void Object3D::rotateAroundPoint(vec3 point, vec3 euler){
     combineTransformations();
 
-    model = glm::translate(point) * eulerToMat4(euler) * glm::translate(-point) * model;
+    model = translate(point) * eulerToMat4(euler) * translate(-point) * model;
 
     position.x = model[3][0];
     position.y = model[3][1];
@@ -65,7 +60,7 @@ void Object3D::rotateAroundPoint(glm::vec3 point, glm::vec3 euler){
     // TODO : Actualize Euler
 }
 
-glm::mat4 Object3D::eulerToMat4(glm::vec3 euler){
+mat4 Object3D::eulerToMat4(vec3 euler){
     float mat[16];
     float A = cos(euler.x);
     float B = sin(euler.x);
@@ -89,15 +84,15 @@ glm::mat4 Object3D::eulerToMat4(glm::vec3 euler){
 
     mat[3]  =  mat[7] = mat[11] = mat[12] = mat[13] = mat[14] = 0;
     mat[15] =  1;
-    return glm::make_mat4(mat);
+    return make_mat4(mat);
 }
 
 void Object3D::combineTransformations(){
-    glm::mat4 scaleMatrix = glm::scale(scale);
+    mat4 scaleMatrix = glm::scale(scale);
 
-    glm::mat4 rotationMatrix = eulerToMat4(rotation);
+    mat4 rotationMatrix = eulerToMat4(rotation);
 
-    glm::mat4 translationMatrix = glm::translate(glm::mat4(1.f), position);
+    mat4 translationMatrix = translate(mat4(1.f), position);
 
     model = translationMatrix * rotationMatrix * scaleMatrix;
 }
