@@ -1,9 +1,10 @@
-Est-ce que j'intègre Assimp maintenant ou est-ce que j'améliore la classe ObjLoader ?
+Pourquoi est-ce qu'il faut déclarer les useLights sur les derniers mesh créés plutôt qu'une fois au début ?
 
- - Ajouter une classe PlaneGeometry
- - ObjLoader.load renvoie une Geometry
- - Faire passer les .h en .hpp
  - Importer sponza ou nanosuit
+ - Importer les .mtl
+ - Importer plusieurs objets d'un même .obj
+ - Ajouter une classe PlaneGeometry
+ - Faire passer les .h en .hpp
  - Corriger la rotation dans Object3D::rotateAroundPoint
  - Calculer la matrice normale en dehors phong vert
  - Séparer la partie création de la fenetre et initialisation d'OpenGL de la classe Scene
