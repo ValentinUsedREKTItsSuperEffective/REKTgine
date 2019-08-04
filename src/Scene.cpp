@@ -131,7 +131,7 @@ void Scene::ExampleOne(){
     phongParamEmerald.color = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamEmerald.ambient = glm::vec3(0.0215f, 0.1745f, 0.0215f);
     phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
-    phongParamEmerald.emissiveMapSrc = "Ressources/matrix.jpg";
+    phongParamEmerald.emissiveMapSrc = "Ressources/Materials/matrix.jpg";
     PhongMaterial phongMatE(phongParamEmerald);
     Mesh* emeraldCube = new Mesh(&emeraldGeom, &phongMatE);
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
@@ -142,9 +142,9 @@ void Scene::ExampleOne(){
 
     // Textured Cube
     PhongMaterialParameters phongParamTex;
-    phongParamTex.textureSrc = "Ressources/container2.png";
+    phongParamTex.textureSrc = "Ressources/Materials/container2.png";
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
-    phongParamTex.specularMapSrc = "Ressources/container2_specular.png";
+    phongParamTex.specularMapSrc = "Ressources/Materials/container2_specular.png";
     PhongMaterial phongMatTex(phongParamTex);
     Mesh* texCube = new Mesh(&emeraldGeom, &phongMatTex);
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
@@ -172,7 +172,7 @@ void Scene::ExampleOne(){
 
     ObjLoader loader;
     Geometry suzanneGeometry;
-    loader.load("Ressources/suzanne.obj", suzanneGeometry);
+    loader.load("Ressources/Models/suzanne.obj", suzanneGeometry);
     Mesh suzanne(&suzanneGeometry, &phongMatTex);
     suzanne.setPosition(4.f, 0.f, 0.f);
     suzanne.useLight(pointLight);
