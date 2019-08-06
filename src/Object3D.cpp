@@ -30,6 +30,12 @@ void Object3D::setScale(vec3 s){
     combineTransformations();
 }
 
+void Object3D::setScale(float scale){
+    this->scale.x = this->scale.y = this->scale.z = scale;
+
+    combineTransformations();
+}
+
 void Object3D::addScale(vec3 s){
     scale += s;
 

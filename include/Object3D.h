@@ -26,6 +26,7 @@ class Object3D{
         void setRotationFromEuler(vec3 euler);
         virtual void rotateAroundPoint(vec3 point, vec3 euler);
         void setScale(vec3 scale);
+        void setScale(float scale);
         void addScale(vec3 scale);
     protected:
         mat4 eulerToMat4(vec3 euler);
