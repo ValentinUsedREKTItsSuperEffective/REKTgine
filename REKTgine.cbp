@@ -71,7 +71,7 @@
 		<Unit filename="include/Material_RT.h" />
 		<Unit filename="include/Materials/BaseMaterial.h" />
 		<Unit filename="include/Materials/PhongMaterial.h" />
-		<Unit filename="include/Mesh.h" />
+		<Unit filename="include/Mesh.hpp" />
 		<Unit filename="include/ObjLoader.hpp" />
 		<Unit filename="include/Object3D.h" />
 		<Unit filename="include/Ray.h" />

@@ -2,7 +2,7 @@
 
 #include "Scene.h"
 #include "Camera.h"
-#include "Mesh.h"
+#include "Mesh.hpp"
 #include "Lights/DirectionalLight.h"
 #include "Lights/PointLight.h"
 #include "Lights/Spotlight.h"
