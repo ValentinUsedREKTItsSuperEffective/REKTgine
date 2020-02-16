@@ -58,6 +58,7 @@ Temporary Items
 *.lo
 *.o
 *.obj
+!Ressources/Models/*.obj
 
 # Precompiled Headers
 *.gch
