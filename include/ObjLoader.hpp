@@ -7,7 +7,7 @@
 #include <vector>
 #include <string>
 
-#include "Geometry/Geometry.h"
+#include "Mesh.hpp"
 
 using namespace glm;
 using namespace std;
@@ -22,7 +22,7 @@ class ObjLoader{
     public:
         ObjLoader();
         ~ObjLoader();
-        bool load(string path, Geometry &geometry);
+        bool load(string path, Mesh &mesh);
 };
 
 #endif // OBJLOADER_H

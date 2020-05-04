@@ -8,7 +8,7 @@ ObjLoader::ObjLoader(){}
 
 ObjLoader::~ObjLoader(){}
 
-bool ObjLoader::load(string path, Geometry &geometry){
+bool ObjLoader::load(string path, Mesh &mesh){
     vector<vec3> tmp_positions, tmp_normals;
     vector<vec2> tmp_uvs;
     vector<FaceTriplet> tmp_indexes;
@@ -60,30 +60,30 @@ bool ObjLoader::load(string path, Geometry &geometry){
                     f.uvIndex = uvIndex[i];
                     f.normalIndex = normalIndex[i];
                     tmp_indexes.push_back(f);
-                    geometry.indexes.push_back(j);
+                    mesh.geometry->indexes.push_back(j);
                 } else {
-                    geometry.indexes.push_back(duplicateIndex);
+                    mesh.geometry->indexes.push_back(duplicateIndex);
                 }
             }
         }
     }
 
     for(auto it = tmp_indexes.begin(); it < tmp_indexes.end(); it++){
-        geometry.positions.push_back(tmp_positions[(*it).positionIndex - 1].x);
-        geometry.positions.push_back(tmp_positions[(*it).positionIndex - 1].y);
-        geometry.positions.push_back(tmp_positions[(*it).positionIndex - 1].z);
+        mesh.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].x);
+        mesh.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].y);
+        mesh.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].z);
 
-        geometry.normals.push_back(tmp_normals[(*it).normalIndex - 1].x);
-        geometry.normals.push_back(tmp_normals[(*it).normalIndex - 1].y);
-        geometry.normals.push_back(tmp_normals[(*it).normalIndex - 1].z);
+        mesh.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].x);
+        mesh.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].y);
+        mesh.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].z);
 
-        geometry.uvs.push_back(tmp_uvs[(*it).uvIndex - 1].x);
-        geometry.uvs.push_back(tmp_uvs[(*it).uvIndex - 1].y);
+        mesh.geometry->uvs.push_back(tmp_uvs[(*it).uvIndex - 1].x);
+        mesh.geometry->uvs.push_back(tmp_uvs[(*it).uvIndex - 1].y);
     }
 
     fclose(file);
 
-    geometry.load();
+    mesh.geometry->load();
 
     return true;
 }

@@ -8,6 +8,10 @@
 
 class Mesh : public Object3D {
      public:
+        Geometry *geometry;
+        BaseMaterial *material;
+
+        Mesh();
         Mesh(Geometry *geometry, BaseMaterial *material);
         ~Mesh();
         virtual void display(mat4 &projection, mat4 &modelView);
@@ -15,10 +19,6 @@ class Mesh : public Object3D {
         inline void useLight(Light &light){
             material->useLight(light);
         }
-
-    protected:
-        Geometry *geometry;
-        BaseMaterial *material;
 };
 
 #endif // MESH_H

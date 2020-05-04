@@ -171,13 +171,13 @@ void Scene::ExampleOne(){
     }
 
     ObjLoader loader;
-    Geometry suzanneGeometry;
-    loader.load("Ressources/Models/suzanne.obj", suzanneGeometry);
-    Mesh suzanne(&suzanneGeometry, &phongMatTex);
-    suzanne.setPosition(4.f, 0.f, 0.f);
-    suzanne.useLight(pointLight);
-    suzanne.useLight(dirLight);
-    suzanne.useLight(spotlight);
+    Geometry nanoGeom;
+    Mesh nano(&nanoGeom, &phongMatTex);
+    loader.load("Ressources/Models/nanosuit.obj", nano);
+    nano.setPosition(4.f, 0.f, 0.f);
+    nano.useLight(pointLight);
+    nano.useLight(dirLight);
+    nano.useLight(spotlight);
 
     glm::mat4 view;
 
@@ -214,7 +214,7 @@ void Scene::ExampleOne(){
             crates[i]->display(camera.projectionMatrix, view);
         }
 
-        suzanne.display(camera.projectionMatrix, view);
+        nano.display(camera.projectionMatrix, view);
 
         SDL_GL_SwapWindow(window);
 
