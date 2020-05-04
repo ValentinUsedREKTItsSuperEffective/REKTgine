@@ -13,6 +13,9 @@ bool ObjLoader::load(string path, Mesh &mesh){
     vector<vec2> tmp_uvs;
     vector<FaceTriplet> tmp_indexes;
 
+    bool firstMesh = true;
+    Mesh current = mesh;
+
     FILE * file = fopen(path.c_str(), "r");
     if(!file){
         cout << "Error : Cannot find " << path << endl;
@@ -26,7 +29,13 @@ bool ObjLoader::load(string path, Mesh &mesh){
         char header[256];
         fscanf(file, "%s", header);
 
-        if(strcmp("v", header) == 0){ // vertices
+        if(strcmp("o", header) == 0){
+            if(firstMesh){
+                firstMesh = false;
+            } else {
+                // TODO : create a new Mesh as child of mesh and set it current
+            }
+        } else if(strcmp("v", header) == 0){ // vertices
             fscanf(file, "%f" "%f" "%f\n", &position.x, &position.y, &position.z);
             tmp_positions.push_back(position);
         } else if(strcmp("vt", header) == 0){ // uv
@@ -60,30 +69,30 @@ bool ObjLoader::load(string path, Mesh &mesh){
                     f.uvIndex = uvIndex[i];
                     f.normalIndex = normalIndex[i];
                     tmp_indexes.push_back(f);
-                    mesh.geometry->indexes.push_back(j);
+                    current.geometry->indexes.push_back(j);
                 } else {
-                    mesh.geometry->indexes.push_back(duplicateIndex);
+                    current.geometry->indexes.push_back(duplicateIndex);
                 }
             }
         }
     }
 
     for(auto it = tmp_indexes.begin(); it < tmp_indexes.end(); it++){
-        mesh.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].x);
-        mesh.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].y);
-        mesh.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].z);
+        current.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].x);
+        current.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].y);
+        current.geometry->positions.push_back(tmp_positions[(*it).positionIndex - 1].z);
 
-        mesh.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].x);
-        mesh.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].y);
-        mesh.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].z);
+        current.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].x);
+        current.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].y);
+        current.geometry->normals.push_back(tmp_normals[(*it).normalIndex - 1].z);
 
-        mesh.geometry->uvs.push_back(tmp_uvs[(*it).uvIndex - 1].x);
-        mesh.geometry->uvs.push_back(tmp_uvs[(*it).uvIndex - 1].y);
+        current.geometry->uvs.push_back(tmp_uvs[(*it).uvIndex - 1].x);
+        current.geometry->uvs.push_back(tmp_uvs[(*it).uvIndex - 1].y);
     }
 
     fclose(file);
 
-    mesh.geometry->load();
+    current.geometry->load();
 
     return true;
 }
