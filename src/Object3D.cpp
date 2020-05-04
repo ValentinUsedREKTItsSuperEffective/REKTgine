@@ -4,6 +4,15 @@ Object3D::Object3D() : name(""), model(mat4(1.f)), position(vec3()), scale(vec3(
 
 Object3D::~Object3D(){}
 
+void Object3D::SetParent(Object3D &parent){
+    this->parent = &parent;
+    parent.AddChildren(this);
+}
+
+void Object3D::AddChildren(Object3D* child){
+    children.push_back(child);
+}
+
 void Object3D::setPosition(vec3 p){
     position = p;
 
