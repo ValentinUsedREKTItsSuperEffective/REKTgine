@@ -172,7 +172,7 @@ void Scene::ExampleOne(){
 
     ObjLoader loader;
     Geometry suzanneGeometry;
-    loader.load("Ressources/Models/suzanne.obj", suzanneGeometry);
+    loader.load("Ressources/Models/backpack.obj", suzanneGeometry);
     Mesh suzanne(&suzanneGeometry, &phongMatTex);
     suzanne.setPosition(4.f, 0.f, 0.f);
     suzanne.useLight(pointLight);

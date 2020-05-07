@@ -9,3 +9,11 @@ Pourquoi est-ce qu'il faut déclarer les useLights sur les derniers mesh créés
  - Calculer la matrice normale en dehors phong vert
  - Séparer la partie création de la fenetre et initialisation d'OpenGL de la classe Scene
  - Ajouter des objets à la Scene plus facilement
+
+ - Depth Testing
+ - Stencil
+ - Blending
+ - Framebuffer
+ - Cubemap
+ - AA
+ - Instancing
