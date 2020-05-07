@@ -3,14 +3,10 @@
 
 #include <glm/glm.hpp>
 
+#include "MaterialParamaters.hpp"
 #include "Shader.h"
 #include "Texture.h"
 #include "Lights/Light.h"
-
-struct BaseMaterialParameters{
-    glm::vec3 color = glm::vec3(1.f, 1.f, 1.f);
-    std::string textureSrc = "";
-};
 
 class BaseMaterial{
     public:
@@ -21,7 +17,7 @@ class BaseMaterial{
         Shader shader;
 
         BaseMaterial();
-        BaseMaterial(BaseMaterialParameters parameters);
+        BaseMaterial(MaterialParamaters parameters);
         virtual ~BaseMaterial();
         virtual void update();
         virtual void bindTextures();

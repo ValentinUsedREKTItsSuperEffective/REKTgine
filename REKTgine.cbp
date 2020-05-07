@@ -68,6 +68,7 @@
 		<Unit filename="include/Lights/Light.h" />
 		<Unit filename="include/Lights/PointLight.h" />
 		<Unit filename="include/Lights/Spotlight.h" />
+		<Unit filename="include/MaterialParamaters.hpp" />
 		<Unit filename="include/Material_RT.h" />
 		<Unit filename="include/Materials/BaseMaterial.h" />
 		<Unit filename="include/Materials/PhongMaterial.h" />

@@ -8,7 +8,7 @@ PhongMaterial::PhongMaterial() : BaseMaterial(), ambient(glm::vec3(1.f)), specul
     emissiveMap.load();
 }
 
-PhongMaterial::PhongMaterial(PhongMaterialParameters p) : BaseMaterial(p), specular(p.specular), shininess(p.shininess) {
+PhongMaterial::PhongMaterial(MaterialParamaters p) : BaseMaterial(p), specular(p.specular), shininess(p.shininess) {
     if(p.ambient == glm::vec3(1.f)){
         ambient = p.color;
     } else {

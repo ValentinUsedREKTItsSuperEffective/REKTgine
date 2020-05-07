@@ -114,7 +114,7 @@ void Scene::ExampleOne(){
 
     // Red Cube
     CubeGeometry redGeom(2.5f);
-    PhongMaterialParameters phongParam;
+    MaterialParamaters phongParam;
     phongParam.color = glm::vec3(1.0f, 0.5f, 0.31f);
     phongParam.specular = glm::vec3(0.5f, 0.5f, 0.5f);
     PhongMaterial phongMat(phongParam);
@@ -127,7 +127,7 @@ void Scene::ExampleOne(){
 
     // Emerald Cube
     CubeGeometry emeraldGeom(1.f);
-    PhongMaterialParameters phongParamEmerald;
+    MaterialParamaters phongParamEmerald;
     phongParamEmerald.color = glm::vec3(0.07568f, 0.61424f, 0.07568f);
     phongParamEmerald.ambient = glm::vec3(0.0215f, 0.1745f, 0.0215f);
     phongParamEmerald.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
@@ -141,7 +141,7 @@ void Scene::ExampleOne(){
     crates.push_back(emeraldCube);
 
     // Textured Cube
-    PhongMaterialParameters phongParamTex;
+    MaterialParamaters phongParamTex;
     phongParamTex.textureSrc = "Ressources/Materials/container2.png";
     phongParamTex.specular = glm::vec3(0.633f, 0.727811f, 0.633f);
     phongParamTex.specularMapSrc = "Ressources/Materials/container2_specular.png";
