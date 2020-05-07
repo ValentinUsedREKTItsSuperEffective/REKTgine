@@ -9,6 +9,7 @@
 #include "Materials/PhongMaterial.h"
 #include "Geometry/CubeGeometry.h"
 #include "ObjLoader.hpp"
+#include "MTLLoader.hpp"
 
 using namespace std;
 
@@ -172,8 +173,14 @@ void Scene::ExampleOne(){
 
     ObjLoader loader;
     Geometry suzanneGeometry;
-    loader.load("Ressources/Models/backpack.obj", suzanneGeometry);
-    Mesh suzanne(&suzanneGeometry, &phongMatTex);
+    loader.Load("Ressources/Models/backpack.obj", suzanneGeometry);
+
+    MTLLoader MTLLoader;
+    MaterialParamaters backpackMatParam;
+    MTLLoader.Load("Ressources/Materials/backpack/", "backpack.mtl", backpackMatParam);
+    PhongMaterial backpackMat(backpackMatParam);
+
+    Mesh suzanne(&suzanneGeometry, &backpackMat);
     suzanne.setPosition(4.f, 0.f, 0.f);
     suzanne.useLight(pointLight);
     suzanne.useLight(dirLight);

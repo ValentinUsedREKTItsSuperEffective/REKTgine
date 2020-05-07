@@ -8,7 +8,7 @@ ObjLoader::ObjLoader(){}
 
 ObjLoader::~ObjLoader(){}
 
-bool ObjLoader::load(string path, Geometry &geometry){
+bool ObjLoader::Load(string path, Geometry &geometry){
     vector<vec3> tmp_positions, tmp_normals;
     vector<vec2> tmp_uvs;
     vector<FaceTriplet> tmp_indexes;

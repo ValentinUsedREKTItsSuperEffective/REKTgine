@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add library="glew32" />
@@ -28,6 +29,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -68,6 +70,7 @@
 		<Unit filename="include/Lights/Light.h" />
 		<Unit filename="include/Lights/PointLight.h" />
 		<Unit filename="include/Lights/Spotlight.h" />
+		<Unit filename="include/MTLLoader.hpp" />
 		<Unit filename="include/MaterialParamaters.hpp" />
 		<Unit filename="include/Material_RT.h" />
 		<Unit filename="include/Materials/BaseMaterial.h" />
@@ -91,6 +94,7 @@
 		<Unit filename="src/Lights/Light.cpp" />
 		<Unit filename="src/Lights/PointLight.cpp" />
 		<Unit filename="src/Lights/Spotlight.cpp" />
+		<Unit filename="src/MTLLoader.cpp" />
 		<Unit filename="src/Materials/BaseMaterial.cpp" />
 		<Unit filename="src/Materials/PhongMaterial.cpp" />
 		<Unit filename="src/Mesh.cpp" />

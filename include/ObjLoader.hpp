@@ -22,7 +22,7 @@ class ObjLoader{
     public:
         ObjLoader();
         ~ObjLoader();
-        bool load(string path, Geometry &geometry);
+        bool Load(string path, Geometry &geometry);
 };
 
 #endif // OBJLOADER_H
