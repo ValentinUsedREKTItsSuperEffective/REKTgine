@@ -181,11 +181,11 @@ void Scene::ExampleOne(){
     backpackMatParam.inverseImage = false;
     PhongMaterial backpackMat(backpackMatParam);
 
-    Mesh suzanne(&suzanneGeometry, &backpackMat);
-    suzanne.setPosition(4.f, 0.f, 0.f);
-    suzanne.useLight(pointLight);
-    suzanne.useLight(dirLight);
-    suzanne.useLight(spotlight);
+    Mesh backpack(&suzanneGeometry, &backpackMat);
+    backpack.setPosition(4.f, 0.f, 0.f);
+    backpack.useLight(pointLight);
+    backpack.useLight(dirLight);
+    backpack.useLight(spotlight);
 
     glm::mat4 view;
 
@@ -222,7 +222,7 @@ void Scene::ExampleOne(){
             crates[i]->display(camera.projectionMatrix, view);
         }
 
-        suzanne.display(camera.projectionMatrix, view);
+        backpack.display(camera.projectionMatrix, view);
 
         SDL_GL_SwapWindow(window);
 
