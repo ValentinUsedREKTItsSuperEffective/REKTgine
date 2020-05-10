@@ -1,11 +1,12 @@
 #include "Texture.h"
 
-Texture::Texture() : textureID(0), colorByDefault(glm::vec3(1.0f)), src(""){}
+Texture::Texture() : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(""){}
 
-Texture::Texture(std::string src) : textureID(0), colorByDefault(glm::vec3(1.0f)), src(src){}
+Texture::Texture(std::string src) : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(src){}
 
 Texture::Texture(const Texture &texture) : colorByDefault(glm::vec3(1.0f)){
     src = texture.src;
+    inverseImage = texture.inverseImage;
     load();
 }
 
@@ -50,7 +51,9 @@ bool Texture::load(){
             return false;
         }
 
-        img = invertPixels(img);
+        if(inverseImage){
+            img = invertPixels(img);
+        }
 
         if(img->format->BytesPerPixel == 3){
             internalFormat = GL_RGB;

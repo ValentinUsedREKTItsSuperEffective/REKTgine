@@ -10,6 +10,7 @@ BaseMaterial::BaseMaterial(MaterialParamaters parameters) : color(parameters.col
     } else {
         colorTexture = Texture();
     }
+    colorTexture.inverseImage = parameters.inverseImage;
     colorTexture.load();
 }
 

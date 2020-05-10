@@ -178,6 +178,7 @@ void Scene::ExampleOne(){
     MTLLoader MTLLoader;
     MaterialParamaters backpackMatParam;
     MTLLoader.Load("Ressources/Materials/backpack/", "backpack.mtl", backpackMatParam);
+    backpackMatParam.inverseImage = false;
     PhongMaterial backpackMat(backpackMatParam);
 
     Mesh suzanne(&suzanneGeometry, &backpackMat);

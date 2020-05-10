@@ -13,6 +13,7 @@ class Texture{
     public:
         GLuint textureID;
         glm::vec3 colorByDefault;
+        bool inverseImage;
 
         Texture();
         Texture(std::string src);

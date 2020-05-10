@@ -20,6 +20,7 @@ PhongMaterial::PhongMaterial(MaterialParamaters p) : BaseMaterial(p), specular(p
     } else {
         specularMap = Texture();
     }
+    specularMap.inverseImage = p.inverseImage;
     specularMap.load();
 
     if(p.emissiveMapSrc != ""){
@@ -28,6 +29,7 @@ PhongMaterial::PhongMaterial(MaterialParamaters p) : BaseMaterial(p), specular(p
         emissiveMap = Texture();
         emissiveMap.colorByDefault = glm::vec3();
     }
+    emissiveMap.inverseImage = p.inverseImage;
     emissiveMap.load();
 }
 
