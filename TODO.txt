@@ -1,7 +1,5 @@
 Pourquoi est-ce qu'il faut déclarer les useLights sur les derniers mesh créés plutôt qu'une fois au début ?
 
- - Importer sponza ou nanosuit
- - Importer les .mtl
  - Importer plusieurs objets d'un même .obj
  - Ajouter une classe PlaneGeometry
  - Faire passer les .h en .hpp
