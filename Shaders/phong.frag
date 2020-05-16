@@ -144,4 +144,12 @@ void main(){
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 
     outColor = vec4((pointComponents + emissive), 1);
+
+    // depth test
+    float near = 0.1;
+    float far = 100.0;
+
+    float z = gl_FragCoord.z * 2.0 - 1.0; // back to NDC
+    float depth = ((2.0 * near * far) / (far + near - z * (far - near)))/far;
+    outColor = vec4(vec3(depth), 1.0);
 }
