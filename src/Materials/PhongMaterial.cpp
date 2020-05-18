@@ -36,18 +36,22 @@ PhongMaterial::PhongMaterial(MaterialParamaters p) : BaseMaterial(p), specular(p
 PhongMaterial::~PhongMaterial(){}
 
 void PhongMaterial::loadShader(){
-    shader = Shader("Shaders/phong.vert", "Shaders/phong.frag");
-    shader.load();
+    if(shader) {
+        return;
+    }
+
+    shader = new Shader("Shaders/phong.vert", "Shaders/phong.frag");
+    shader->load();
 }
 
 void PhongMaterial::update(){
     BaseMaterial::update();
 
-    shader.bindFloat3("material.ambient", ambient);
-    shader.bindFloat3("material.specular", specular);
-    shader.bindInt("material.specularMap", 1);
-    shader.bindFloat("material.shininess", shininess);
-    shader.bindInt("material.emissiveMap", 2);
+    shader->bindFloat3("material.ambient", ambient);
+    shader->bindFloat3("material.specular", specular);
+    shader->bindInt("material.specularMap", 1);
+    shader->bindFloat("material.shininess", shininess);
+    shader->bindInt("material.emissiveMap", 2);
 }
 
 void PhongMaterial::bindTextures(){
@@ -61,17 +65,17 @@ void PhongMaterial::bindTextures(){
 }
 
 void PhongMaterial::useLight(Light &light){
-    glUseProgram(shader.programID);
+    glUseProgram(shader->programID);
 
-    light.subscribeProgram(shader.programID);
+    light.subscribeProgram(shader->programID);
 
     glUseProgram(0);
 }
 
 void PhongMaterial::setViewPosition(glm::vec3 view){
-    glUseProgram(shader.programID);
+    glUseProgram(shader->programID);
 
-    shader.bindFloat3("cameraPosition", view);
+    shader->bindFloat3("cameraPosition", view);
 
     glUseProgram(0);
 }

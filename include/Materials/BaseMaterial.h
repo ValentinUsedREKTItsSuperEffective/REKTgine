@@ -14,7 +14,7 @@ class BaseMaterial{
         Texture colorTexture;
         bool needUpdate;
 
-        Shader shader;
+        Shader* shader;
 
         BaseMaterial();
         BaseMaterial(MaterialParamaters parameters);

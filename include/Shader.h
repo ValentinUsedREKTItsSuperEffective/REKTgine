@@ -13,7 +13,6 @@ class Shader{
     public:
         GLuint programID;
 
-        Shader();
         Shader(std::string, std::string);
         ~Shader();
         bool load();

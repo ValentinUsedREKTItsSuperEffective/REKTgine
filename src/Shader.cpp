@@ -3,8 +3,6 @@
 #include <iostream>
 #include <fstream>
 
-Shader::Shader() : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(""), fragSrc(""){}
-
 Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){}
 
 Shader::~Shader(){

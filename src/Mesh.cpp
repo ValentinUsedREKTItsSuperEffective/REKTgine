@@ -28,15 +28,15 @@ void Mesh::display(mat4 &projection, mat4 &view){
     material->bindTextures();
 
     // Specify which shader we are using
-    glUseProgram(material->shader.programID);
+    glUseProgram(material->shader->programID);
 
     geometry->bindVertexArray();
 
     //Transformations
     // Matrix send to shader as Uniform after transformation
-    material->shader.bindMat4("projection", projection);
-    material->shader.bindMat4("view", view);
-    material->shader.bindMat4("model", model);
+    material->shader->bindMat4("projection", projection);
+    material->shader->bindMat4("view", view);
+    material->shader->bindMat4("model", model);
 
     // Time to draw
     //glDrawArrays(GL_TRIANGLES, 0, 36);

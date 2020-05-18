@@ -1,10 +1,10 @@
 #include "Materials/BaseMaterial.h"
 
-BaseMaterial::BaseMaterial() : color(glm::vec3(1.f, 1.f, 1.f)), needUpdate(true){
+BaseMaterial::BaseMaterial() : color(glm::vec3(1.f, 1.f, 1.f)), needUpdate(true), shader(NULL){
     colorTexture = Texture();
     colorTexture.load();
 }
-BaseMaterial::BaseMaterial(MaterialParamaters parameters) : color(parameters.color), needUpdate(true){
+BaseMaterial::BaseMaterial(MaterialParamaters parameters) : color(parameters.color), needUpdate(true), shader(NULL){
     if(parameters.textureSrc != ""){
         colorTexture = Texture(parameters.textureSrc);
     } else {
@@ -14,18 +14,24 @@ BaseMaterial::BaseMaterial(MaterialParamaters parameters) : color(parameters.col
     colorTexture.load();
 }
 
-BaseMaterial::~BaseMaterial(){}
+BaseMaterial::~BaseMaterial(){
+    delete shader;
+}
 
 void BaseMaterial::loadShader(){
-    shader = Shader("Shaders/default.vert", "Shaders/default.frag");
-    shader.load();
+    if(shader) {
+        return;
+    }
+
+    shader = new Shader("Shaders/default.vert", "Shaders/default.frag");
+    shader->load();
 }
 
 void BaseMaterial::update(){
-    glUseProgram(shader.programID);
+    glUseProgram(shader->programID);
 
-    shader.bindFloat3("material.color", color);
-    shader.bindInt("material.map", 0);
+    shader->bindFloat3("material.color", color);
+    shader->bindInt("material.map", 0);
 }
 
 void BaseMaterial::bindTextures(){
