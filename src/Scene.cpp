@@ -213,6 +213,7 @@ void Scene::ExampleOne(){
         phongMat.setViewPosition(camera.position);
         phongMatE.setViewPosition(camera.position);
         phongMatTex.setViewPosition(camera.position);
+        backpackMat.setViewPosition(camera.position);
 
         pointLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
