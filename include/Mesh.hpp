@@ -10,6 +10,7 @@ class Mesh : public Object3D {
      public:
         Mesh(Geometry *geometry, BaseMaterial *material);
         ~Mesh();
+        void SetMaterial(BaseMaterial *material);
         virtual void display(mat4 &projection, mat4 &modelView);
 
         inline void useLight(Light &light){

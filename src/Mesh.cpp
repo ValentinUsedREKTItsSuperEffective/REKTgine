@@ -12,6 +12,12 @@ Mesh::Mesh(Geometry *geom, BaseMaterial *mat) : Object3D(), geometry(geom), mate
 
 Mesh::~Mesh(){}
 
+void Mesh::SetMaterial(BaseMaterial* mat){
+    material = mat;
+    material->loadShader();
+    material->update();
+}
+
 void Mesh::display(mat4 &projection, mat4 &view){
     if(material->needUpdate){
         material->update();
