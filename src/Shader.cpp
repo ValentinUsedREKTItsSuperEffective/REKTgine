@@ -8,8 +8,6 @@ Shader::Shader() : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(""), 
 Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){}
 
 Shader::~Shader(){
-    glDeleteShader(vertShaderID);
-    glDeleteShader(fragShaderID);
     glDeleteProgram(programID);
 }
 
@@ -27,6 +25,9 @@ bool Shader::load(){
     glAttachShader(programID, vertShaderID);
     glAttachShader(programID, fragShaderID);
     glLinkProgram(programID);
+
+    glDeleteShader(vertShaderID);
+    glDeleteShader(fragShaderID);
 
     return true;
 }
