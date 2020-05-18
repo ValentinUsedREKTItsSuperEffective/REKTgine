@@ -16,7 +16,6 @@ class Shader{
         Shader(std::string, std::string);
         ~Shader();
         bool load();
-        bool compile(GLuint &shader, GLenum type, std::string const &fileSrc);
 
         void bindFloat(const std::string &location, float f) const;
         void bindInt(const std::string &location, int i) const;
@@ -29,6 +28,8 @@ class Shader{
 
         std::string vertSrc;
         std::string fragSrc;
+
+        bool compile(GLuint &shader, GLenum type, std::string const &fileSrc);
 };
 
 #endif // SHADER_H
