@@ -24,7 +24,6 @@ void BaseMaterial::loadShader(){
     }
 
     shader = new Shader("Shaders/default.vert", "Shaders/default.frag");
-    shader->load();
 }
 
 void BaseMaterial::update(){

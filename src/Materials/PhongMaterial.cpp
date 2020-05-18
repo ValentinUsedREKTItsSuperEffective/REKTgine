@@ -41,7 +41,6 @@ void PhongMaterial::loadShader(){
     }
 
     shader = new Shader("Shaders/phong.vert", "Shaders/phong.frag");
-    shader->load();
 }
 
 void PhongMaterial::update(){

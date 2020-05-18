@@ -3,19 +3,13 @@
 #include <iostream>
 #include <fstream>
 
-Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){}
-
-Shader::~Shader(){
-    glDeleteProgram(programID);
-}
-
-bool Shader::load(){
+Shader::Shader(std::string vSrc, std::string fSrc) : programID(0), vertShaderID(0), fragShaderID(0), vertSrc(vSrc), fragSrc(fSrc){
     if(compile(vertShaderID ,GL_VERTEX_SHADER, vertSrc) == false){
-        return false;
+        return;
     }
 
     if(compile(fragShaderID,GL_FRAGMENT_SHADER,fragSrc) == false){
-        return false;
+        return;
     }
 
     programID = glCreateProgram();
@@ -26,8 +20,10 @@ bool Shader::load(){
 
     glDeleteShader(vertShaderID);
     glDeleteShader(fragShaderID);
+}
 
-    return true;
+Shader::~Shader(){
+    glDeleteProgram(programID);
 }
 
 bool Shader::compile(GLuint &shader, GLenum type, std::string const &fileSrc){

@@ -15,7 +15,6 @@ class Shader{
 
         Shader(std::string, std::string);
         ~Shader();
-        bool load();
 
         void bindFloat(const std::string &location, float f) const;
         void bindInt(const std::string &location, int i) const;
