@@ -187,9 +187,16 @@ void Scene::ExampleOne(){
     backpack.useLight(dirLight);
     backpack.useLight(spotlight);
 
+    MaterialParamaters outlineMatParam;
+    outlineMatParam.color = vec3(245.f, 0.f, 0.f);
+    BaseMaterial outlineMat(outlineMatParam);
+
     glm::mat4 view;
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+    glStencilMask(0x00);
 
      while(!input.isEnd){
 
@@ -203,7 +210,8 @@ void Scene::ExampleOne(){
         camera.translate(input);
 
         // Clean buffers
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+        glStencilMask(0x00);
 
         // Camera location
         view = camera.getViewMatrix();
@@ -219,11 +227,25 @@ void Scene::ExampleOne(){
         lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.display(camera.projectionMatrix, view);
 
-        for(int i = 0; i < 11; i++){
+        for(int i = 0; i < 10; i++){
             crates[i]->display(camera.projectionMatrix, view);
         }
 
-        backpack.display(camera.projectionMatrix, view);
+        // Outline
+        // This work only for non-holed centered object, otherwise the outline will be shift or simply won't fit
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
+        glStencilMask(0xFF);
+        crates[10]->setScale(1.f);
+        crates[10]->SetMaterial(&phongMatTex);
+        crates[10]->display(camera.projectionMatrix, view);
+
+        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+        glStencilMask(0x00);
+        crates[10]->setScale(1.1f);
+        crates[10]->SetMaterial(&outlineMat);
+        crates[10]->display(camera.projectionMatrix, view);
+        glStencilMask(0xFF);
+        glStencilFunc(GL_ALWAYS, 1, 0xFF);
 
         SDL_GL_SwapWindow(window);
 
