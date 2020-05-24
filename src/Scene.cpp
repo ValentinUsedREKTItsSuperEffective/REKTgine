@@ -194,6 +194,8 @@ void Scene::ExampleOne(){
     glm::mat4 view;
 
     glEnable(GL_DEPTH_TEST);
+
+    //Outline
     glEnable(GL_STENCIL_TEST);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     glStencilMask(0x00);
