@@ -76,7 +76,7 @@
 		<Unit filename="include/MTLLoader.hpp" />
 		<Unit filename="include/MaterialParamaters.hpp" />
 		<Unit filename="include/Material_RT.h" />
-		<Unit filename="include/Materials/BaseMaterial.h" />
+		<Unit filename="include/Materials/BaseMaterial.hpp" />
 		<Unit filename="include/Materials/PhongMaterial.h" />
 		<Unit filename="include/Mesh.hpp" />
 		<Unit filename="include/ObjLoader.hpp" />
@@ -84,6 +84,7 @@
 		<Unit filename="include/Ray.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/Shader.h" />
+		<Unit filename="include/Sprite.hpp" />
 		<Unit filename="include/Texture.h" />
 		<Unit filename="include/Vector3.h" />
 		<Unit filename="include/rt_Camera.h" />
@@ -107,6 +108,7 @@
 		<Unit filename="src/Ray.cpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Shader.cpp" />
+		<Unit filename="src/Sprite.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Vector3.cpp" />
 		<Extensions>

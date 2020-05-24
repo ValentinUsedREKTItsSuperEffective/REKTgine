@@ -249,6 +249,8 @@ void Scene::ExampleOne(){
         glStencilMask(0xFF);
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
 
+        backpack.display(camera.projectionMatrix, view);
+
         SDL_GL_SwapWindow(window);
 
         tac = SDL_GetTicks();

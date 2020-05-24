@@ -16,6 +16,12 @@ struct MaterialParamaters {
     std::string specularMapSrc = "";
     float shininess = 32.f;
     std::string emissiveMapSrc = "";
+
+    MaterialParamaters(){}
+
+    MaterialParamaters(std::string textureSrc){
+        this->textureSrc = textureSrc;
+    }
 };
 
 #endif // MATERIALPARAMATERS_H

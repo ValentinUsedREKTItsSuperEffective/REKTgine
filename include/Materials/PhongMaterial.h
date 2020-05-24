@@ -1,7 +1,7 @@
 #ifndef PHONGMATERIAL_H
 #define PHONGMATERIAL_H
 
-#include <Materials/BaseMaterial.h>
+#include <Materials/BaseMaterial.hpp>
 #include <Lights/Light.h>
 
 class PhongMaterial : public BaseMaterial {

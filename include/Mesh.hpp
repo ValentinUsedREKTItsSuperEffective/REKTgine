@@ -3,7 +3,7 @@
 
 #include "Object3D.h"
 #include "Shader.h"
-#include "Materials/BaseMaterial.h"
+#include "Materials/BaseMaterial.hpp"
 #include "Geometry/Geometry.h"
 
 class Mesh : public Object3D {
