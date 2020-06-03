@@ -15,5 +15,9 @@ uniform Material material;
 out vec4 out_Color;
 
 void main(){
+    vec4 tex = texture(material.map, coordTexture);
+    if(tex.w == 0.0){
+        discard;
+    }
     out_Color = texture(material.map, coordTexture) * vec4(material.color, 1);
 }
