@@ -10,6 +10,7 @@
 #include "Geometry/CubeGeometry.h"
 #include "ObjLoader.hpp"
 #include "MTLLoader.hpp"
+#include "Sprite.hpp"
 
 using namespace std;
 
@@ -187,9 +188,14 @@ void Scene::ExampleOne(){
     backpack.useLight(dirLight);
     backpack.useLight(spotlight);
 
+    // Outline
     MaterialParamaters outlineMatParam;
     outlineMatParam.color = vec3(245.f, 0.f, 0.f);
     BaseMaterial outlineMat(outlineMatParam);
+
+    // Blending
+    Sprite transparent_window("Ressources/Materials/blending_transparent_window.png");
+    transparent_window.setPosition(-4.f, 0.f, 0.f);
 
     glm::mat4 view;
 
@@ -250,6 +256,8 @@ void Scene::ExampleOne(){
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
 
         backpack.display(camera.projectionMatrix, view);
+
+        transparent_window.display(camera.projectionMatrix, view);
 
         SDL_GL_SwapWindow(window);
 

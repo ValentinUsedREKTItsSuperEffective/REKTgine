@@ -5,7 +5,7 @@
 
 #include "Object3D.h"
 #include "Mesh.hpp"
-#include "PlaneGeometry.hpp"
+#include "SpriteGeometry.hpp"
 #include "Materials/BaseMaterial.hpp"
 
 using namespace std;

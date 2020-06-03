@@ -33,30 +33,3 @@ PlaneGeometry::PlaneGeometry(float planeSize){
 }
 
 PlaneGeometry::~PlaneGeometry(){}
-
-void PlaneGeometry::SetAsSpriteGeometry(){
-    float planeSize = positions[1];
-
-    positions = {
-        -planeSize, -planeSize, 0.f,
-         planeSize, -planeSize, 0.f,
-         planeSize,  planeSize, 0.f,
-        -planeSize,  planeSize, 0.f
-    };
-
-    normals = {
-        0.0f,  0.0f, -1.0f,
-        0.0f,  0.0f, -1.0f,
-        0.0f,  0.0f, -1.0f,
-        0.0f,  0.0f, -1.0f
-    };
-
-    uvs = {
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-        1.0f, 1.0f,
-        0.0f, 1.0f
-    };
-
-    load();
-}
