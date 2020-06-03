@@ -66,6 +66,7 @@
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
 		<Unit filename="include/Geometry/PlaneGeometry.hpp" />
+		<Unit filename="include/Geometry/SpriteGeometry.hpp" />
 		<Unit filename="include/Hitable.h" />
 		<Unit filename="include/HitableList.h" />
 		<Unit filename="include/Input.h" />
@@ -94,6 +95,7 @@
 		<Unit filename="src/Geometry/CubeGeometry.cpp" />
 		<Unit filename="src/Geometry/Geometry.cpp" />
 		<Unit filename="src/Geometry/PlaneGeometry.cpp" />
+		<Unit filename="src/Geometry/SpriteGeometry.cpp" />
 		<Unit filename="src/Input.cpp" />
 		<Unit filename="src/Lights/DirectionalLight.cpp" />
 		<Unit filename="src/Lights/Light.cpp" />
