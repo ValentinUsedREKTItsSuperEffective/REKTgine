@@ -197,6 +197,16 @@ void Scene::ExampleOne(){
     Sprite transparent_window("Ressources/Materials/blending_transparent_window.png");
     transparent_window.setPosition(-4.f, 0.f, 0.f);
 
+    Sprite transparent_window2("Ressources/Materials/blending_transparent_window.png");
+    transparent_window2.setPosition(-3.5f, 0.f, -.2f);
+
+    Sprite transparent_window3("Ressources/Materials/blending_transparent_window.png");
+    transparent_window3.setPosition(-4.5f, 0.f, -.4f);
+
+    // TODO : les objets transparent active GL_BLEND une seule fois
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glm::mat4 view;
 
     glEnable(GL_DEPTH_TEST);
@@ -257,6 +267,10 @@ void Scene::ExampleOne(){
 
         backpack.display(camera.projectionMatrix, view);
 
+        // Objets transparents apres objets opaques
+        // TODO : Faut que les objets transparents soient rendu selon leur distance avec la camera, le plus loin en premier
+        transparent_window3.display(camera.projectionMatrix, view);
+        transparent_window2.display(camera.projectionMatrix, view);
         transparent_window.display(camera.projectionMatrix, view);
 
         SDL_GL_SwapWindow(window);
