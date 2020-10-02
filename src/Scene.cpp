@@ -194,6 +194,7 @@ void Scene::ExampleOne(){
     BaseMaterial outlineMat(outlineMatParam);
 
     // Blending
+    // TODO : Detecter les textures transparentes pour les Sprites
     Sprite transparent_window("Ressources/Materials/blending_transparent_window.png");
     transparent_window.setPosition(-4.f, 0.f, 0.f);
 
