@@ -2,10 +2,13 @@
 #define OBJECT3D_H
 
 #include <string>
+#include <stdlib.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#define EPSILON 0.000001
 
 using namespace glm;
 
@@ -28,6 +31,7 @@ class Object3D{
         void setScale(vec3 scale);
         void setScale(float scale);
         void addScale(vec3 scale);
+        void LookAt(Object3D const &obj);
     protected:
         mat4 eulerToMat4(vec3 euler);
         void combineTransformations();

@@ -1,5 +1,8 @@
 #include "Object3D.h"
 
+/**
+ ** Public functions
+ **/
 Object3D::Object3D() : name(""), model(mat4(1.f)), position(vec3()), scale(vec3(1.f)), rotation(vec3()) {}
 
 Object3D::~Object3D(){}
@@ -66,6 +69,43 @@ void Object3D::rotateAroundPoint(vec3 point, vec3 euler){
     // TODO : Actualize Euler
 }
 
+void Object3D::LookAt(Object3D const &obj){
+    vec3 fwd = normalize(obj.position - position); // forward
+
+    vec3 up; // reference up vector
+    if(fabs(fwd.x) < EPSILON && fabs(fwd.z) < EPSILON ){
+            if(fwd.y > 0){
+                up = vec3(0, 0, -1);
+            } else {
+                up = vec3(0, 0, 1);
+            }
+    } else {
+        up = vec3(0, 1, 0);
+    }
+    vec3 left = normalize(cross(up, fwd));
+
+    up = normalize(cross(fwd, left));
+
+    float mat[16];
+    mat[0]  = left.x;
+    mat[1]  = left.y;
+    mat[2]  = left.z;
+
+    mat[4]  = up.x;
+    mat[5]  = up.y;
+    mat[6]  = up.z;
+
+    mat[8]  = fwd.x;
+    mat[9]  = fwd.y;
+    mat[10] = fwd.z;
+
+    mat[3]  =  mat[7] = mat[11] = mat[12] = mat[13] = mat[14] = 0;
+    mat[15] =  1;
+}
+
+/**
+ ** Protected functions
+ **/
 mat4 Object3D::eulerToMat4(vec3 euler){
     float mat[16];
     float A = cos(euler.x);
