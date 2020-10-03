@@ -184,6 +184,8 @@ void Scene::ExampleOne(){
 
     Mesh backpack(&suzanneGeometry, &backpackMat);
     backpack.setPosition(4.f, 0.f, 0.f);
+    // BUG : caisse non affiche sans cette ligne MAIS cube lumineux trop gros
+    backpack.setRotationFromEuler(vec3());
     backpack.useLight(pointLight);
     backpack.useLight(dirLight);
     backpack.useLight(spotlight);
