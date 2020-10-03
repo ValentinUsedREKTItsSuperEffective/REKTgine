@@ -81,6 +81,9 @@ bool Scene::initGL(){
 
 // Cubes example
 void Scene::ExampleOne(){
+    // TODO : Random class
+    srand (time(NULL));
+
     unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
 
@@ -165,7 +168,7 @@ void Scene::ExampleOne(){
     for(int i = 0; i < 7; i++){
         Mesh* crate = new Mesh(&emeraldGeom, &phongMatTex);
         crate->setPosition(cubePositions[i]);
-        crate->setRotationFromEuler(vec3(radians(rand() * 356.f), radians(rand() * 356.f), radians(rand() * 356.f)));
+        crate->setRotationFromEuler(vec3(radians((float)(rand() % 365)), radians((float)(rand() % 365)), radians((float)(rand() % 365))));
         crate->useLight(pointLight);
         crate->useLight(dirLight);
         crate->useLight(spotlight);
