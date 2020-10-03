@@ -3,7 +3,7 @@
 /**
  ** Public functions
  **/
-Object3D::Object3D() : name(""), model(mat4(1.f)), position(vec3()), scale(vec3(1.f)), rotation(vec3()) {}
+Object3D::Object3D() : name(""), model(mat4(1.f)), position(vec3()), scale(vec3(1.f)), rotation(vec3()), quaternion(1, 0, 0, 0) {}
 
 Object3D::~Object3D(){}
 
@@ -45,14 +45,16 @@ void Object3D::addScale(vec3 s){
     combineTransformations();
 }
 
-void Object3D::setRotationFromEuler(vec3 euler){
+void Object3D::setRotationFromEuler(vec3 euler){ // euler in radians
     rotation = euler;
+    quaternion = quat(rotation);
 
     combineTransformations();
 }
 
-void Object3D::addRotationFromEuler(vec3 euler){
+void Object3D::addRotationFromEuler(vec3 euler){ // euler in radians
     rotation += euler;
+    quaternion = quat(rotation);
 
     combineTransformations();
 }
@@ -136,9 +138,9 @@ mat4 Object3D::eulerToMat4(vec3 euler){
 void Object3D::combineTransformations(){
     mat4 scaleMatrix = glm::scale(scale);
 
-    mat4 rotationMatrix = eulerToMat4(rotation);
+    mat4 rotationMatrix = glm::toMat4(quaternion);
 
-    mat4 translationMatrix = translate(mat4(1.f), position);
+    mat4 translationMatrix = glm::translate(mat4(1.f), position);
 
     model = translationMatrix * rotationMatrix * scaleMatrix;
 }

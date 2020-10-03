@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #define EPSILON 0.000001
 
@@ -19,6 +21,7 @@ class Object3D{
         vec3 position;
         vec3 scale;
         vec3 rotation; // Euler angles
+        quat quaternion;
 
         Object3D();
         virtual ~Object3D();
