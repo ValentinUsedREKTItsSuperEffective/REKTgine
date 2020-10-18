@@ -1,5 +1,7 @@
 #include "Object3D.h"
 
+#include <iostream>
+
 /**
  ** Public functions
  **/
@@ -143,4 +145,15 @@ void Object3D::combineTransformations(){
     mat4 translationMatrix = glm::translate(mat4(1.f), position);
 
     model = translationMatrix * rotationMatrix * scaleMatrix;
+}
+
+void Object3D::DebugMatrix(){
+    if(!debug) return;
+
+    std::cout << name << std::endl;
+    std::cout << "Local matrix" << std::endl <<
+    model[0][0] << "  " << model[1][0] << "  " << model[2][0] << "  " << model[3][0] << std::endl <<
+    model[0][1] << "  " << model[1][1] << "  " << model[2][1] << "  " << model[3][1] << std::endl <<
+    model[0][2] << "  " << model[1][2] << "  " << model[2][2] << "  " << model[3][2] << std::endl <<
+    model[0][3] << "  " << model[1][3] << "  " << model[2][3] << "  " << model[3][3] << std::endl << std::endl;
 }

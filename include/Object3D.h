@@ -23,6 +23,8 @@ class Object3D{
         vec3 rotation; // Euler angles
         quat quaternion;
 
+        bool debug;
+
         Object3D();
         virtual ~Object3D();
         virtual void setPosition(vec3 position);
@@ -35,6 +37,8 @@ class Object3D{
         void setScale(float scale);
         void addScale(vec3 scale);
         void LookAt(Object3D const &obj);
+
+        void DebugMatrix();
     protected:
         mat4 eulerToMat4(vec3 euler);
         void combineTransformations();
