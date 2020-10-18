@@ -62,15 +62,12 @@ void Object3D::addRotationFromEuler(vec3 euler){ // euler in radians
 }
 
 void Object3D::rotateAroundPoint(vec3 point, vec3 euler){
-    combineTransformations();
-
-    model = translate(point) * eulerToMat4(euler) * translate(-point) * model;
-
-    position.x = model[3][0];
-    position.y = model[3][1];
-    position.z = model[3][2];
-
-    // TODO : Actualize Euler
+    position = point + quat(euler) * (position - point);
+    //if(stationary){
+    //    combineTransformations();
+    //} else {
+    addRotationFromEuler(euler);
+    //}
 }
 
 void Object3D::LookAt(Object3D const &obj){
