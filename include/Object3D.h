@@ -40,7 +40,7 @@ class Object3D{
 
         void DebugMatrix();
     protected:
-        mat4 eulerToMat4(vec3 euler);
+        quat RotationBetweenVectors(vec3 start, vec3 dest);
         void combineTransformations();
 };
 

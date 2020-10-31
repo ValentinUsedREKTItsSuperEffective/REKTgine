@@ -1,5 +1,7 @@
 #include "Object3D.h"
 
+#include <glm/gtx/norm.hpp>
+
 #include <iostream>
 
 /**
@@ -71,6 +73,14 @@ void Object3D::rotateAroundPoint(vec3 point, vec3 euler){
 }
 
 void Object3D::LookAt(Object3D const &obj){
+    vec3 direction = normalize(obj.position - position);
+    mat4 rotationMatrix = glm::toMat4(quaternion);
+    quaternion = RotationBetweenVectors(vec3(rotationMatrix[2][0], rotationMatrix[2][1], rotationMatrix[2][2]), direction) * quaternion;
+
+    combineTransformations();
+
+    return;
+
     vec3 fwd = normalize(obj.position - position); // forward
 
     vec3 up; // reference up vector
@@ -107,31 +117,42 @@ void Object3D::LookAt(Object3D const &obj){
 /**
  ** Protected functions
  **/
-mat4 Object3D::eulerToMat4(vec3 euler){
-    float mat[16];
-    float A = cos(euler.x);
-    float B = sin(euler.x);
-    float C = cos(euler.y);
-    float D = sin(euler.y);
-    float E = cos(euler.z);
-    float F = sin(euler.z);
+// https://github.com/opengl-tutorials/ogl/blob/master/common/quaternion_utils.cpp
+// Returns a quaternion such that q*start = dest
+quat Object3D::RotationBetweenVectors(vec3 start, vec3 dest){
+    start = normalize(start);
+	dest = normalize(dest);
 
-    float AD = A * D;
-    float BD = B * D;
+	float cosTheta = dot(start, dest);
+	vec3 rotationAxis;
 
-    mat[0]  =   C * E;
-    mat[1]  =  -C * F;
-    mat[2]  =   D;
-    mat[4]  =  BD * E + A * F;
-    mat[5]  = -BD * F + A * E;
-    mat[6]  =  -B * C;
-    mat[8]  = -AD * E + B * F;
-    mat[9]  =  AD * F + B * E;
-    mat[10] =   A * C;
+	if (cosTheta < -1 + 0.001f){
+		// special case when vectors in opposite directions :
+		// there is no "ideal" rotation axis
+		// So guess one; any will do as long as it's perpendicular to start
+		// This implementation favors a rotation around the Up axis,
+		// since it's often what you want to do.
+		rotationAxis = cross(vec3(0.0f, 0.0f, 1.0f), start);
+		if (glm::length2(rotationAxis) < 0.01 ) // bad luck, they were parallel, try again!
+			rotationAxis = cross(vec3(1.0f, 0.0f, 0.0f), start);
 
-    mat[3]  =  mat[7] = mat[11] = mat[12] = mat[13] = mat[14] = 0;
-    mat[15] =  1;
-    return make_mat4(mat);
+		rotationAxis = normalize(rotationAxis);
+		return angleAxis(glm::radians(180.0f), rotationAxis);
+	}
+
+	// Implementation from Stan Melax's Game Programming Gems 1 article
+	rotationAxis = cross(start, dest);
+
+	float s = sqrt( (1+cosTheta)*2 );
+	float invs = 1 / s;
+
+	return quat(
+		s * 0.5f,
+		rotationAxis.x * invs,
+		rotationAxis.y * invs,
+		rotationAxis.z * invs
+	);
+
 }
 
 void Object3D::combineTransformations(){
