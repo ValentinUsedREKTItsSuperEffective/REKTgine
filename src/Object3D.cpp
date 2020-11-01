@@ -75,43 +75,19 @@ void Object3D::rotateAroundPoint(vec3 point, vec3 euler){
 void Object3D::LookAt(Object3D const &obj){
     vec3 direction = normalize(obj.position - position);
     mat4 rotationMatrix = glm::toMat4(quaternion);
+
+    // Without forcing the object to be straight
     quaternion = RotationBetweenVectors(vec3(rotationMatrix[2][0], rotationMatrix[2][1], rotationMatrix[2][2]), direction) * quaternion;
 
+    // With forcing
+    vec3 up = vec3(0.f, 1.f, 0.f);
+    vec3 right = cross(direction, up);
+    up = cross(right, direction);
+    rotationMatrix = glm::toMat4(quaternion);
+
+    quaternion = RotationBetweenVectors(vec3(rotationMatrix[1][0], rotationMatrix[1][1], rotationMatrix[1][2]), up) * quaternion;
+
     combineTransformations();
-
-    return;
-
-    vec3 fwd = normalize(obj.position - position); // forward
-
-    vec3 up; // reference up vector
-    if(fabs(fwd.x) < EPSILON && fabs(fwd.z) < EPSILON ){
-            if(fwd.y > 0){
-                up = vec3(0, 0, -1);
-            } else {
-                up = vec3(0, 0, 1);
-            }
-    } else {
-        up = vec3(0, 1, 0);
-    }
-    vec3 left = normalize(cross(up, fwd));
-
-    up = normalize(cross(fwd, left));
-
-    float mat[16];
-    mat[0]  = left.x;
-    mat[1]  = left.y;
-    mat[2]  = left.z;
-
-    mat[4]  = up.x;
-    mat[5]  = up.y;
-    mat[6]  = up.z;
-
-    mat[8]  = fwd.x;
-    mat[9]  = fwd.y;
-    mat[10] = fwd.z;
-
-    mat[3]  =  mat[7] = mat[11] = mat[12] = mat[13] = mat[14] = 0;
-    mat[15] =  1;
 }
 
 /**
