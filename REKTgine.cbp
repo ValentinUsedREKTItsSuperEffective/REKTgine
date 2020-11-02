@@ -62,6 +62,7 @@
 		<Unit filename="Shaders/texture.frag" />
 		<Unit filename="Shaders/texture.vert" />
 		<Unit filename="TODO.txt" />
+		<Unit filename="include/Billboard.hpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
@@ -91,6 +92,7 @@
 		<Unit filename="include/rt_Camera.h" />
 		<Unit filename="include/rt_Sphere.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Billboard.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Geometry/CubeGeometry.cpp" />
 		<Unit filename="src/Geometry/Geometry.cpp" />

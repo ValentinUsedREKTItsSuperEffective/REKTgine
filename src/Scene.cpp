@@ -11,6 +11,7 @@
 #include "ObjLoader.hpp"
 #include "MTLLoader.hpp"
 #include "Sprite.hpp"
+#include "Billboard.hpp"
 
 using namespace std;
 
@@ -203,7 +204,7 @@ void Scene::ExampleOne(){
     Sprite transparent_window("Ressources/Materials/blending_transparent_window.png");
     transparent_window.setPosition(-4.f, 0.f, 0.f);
 
-    Sprite transparent_window2("Ressources/Materials/blending_transparent_window.png");
+    Billboard transparent_window2("Ressources/Materials/blending_transparent_window.png", &camera);
     transparent_window2.setPosition(-3.5f, 0.f, -.2f);
 
     Sprite transparent_window3("Ressources/Materials/blending_transparent_window.png");
@@ -275,7 +276,6 @@ void Scene::ExampleOne(){
 
         // Objets transparents apres objets opaques
         // TODO : Faut que les objets transparents soient rendu selon leur distance avec la camera, le plus loin en premier
-        transparent_window2.LookAt(camera);
         transparent_window3.display(camera.projectionMatrix, view);
         transparent_window2.display(camera.projectionMatrix, view);
         transparent_window.display(camera.projectionMatrix, view);
