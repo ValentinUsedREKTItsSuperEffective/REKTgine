@@ -223,6 +223,9 @@ void Scene::ExampleOne(){
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     glStencilMask(0x00);
 
+    //Culling
+    glEnable(GL_CULL_FACE);
+
      while(!input.isEnd){
 
         tic = SDL_GetTicks();

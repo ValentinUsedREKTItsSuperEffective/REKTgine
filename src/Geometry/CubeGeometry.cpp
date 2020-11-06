@@ -4,35 +4,41 @@ CubeGeometry::CubeGeometry(float cubeSize){
     cubeSize *= 0.5f;
 
     positions = {
-        -cubeSize, -cubeSize, -cubeSize,
+        // back face
          cubeSize, -cubeSize, -cubeSize,
-         cubeSize,  cubeSize, -cubeSize,
+        -cubeSize, -cubeSize, -cubeSize,
         -cubeSize,  cubeSize, -cubeSize,
+         cubeSize,  cubeSize, -cubeSize,
 
+        // front face
         -cubeSize, -cubeSize,  cubeSize,
          cubeSize, -cubeSize,  cubeSize,
          cubeSize,  cubeSize,  cubeSize,
         -cubeSize,  cubeSize,  cubeSize,
 
+        // left face
+        -cubeSize, -cubeSize, -cubeSize,
+        -cubeSize, -cubeSize,  cubeSize,
         -cubeSize,  cubeSize,  cubeSize,
         -cubeSize,  cubeSize, -cubeSize,
-        -cubeSize, -cubeSize, -cubeSize,
-        -cubeSize, -cubeSize,  cubeSize,
 
-         cubeSize,  cubeSize,  cubeSize,
-         cubeSize,  cubeSize, -cubeSize,
-         cubeSize, -cubeSize, -cubeSize,
+        // right face
          cubeSize, -cubeSize,  cubeSize,
-
-        -cubeSize, -cubeSize, -cubeSize,
          cubeSize, -cubeSize, -cubeSize,
-         cubeSize, -cubeSize,  cubeSize,
-        -cubeSize, -cubeSize,  cubeSize,
-
-        -cubeSize,  cubeSize, -cubeSize,
          cubeSize,  cubeSize, -cubeSize,
          cubeSize,  cubeSize,  cubeSize,
-        -cubeSize,  cubeSize,  cubeSize
+
+        // bottom face
+        -cubeSize, -cubeSize, -cubeSize,
+         cubeSize, -cubeSize, -cubeSize,
+         cubeSize, -cubeSize,  cubeSize,
+        -cubeSize, -cubeSize,  cubeSize,
+
+        // top face
+        -cubeSize,  cubeSize,  cubeSize,
+         cubeSize,  cubeSize,  cubeSize,
+         cubeSize,  cubeSize, -cubeSize,
+        -cubeSize,  cubeSize, -cubeSize
     };
 
     normals = {
@@ -78,25 +84,25 @@ CubeGeometry::CubeGeometry(float cubeSize){
         1.0f, 1.0f,
         0.0f, 1.0f,
 
-        1.0f, 0.0f,
-        1.0f, 1.0f,
-        0.0f, 1.0f,
         0.0f, 0.0f,
-
         1.0f, 0.0f,
         1.0f, 1.0f,
         0.0f, 1.0f,
+
         0.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
         1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+
         0.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
         1.0f, 0.0f,
-        0.0f, 0.0f
+        1.0f, 1.0f,
+        0.0f, 1.0f,
+
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f
     };
 
     indexes = {
