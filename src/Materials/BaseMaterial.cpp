@@ -1,4 +1,4 @@
-#include "Materials/BaseMaterial.h"
+#include "Materials/BaseMaterial.hpp"
 
 BaseMaterial::BaseMaterial() : color(glm::vec3(1.f, 1.f, 1.f)), needUpdate(true), shader(NULL){
     colorTexture = Texture();
