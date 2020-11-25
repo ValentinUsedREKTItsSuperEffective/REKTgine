@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Scene.h"
+#include "Screen.hpp"
 
 #include "Vector3.h"
 #include "Ray.h"
@@ -67,8 +68,8 @@ int main(int argc, char **argv){
     bool realtime = true;
 
     if (realtime) {
-        // Notre scène
-        Scene scene(1200, 800);
+        Screen screen(1200, 800);
+        Scene scene;
 
         if(scene.initWindow() == false)
             return -1;

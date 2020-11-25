@@ -15,7 +15,7 @@ using namespace glm;
 
 class Scene{
     public:
-        Scene(int, int);
+        Scene();
         ~Scene();
 
         bool initWindow();
@@ -26,7 +26,6 @@ class Scene{
         SDL_Window* window;
         SDL_GLContext context;
         Input input;
-        int width, height;
 };
 
 #endif // SCENEOPENGL_H

@@ -1,6 +1,7 @@
 #include "glm/ext.hpp"
 
 #include "Scene.h"
+#include "Screen.hpp"
 #include "Camera.h"
 #include "Mesh.hpp"
 #include "Lights/DirectionalLight.h"
@@ -15,7 +16,7 @@
 
 using namespace std;
 
-Scene::Scene(int width, int height) : window(0), context(0), input(), width(width), height(height){}
+Scene::Scene() : window(0), context(0), input(){}
 
 Scene::~Scene(){
     SDL_GL_DeleteContext(context);
@@ -40,8 +41,7 @@ bool Scene::initWindow(){
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
-    // Création de la fenêtre
-    window = SDL_CreateWindow("REKTgine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+    window = SDL_CreateWindow("REKTgine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::width, Screen::height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
     if(window == 0){
         std::cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << std::endl;
@@ -89,7 +89,7 @@ void Scene::ExampleOne(){
     Uint32 tic(0), tac(0), timeSpend(0);
 
      // create camera
-    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)width/height, 0.1, 100.0);
+    Camera camera(glm::vec3(3,3,3), glm::vec3(0.0,0.0,0.0), 70.0, (double)Screen::width/Screen::height, 0.1, 100.0);
     input.showCursor(false);
     input.captureCursor(true);
 
