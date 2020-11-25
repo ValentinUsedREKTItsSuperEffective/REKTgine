@@ -3,14 +3,17 @@
 
 #include <GL/glew.h>
 
+#include "Texture.h"
+
 class Framebuffer
 {
     public:
         Framebuffer();
         virtual ~Framebuffer();
 
-    protected:
         GLuint fbo;
+        GLuint rbo;
+        Texture texture;
 };
 
 #endif // FRAMEBUFFER_H

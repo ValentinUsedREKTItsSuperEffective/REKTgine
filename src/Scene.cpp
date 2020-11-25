@@ -13,6 +13,7 @@
 #include "MTLLoader.hpp"
 #include "Sprite.hpp"
 #include "Billboard.hpp"
+#include "Framebuffer.hpp"
 
 using namespace std;
 
@@ -222,6 +223,9 @@ void Scene::ExampleOne(){
     glEnable(GL_STENCIL_TEST);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     glStencilMask(0x00);
+
+    // Framebuffer
+    Framebuffer framebuffer;
 
     //Culling
     glEnable(GL_CULL_FACE);
