@@ -16,6 +16,7 @@ class Texture{
         bool inverseImage;
 
         Texture();
+        Texture(GLsizei, GLsizei);
         Texture(std::string src);
         Texture(const Texture &texture);
         ~Texture();
@@ -25,6 +26,8 @@ class Texture{
 
     private:
         std::string src;
+
+        GLsizei width, height;
 };
 
 #endif // TEXTURE_H
