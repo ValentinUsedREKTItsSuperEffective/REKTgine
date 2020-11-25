@@ -40,9 +40,10 @@ class Context {
         ~Context();
 
         bool CreateWindowAndContext(unsigned int, unsigned int);
+		static void SwapWindow(){ SDL_GL_SwapWindow(window); }
 
 	private:
-		SDL_Window* window;
+		static SDL_Window* window;
         SDL_GLContext context;
         Input input;
 }
