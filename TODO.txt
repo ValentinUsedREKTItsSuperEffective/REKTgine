@@ -10,3 +10,25 @@ Pourquoi est-ce qu'il faut déclarer les useLights sur les derniers mesh créés
  - Cubemap
  - AA
  - Instancing
+
+// --- SCREEN ---
+ Screen.hpp
+
+class Screen {
+	public: 
+		static unsigned int width;
+		static unsigned int height;
+
+		Scene(int, int);
+		~Scene();
+
+}
+
+Screen.cpp
+
+Screen::Screen(int width, height) : width(width), height(height){}
+
+Screen::~Screen(){}
+// --- SCREEN ---
+
+
