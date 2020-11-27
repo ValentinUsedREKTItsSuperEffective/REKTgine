@@ -11,26 +11,6 @@ Pourquoi est-ce qu'il faut déclarer les useLights sur les derniers mesh créés
  - AA
  - Instancing
 
-// --- SCREEN ---
-_Screen.hpp_
-
-class Screen {
-	public: 
-		static unsigned int width;
-		static unsigned int height;
-
-		Scene(int, int);
-		~Scene();
-
-}
-
-_Screen.cpp_
-
-Screen::Screen(int width, height) : width(width), height(height){}
-
-Screen::~Screen(){}
-// --- SCREEN ---
-
 // --- Context ---
 _Context.hpp_
 
