@@ -4,10 +4,17 @@
 #include <GL/glew.h>
 
 #include "Texture.h"
+#include "Geometry.h"
 
 class Framebuffer
 {
     public:
+        class QuadGeometry : public Geometry {
+            public:
+                QuadGeometry();
+                ~QuadGeometry();
+        };
+
         Framebuffer();
         virtual ~Framebuffer();
 

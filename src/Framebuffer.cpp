@@ -27,3 +27,28 @@ Framebuffer::~Framebuffer(){
     glDeleteFramebuffers(1, &fbo);
     glDeleteRenderbuffers(1, &rbo);
 }
+
+Framebuffer::QuadGeometry::QuadGeometry(){
+    positions = {
+        0.f, 0.f,
+        1.f, 0.f,
+        1.f, 1.f,
+        0.f, 1.f
+    };
+
+    uvs = {
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f
+    };
+
+    indexes = {
+        0, 1, 2,
+        2, 3, 0
+    };
+
+    load();
+}
+
+Framebuffer::QuadGeometry::~QuadGeometry(){}
