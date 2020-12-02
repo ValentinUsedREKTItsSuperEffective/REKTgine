@@ -57,6 +57,8 @@
 		<Unit filename="Shaders/couleur3D.vert" />
 		<Unit filename="Shaders/default.frag" />
 		<Unit filename="Shaders/default.vert" />
+		<Unit filename="Shaders/framebuffer.frag" />
+		<Unit filename="Shaders/framebuffer.vert" />
 		<Unit filename="Shaders/phong.frag" />
 		<Unit filename="Shaders/phong.vert" />
 		<Unit filename="Shaders/texture.frag" />
