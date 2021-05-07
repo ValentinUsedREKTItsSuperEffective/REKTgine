@@ -13,7 +13,6 @@ Framebuffer::Framebuffer() : geometry(QuadGeometry()), shader(Shader("Shaders/fr
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, textureID, 0);
 
@@ -40,7 +39,7 @@ Framebuffer::~Framebuffer(){
 
 void Framebuffer::Display(){
     glBindFramebuffer(GL_FRAMEBUFFER, 0); // back to default
-    glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
+    //glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glUseProgram(shader.programID);
@@ -51,6 +50,7 @@ void Framebuffer::Display(){
 
     glBindVertexArray(0);
     glUseProgram(0);
+    glEnable(GL_DEPTH_TEST);
 }
 
 Framebuffer::QuadGeometry::QuadGeometry(){
