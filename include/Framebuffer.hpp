@@ -1,10 +1,12 @@
 #ifndef FRAMEBUFFER_H
 #define FRAMEBUFFER_H
 
+#include <iostream>
+
 #include <GL/glew.h>
 
-#include "Texture.h"
 #include "Geometry.h"
+#include "Shader.h"
 
 class Framebuffer
 {
@@ -13,14 +15,18 @@ class Framebuffer
             public:
                 QuadGeometry();
                 ~QuadGeometry();
+                void load();
         };
 
         Framebuffer();
         virtual ~Framebuffer();
+        void Display();
 
         GLuint fbo;
         GLuint rbo;
-        Texture texture;
+        GLuint textureID;
+        QuadGeometry geometry;
+        Shader shader;
 };
 
 #endif // FRAMEBUFFER_H

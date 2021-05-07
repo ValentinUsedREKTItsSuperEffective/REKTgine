@@ -230,6 +230,8 @@ void Scene::ExampleOne(){
     //Culling
     glEnable(GL_CULL_FACE);
 
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
      while(!input.isEnd){
 
         tic = SDL_GetTicks();
@@ -240,6 +242,9 @@ void Scene::ExampleOne(){
             break;
 
         camera.translate(input);
+
+        // bind the framebuffer before clearing buffer otherwise the wrong framebuffer's color will be clear
+        glBindFramebuffer(GL_FRAMEBUFFER, framebuffer.fbo);
 
         // Clean buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -286,6 +291,8 @@ void Scene::ExampleOne(){
         transparent_window3.display(camera.projectionMatrix, view);
         transparent_window2.display(camera.projectionMatrix, view);
         transparent_window.display(camera.projectionMatrix, view);
+
+        framebuffer.Display();
 
         SDL_GL_SwapWindow(window);
 

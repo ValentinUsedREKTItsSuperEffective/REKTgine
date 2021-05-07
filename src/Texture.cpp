@@ -81,7 +81,13 @@ bool Texture::load(){
 
         data = img->pixels;
     } else {
-        img = SDL_CreateRGBSurface(0, 1, 1, 32, 0, 0, 0, 0);
+        img = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
+
+        if(img == NULL){
+            std::cout << "SDL_CreateRGBSurface() failed: " << SDL_GetError()<< std::endl;
+            SDL_FreeSurface(img);
+            return false;
+        }
 
         SDL_LockSurface(img);
         SDL_FillRect(img, NULL, SDL_MapRGB(img->format, colorByDefault.x * 255, colorByDefault.y * 255, colorByDefault.z * 255));
