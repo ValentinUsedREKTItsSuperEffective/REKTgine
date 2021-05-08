@@ -225,7 +225,7 @@ void Scene::ExampleOne(){
     glStencilMask(0x00);
 
     // Framebuffer
-    Framebuffer framebuffer;
+    Framebuffer framebuffer("Shaders/framebuffer.vert", "Shaders/framebuffer.frag");
 
     //Culling
     glEnable(GL_CULL_FACE);

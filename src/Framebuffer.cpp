@@ -1,7 +1,7 @@
 #include "Framebuffer.hpp"
 #include "Screen.hpp"
 
-Framebuffer::Framebuffer() : geometry(QuadGeometry()), shader(Shader("Shaders/framebuffer.vert", "Shaders/framebuffer.frag")){
+Framebuffer::Framebuffer(string vertexShader, string fragmentShader) : geometry(QuadGeometry()), shader(Shader(vertexShader, fragmentShader)){
     glGenFramebuffers(1, &fbo);
     glGenRenderbuffers(1, &rbo);
 

@@ -18,7 +18,7 @@ class Framebuffer
                 void load();
         };
 
-        Framebuffer();
+        Framebuffer(string vertexShader, string fragmentShader);
         virtual ~Framebuffer();
         void Display();
 
