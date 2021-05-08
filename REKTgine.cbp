@@ -66,6 +66,7 @@
 		<Unit filename="TODO.txt" />
 		<Unit filename="include/Billboard.hpp" />
 		<Unit filename="include/Camera.h" />
+		<Unit filename="include/Context.hpp" />
 		<Unit filename="include/Framebuffer.hpp" />
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
@@ -98,6 +99,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Billboard.cpp" />
 		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Context.cpp" />
 		<Unit filename="src/Framebuffer.cpp" />
 		<Unit filename="src/Geometry/CubeGeometry.cpp" />
 		<Unit filename="src/Geometry/Geometry.cpp" />

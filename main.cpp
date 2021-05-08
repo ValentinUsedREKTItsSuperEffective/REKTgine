@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "Screen.hpp"
+#include "Context.hpp"
 
 #include "Vector3.h"
 #include "Ray.h"
@@ -69,15 +70,15 @@ int main(int argc, char **argv){
 
     if (realtime) {
         Screen screen(1200, 800);
-        Scene scene;
+        Context context;
 
-        if(scene.initWindow() == false)
+        if(context.InitWindow() == false)
             return -1;
 
-        if(scene.initGL() == false)
+        if(context.InitGL() == false)
             return -1;
 
-        //Boucle principale
+        Scene scene(&context);
         scene.ExampleOne();
 
     } else {

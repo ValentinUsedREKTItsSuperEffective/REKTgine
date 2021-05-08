@@ -17,69 +17,9 @@
 
 using namespace std;
 
-Scene::Scene() : window(0), context(0), input(){}
+Scene::Scene(Context* context) : context(context), input(){}
 
-Scene::~Scene(){
-    SDL_GL_DeleteContext(context);
-    SDL_DestroyWindow(window);
-    SDL_Quit();
-}
-
-bool Scene::initWindow(){
-    // Initialisation de la SDL
-    if(SDL_Init(SDL_INIT_VIDEO) < 0){
-        std::cout << "Erreur lors de l'initialisation de la SDL : " << SDL_GetError() << std::endl;
-        SDL_Quit();
-
-        return false;
-    }
-
-    // Version d'OpenGL
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-
-    // Double Buffer
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
-
-    window = SDL_CreateWindow("REKTgine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, Screen::width, Screen::height, SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
-
-    if(window == 0){
-        std::cout << "Erreur lors de la creation de la fenetre : " << SDL_GetError() << std::endl;
-        SDL_Quit();
-
-        return false;
-    }
-
-    // Création du contexte OpenGL
-    context = SDL_GL_CreateContext(window);
-
-    if(context == 0){
-        std::cout << SDL_GetError() << std::endl;
-        SDL_DestroyWindow(window);
-        SDL_Quit();
-
-        return false;
-    }
-
-    return true;
-}
-
-bool Scene::initGL(){
-    // Initialisation d'OpenGL
-    GLenum err = glewInit();
-
-    if(err != GLEW_OK){
-        std::cout << "Erreur d'initialisation de GLEW : " << glewGetErrorString(err);
-        SDL_GL_DeleteContext(context);
-        SDL_DestroyWindow(window);
-        SDL_Quit();
-
-        return false;
-    }
-
-    return true;
-}
+Scene::~Scene(){}
 
 // Cubes example
 void Scene::ExampleOne(){
@@ -177,6 +117,7 @@ void Scene::ExampleOne(){
         crates.push_back(crate);
     }
 
+    /*
     ObjLoader loader;
     Geometry suzanneGeometry;
     loader.Load("Ressources/Models/backpack.obj", suzanneGeometry);
@@ -194,6 +135,7 @@ void Scene::ExampleOne(){
     backpack.useLight(pointLight);
     backpack.useLight(dirLight);
     backpack.useLight(spotlight);
+    */
 
     // Outline
     MaterialParamaters outlineMatParam;
@@ -258,7 +200,7 @@ void Scene::ExampleOne(){
         phongMat.setViewPosition(camera.position);
         phongMatE.setViewPosition(camera.position);
         phongMatTex.setViewPosition(camera.position);
-        backpackMat.setViewPosition(camera.position);
+        //backpackMat.setViewPosition(camera.position);
 
         pointLight.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
         lightCube.rotateAroundPoint(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.05, 0.0));
@@ -284,7 +226,7 @@ void Scene::ExampleOne(){
         glStencilMask(0xFF);
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
 
-        backpack.display(camera.projectionMatrix, view);
+        //backpack.display(camera.projectionMatrix, view);
 
         // Objets transparents apres objets opaques
         // TODO : Faut que les objets transparents soient rendu selon leur distance avec la camera, le plus loin en premier
@@ -294,7 +236,7 @@ void Scene::ExampleOne(){
 
         framebuffer.Display();
 
-        SDL_GL_SwapWindow(window);
+        context->SwapWindow();
 
         tac = SDL_GetTicks();
         timeSpend = tac - tic;
