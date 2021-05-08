@@ -53,8 +53,11 @@
 			<Add directory="Dependencies/lib" />
 			<Add directory="Dependencies/dll" />
 		</Linker>
+		<Unit filename="Shaders/PostEffects/blur.frag" />
+		<Unit filename="Shaders/PostEffects/edgeDetection.frag" />
 		<Unit filename="Shaders/PostEffects/framebuffer.frag" />
 		<Unit filename="Shaders/PostEffects/framebuffer.vert" />
+		<Unit filename="Shaders/PostEffects/grayscale.frag" />
 		<Unit filename="Shaders/PostEffects/inverseColor.frag" />
 		<Unit filename="Shaders/couleur3D.frag" />
 		<Unit filename="Shaders/couleur3D.vert" />
