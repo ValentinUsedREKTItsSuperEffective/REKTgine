@@ -16,6 +16,7 @@ class Scene{
         ~Scene();
 
         void ExampleOne();
+        void ExampleFramework();
 
     private:
         Context* context;
