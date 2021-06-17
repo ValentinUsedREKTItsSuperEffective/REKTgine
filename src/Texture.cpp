@@ -1,10 +1,12 @@
 #include "Texture.h"
 
-Texture::Texture() : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(""){}
+Texture::Texture() : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(""), width(1), height(1){}
 
-Texture::Texture(std::string src) : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(src){}
+Texture::Texture(GLsizei width, GLsizei height) : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(""), width(width), height(height){}
 
-Texture::Texture(const Texture &texture) : colorByDefault(glm::vec3(1.0f)){
+Texture::Texture(std::string src) : textureID(0), colorByDefault(glm::vec3(1.0f)), inverseImage(true), src(src), width(1), height(1){}
+
+Texture::Texture(const Texture &texture) : colorByDefault(glm::vec3(1.0f)), width(1), height(1){
     src = texture.src;
     inverseImage = texture.inverseImage;
     load();
@@ -36,9 +38,6 @@ bool Texture::load(){
 
     // rgb or brg (.bmp)
     GLenum format = GL_RGB;
-
-    GLsizei width = 1;
-    GLsizei height = 1;
 
     GLvoid *data;
 
@@ -82,7 +81,13 @@ bool Texture::load(){
 
         data = img->pixels;
     } else {
-        img = SDL_CreateRGBSurface(0, 1, 1, 32, 0, 0, 0, 0);
+        img = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
+
+        if(img == NULL){
+            std::cout << "SDL_CreateRGBSurface() failed: " << SDL_GetError()<< std::endl;
+            SDL_FreeSurface(img);
+            return false;
+        }
 
         SDL_LockSurface(img);
         SDL_FillRect(img, NULL, SDL_MapRGB(img->format, colorByDefault.x * 255, colorByDefault.y * 255, colorByDefault.z * 255));

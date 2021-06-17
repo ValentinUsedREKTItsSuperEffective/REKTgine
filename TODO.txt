@@ -3,10 +3,12 @@ Pourquoi est-ce qu'il faut déclarer les useLights sur les derniers mesh créés
  - Importer plusieurs objets d'un même .obj
  - Faire passer les .h en .hpp
  - Calculer la matrice normale en dehors phong vert
- - Séparer la partie création de la fenetre et initialisation d'OpenGL de la classe Scene
  - Ajouter des objets à la Scene plus facilement
 
  - Framebuffer
  - Cubemap
  - AA
  - Instancing
+
+ BUG :
+  - Removing the spotlight display black objects

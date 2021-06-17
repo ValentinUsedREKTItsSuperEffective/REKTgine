@@ -53,6 +53,12 @@
 			<Add directory="Dependencies/lib" />
 			<Add directory="Dependencies/dll" />
 		</Linker>
+		<Unit filename="Shaders/PostEffects/blur.frag" />
+		<Unit filename="Shaders/PostEffects/edgeDetection.frag" />
+		<Unit filename="Shaders/PostEffects/framebuffer.frag" />
+		<Unit filename="Shaders/PostEffects/framebuffer.vert" />
+		<Unit filename="Shaders/PostEffects/grayscale.frag" />
+		<Unit filename="Shaders/PostEffects/inverseColor.frag" />
 		<Unit filename="Shaders/couleur3D.frag" />
 		<Unit filename="Shaders/couleur3D.vert" />
 		<Unit filename="Shaders/default.frag" />
@@ -64,6 +70,8 @@
 		<Unit filename="TODO.txt" />
 		<Unit filename="include/Billboard.hpp" />
 		<Unit filename="include/Camera.h" />
+		<Unit filename="include/Context.hpp" />
+		<Unit filename="include/Framebuffer.hpp" />
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
 		<Unit filename="include/Geometry/PlaneGeometry.hpp" />
@@ -85,6 +93,7 @@
 		<Unit filename="include/Object3D.h" />
 		<Unit filename="include/Ray.h" />
 		<Unit filename="include/Scene.h" />
+		<Unit filename="include/Screen.hpp" />
 		<Unit filename="include/Shader.h" />
 		<Unit filename="include/Sprite.hpp" />
 		<Unit filename="include/Texture.h" />
@@ -94,6 +103,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Billboard.cpp" />
 		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Context.cpp" />
+		<Unit filename="src/Framebuffer.cpp" />
 		<Unit filename="src/Geometry/CubeGeometry.cpp" />
 		<Unit filename="src/Geometry/Geometry.cpp" />
 		<Unit filename="src/Geometry/PlaneGeometry.cpp" />
@@ -111,6 +122,7 @@
 		<Unit filename="src/Object3D.cpp" />
 		<Unit filename="src/Ray.cpp" />
 		<Unit filename="src/Scene.cpp" />
+		<Unit filename="src/Screen.cpp" />
 		<Unit filename="src/Shader.cpp" />
 		<Unit filename="src/Sprite.cpp" />
 		<Unit filename="src/Texture.cpp" />

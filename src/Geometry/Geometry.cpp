@@ -26,7 +26,10 @@ void Geometry::load(){
 
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeOfPositions, &positions[0]);
     glBufferSubData(GL_ARRAY_BUFFER, sizeOfPositions, sizeOfUvs, &uvs[0]);
-    glBufferSubData(GL_ARRAY_BUFFER, sizeOfPositions + sizeOfUvs, sizeOfNormals, &normals[0]);
+
+    if(sizeOfNormals > sizeof(0)){
+        glBufferSubData(GL_ARRAY_BUFFER, sizeOfPositions + sizeOfUvs, sizeOfNormals, &normals[0]);
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
@@ -58,8 +61,10 @@ void Geometry::load(){
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeOfPositions));
     glEnableVertexAttribArray(1);
 
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeOfPositions + sizeOfUvs));
-    glEnableVertexAttribArray(2);
+    if(sizeOfNormals > sizeof(0)){
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(sizeOfPositions + sizeOfUvs));
+        glEnableVertexAttribArray(2);
+    }
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 
