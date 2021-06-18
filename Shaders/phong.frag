@@ -13,40 +13,22 @@ struct Material {
     sampler2D emissiveMap;
 };
 
-struct DirectionalLight {
+struct Light {
+    vec3 position;
     vec3 direction;
 
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
-};
 
-struct PointLight {
-    vec3 position;
-
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
-
+    // point light
     float constant;
     float linear;
     float quadratic;
-};
 
-struct Spotlight {
-    vec3 position;
-
-    vec3 ambient;
-    vec3 diffuse;
-    vec3 specular;
-
-    vec3 direction;
+    // spotlight
     float cutAngle;
     float outAngle;
-
-    float constant;
-    float linear;
-    float quadratic;
 };
 
 // Entrée
@@ -57,89 +39,60 @@ in vec2 coordTexture;
 // Uniform
 uniform vec3 cameraPosition;
 uniform Material material;
-uniform DirectionalLight directionalLight;
-uniform PointLight pointLight;
-uniform Spotlight spotlight;
+uniform Light directionalLight;
+uniform Light pointLight;
+uniform Light spotlight;
 
 // Sortie
 out vec4 outColor;
 
-vec3 computeDirectionalLightComponents(){
-    vec3 color = material.color * texture(material.map, coordTexture).rgb;
-    vec3 ambient = color * material.ambient * directionalLight.ambient;
+vec3 computeLightContribution(vec3 color, Light light){
+    vec3 ambient = color * material.ambient * light.ambient;
 
     vec3 N = normalize(normal);
-    vec3 lightDir = normalize(-directionalLight.direction);
-    vec3 diffuse = color * max(0.0, dot(lightDir, N)) * directionalLight.diffuse;
+    vec3 lightDir;
 
-    vec3 specular = vec3(0.0f);
-    if(dot(lightDir, N) >= 0.0f){
-        vec3 R = reflect(-lightDir, N);
-        vec3 viewDir = normalize(cameraPosition - position);
-        specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * directionalLight.specular;
+    if(light.constant == 0.0f){ // directional light
+        lightDir = normalize(-light.direction);
+    } else {
+        lightDir = normalize(light.position - position);
     }
 
-    return ambient + diffuse + specular;
-}
-
-vec3 computePointLightComponents(){
-    float dist = length(pointLight.position - position);
-    float attenuation = 1.0 / (pointLight.constant + pointLight.linear * dist + pointLight.quadratic * dist * dist);
-
-    vec3 color = material.color * texture(material.map, coordTexture).rgb;
-    vec3 ambient = color * material.ambient * pointLight.ambient;
-
-    vec3 N = normalize(normal);
-    vec3 lightDir = normalize(pointLight.position - position);
-    vec3 diffuse = color * max(0.0, dot(lightDir, N)) * pointLight.diffuse;
+    vec3 diffuse = color * max(0.0, dot(lightDir, N)) * light.diffuse;
 
     vec3 specular = vec3(0.0f);
     if(dot(lightDir, N) >= 0.0f){
         vec3 R = reflect(-lightDir, N);
         vec3 viewDir = normalize(cameraPosition - position);
-        specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * pointLight.specular;
+        specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * light.specular;
+    }
+
+    float attenuation = 1.0;
+
+    if(light.constant > 0){
+        float dist = length(light.position - position);
+        attenuation = 1.0 / (light.constant + light.linear * dist + light.quadratic * dist * dist);
+    }
+
+    if(light.cutAngle > 0.0f && light.outAngle > 0.0f){ // spotlight only
+        float theta = dot(lightDir, normalize(-light.direction));
+        float epsilon = light.cutAngle - light.outAngle;
+        float intensity = clamp((theta - light.outAngle) / epsilon, 0.0, 1.0);
+
+        diffuse *= intensity;
+        specular *= intensity;
     }
 
     return (ambient + diffuse + specular) * attenuation;
 }
 
-vec3 computeSpotlightComponents(){
-    vec3 nonNormalizedLightDir = spotlight.position - position;
-    vec3 lightDir = normalize(nonNormalizedLightDir);
-
-    float dist = length(nonNormalizedLightDir);
-    float attenuation = 1.0 / (spotlight.constant + spotlight.linear * dist + spotlight.quadratic * dist * dist);
-
-    vec3 color = material.color * texture(material.map, coordTexture).rgb;
-    vec3 ambient = color * material.ambient * spotlight.ambient;
-
-    vec3 contribution = ambient * attenuation;
-
-    vec3 N = normalize(normal);
-    vec3 diffuse = color * max(0.0, dot(lightDir, N)) * spotlight.diffuse;
-
-    vec3 specular = vec3(0.0f);
-    if(dot(lightDir, N) >= 0.0f){
-        vec3 R = reflect(-lightDir, N);
-        vec3 viewDir = normalize(cameraPosition - position);
-        specular = material.specular * texture(material.specularMap, coordTexture).rgb * pow(max(0.0, dot(viewDir, R)), material.shininess) * spotlight.specular;
-    }
-
-    float theta = dot(lightDir, normalize(-spotlight.direction));
-    float epsilon = spotlight.cutAngle - spotlight.outAngle;
-    float intensity = clamp((theta - spotlight.outAngle) / epsilon, 0.0, 1.0);
-
-    contribution += (diffuse + specular) * attenuation * intensity;;
-
-    return contribution;
-}
-
 void main(){
+    vec3 color = material.color * texture(material.map, coordTexture).rgb;
 
-    vec3 pointComponents;
-    pointComponents = computeDirectionalLightComponents();
-    pointComponents += computePointLightComponents();
-    pointComponents += computeSpotlightComponents();
+    vec3 pointComponents = vec3(0.0f);
+    pointComponents += computeLightContribution(color, directionalLight);
+    pointComponents += computeLightContribution(color, pointLight);
+    pointComponents += computeLightContribution(color, spotlight);
 
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 
