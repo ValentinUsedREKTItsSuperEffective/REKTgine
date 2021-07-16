@@ -1,5 +1,7 @@
 #version 330 core
 
+#define MAX_LIGHT 3
+
 struct Material {
     sampler2D map;
     vec3 color;
@@ -39,9 +41,7 @@ in vec2 coordTexture;
 // Uniform
 uniform vec3 cameraPosition;
 uniform Material material;
-uniform Light directionalLight;
-uniform Light pointLight;
-uniform Light spotlight;
+uniform Light lights[MAX_LIGHT];
 
 // Sortie
 out vec4 outColor;
@@ -90,9 +90,9 @@ void main(){
     vec3 color = material.color * texture(material.map, coordTexture).rgb;
 
     vec3 pointComponents = vec3(0.0f);
-    pointComponents += computeLightContribution(color, directionalLight);
-    pointComponents += computeLightContribution(color, pointLight);
-    pointComponents += computeLightContribution(color, spotlight);
+    for(int i = 0; i < MAX_LIGHT; i++){
+        pointComponents += computeLightContribution(color, lights[i]);
+    }
 
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 
