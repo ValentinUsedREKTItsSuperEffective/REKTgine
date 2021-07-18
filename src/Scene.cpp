@@ -21,6 +21,13 @@ Scene::Scene(Context* context) : context(context), input(){}
 
 Scene::~Scene(){}
 
+void Scene::Add(Mesh* mesh){
+    // Incomplete function, I don't know what a Scene::Add function have to do yet
+    for(auto it = lights.begin(); it != lights.end(); ++it){
+        mesh->useLight(*(*it));
+    }
+}
+
 // Cubes example
 void Scene::ExampleOne(){
     // TODO : Random class
@@ -46,11 +53,14 @@ void Scene::ExampleOne(){
 
     PointLight pointLight(1.f, 0.09f, 0.032f, glm::vec3(1.f), glm::vec3(0.05f), glm::vec3(0.3f), glm::vec3(1.f));
     pointLight.setPosition(glm::vec3(1.2f, 1.0f, 2.0f));
+    lights.push_back(&pointLight);
 
     DirectionalLight dirLight(vec3(-0.2f, -1.0f, -0.3f), vec3(1.f), vec3(0.05f), vec3(0.2f), vec3(1.f));
+    lights.push_back(&dirLight);
 
     Spotlight spotlight(1.f, 0.027f, 0.0028f, vec3(0.f,  0.f, -1.f), radians(12.5f), radians(15.f), vec3(1.f), vec3(0.2f), vec3(0.4f), vec3(1.f));
     spotlight.setPosition(vec3(1.5f, 2.0f, 0.0f));
+    lights.push_back(&spotlight);
 
     CubeGeometry lightGeom(0.1f);
     BaseMaterial lightMat;
@@ -67,9 +77,7 @@ void Scene::ExampleOne(){
     PhongMaterial phongMat(phongParam);
     Mesh* phongCube = new Mesh(&redGeom, &phongMat);
     phongCube->setPosition(glm::vec3(-7.3f,  0.0f, -7.5f));
-    phongCube->useLight(pointLight);
-    phongCube->useLight(dirLight);
-    phongCube->useLight(spotlight);
+    Add(phongCube);
     crates.push_back(phongCube);
 
     // Emerald Cube
@@ -82,9 +90,7 @@ void Scene::ExampleOne(){
     PhongMaterial phongMatE(phongParamEmerald);
     Mesh* emeraldCube = new Mesh(&emeraldGeom, &phongMatE);
     emeraldCube->setPosition(glm::vec3(1.5f,  0.2f, -1.5f));
-    emeraldCube->useLight(pointLight);
-    emeraldCube->useLight(dirLight);
-    emeraldCube->useLight(spotlight);
+    Add(emeraldCube);
     crates.push_back(emeraldCube);
 
     // Textured Cube
@@ -95,25 +101,19 @@ void Scene::ExampleOne(){
     PhongMaterial phongMatTex(phongParamTex);
     Mesh* texCube = new Mesh(&emeraldGeom, &phongMatTex);
     texCube->setPosition(glm::vec3(1.5f,  2.0f, -2.5f));
-    texCube->useLight(pointLight);
-    texCube->useLight(dirLight);
-    texCube->useLight(spotlight);
+    Add(texCube);
     crates.push_back(texCube);
 
     Mesh* texCubeBis = new Mesh(&emeraldGeom, &phongMatTex);
     texCubeBis->setPosition(glm::vec3(2.6f,  2.0f, -2.5f));
-    texCubeBis->useLight(pointLight);
-    texCubeBis->useLight(dirLight);
-    texCubeBis->useLight(spotlight);
+    Add(texCubeBis);
     crates.push_back(texCubeBis);
 
     for(int i = 0; i < 7; i++){
         Mesh* crate = new Mesh(&emeraldGeom, &phongMatTex);
         crate->setPosition(cubePositions[i]);
         crate->setRotationFromEuler(vec3(radians((float)(rand() % 365)), radians((float)(rand() % 365)), radians((float)(rand() % 365))));
-        crate->useLight(pointLight);
-        crate->useLight(dirLight);
-        crate->useLight(spotlight);
+        Add(crate);
         crates.push_back(crate);
     }
 
