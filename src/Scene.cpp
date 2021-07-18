@@ -58,7 +58,7 @@ void Scene::ExampleOne(){
     DirectionalLight dirLight(vec3(-0.2f, -1.0f, -0.3f), vec3(1.f), vec3(0.05f), vec3(0.2f), vec3(1.f));
     lights.push_back(&dirLight);
 
-    Spotlight spotlight(1.f, 0.027f, 0.0028f, vec3(0.f,  0.f, -1.f), radians(12.5f), radians(15.f), vec3(1.f), vec3(0.2f), vec3(0.4f), vec3(1.f));
+    Spotlight spotlight(1.f, 0.027f, 0.0028f, vec3(0.f,  0.f, -1.f), radians(12.5f), radians(15.f), vec3(1.f), vec3(0.05f), vec3(0.4f), vec3(1.f));
     spotlight.setPosition(vec3(1.5f, 2.0f, 0.0f));
     lights.push_back(&spotlight);
 
