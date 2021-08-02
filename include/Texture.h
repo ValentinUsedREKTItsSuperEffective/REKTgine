@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-class Texture{
+class Texture {
     public:
         GLuint textureID;
         glm::vec3 colorByDefault;

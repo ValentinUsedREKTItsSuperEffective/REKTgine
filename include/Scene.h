@@ -23,6 +23,7 @@ class Scene{
 
         void ExampleOne();
         void ExampleFramework();
+        void ExampleSkybox();
 
     private:
         Context* context;

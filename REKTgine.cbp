@@ -65,12 +65,15 @@
 		<Unit filename="Shaders/default.vert" />
 		<Unit filename="Shaders/phong.frag" />
 		<Unit filename="Shaders/phong.vert" />
+		<Unit filename="Shaders/skybox.frag" />
+		<Unit filename="Shaders/skybox.vert" />
 		<Unit filename="Shaders/texture.frag" />
 		<Unit filename="Shaders/texture.vert" />
 		<Unit filename="TODO.txt" />
 		<Unit filename="include/Billboard.hpp" />
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Context.hpp" />
+		<Unit filename="include/Cubemap.hpp" />
 		<Unit filename="include/Framebuffer.hpp" />
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
@@ -100,10 +103,12 @@
 		<Unit filename="include/Vector3.h" />
 		<Unit filename="include/rt_Camera.h" />
 		<Unit filename="include/rt_Sphere.h" />
+		<Unit filename="include/stb_image.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Billboard.cpp" />
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Context.cpp" />
+		<Unit filename="src/Cubemap.cpp" />
 		<Unit filename="src/Framebuffer.cpp" />
 		<Unit filename="src/Geometry/CubeGeometry.cpp" />
 		<Unit filename="src/Geometry/Geometry.cpp" />
@@ -127,6 +132,7 @@
 		<Unit filename="src/Sprite.cpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Vector3.cpp" />
+		<Unit filename="src/stb_image.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
