@@ -42,7 +42,7 @@ Cubemap::Cubemap(std::string left, std::string right, std::string top ,std::stri
 Cubemap::~Cubemap(){}
 
 void Cubemap::Display(mat4 &projection, mat4 &view){
-    glDepthMask(false);
+    glDepthFunc(GL_LEQUAL);
 
     glUseProgram(skyboxShader.programID);
     skyboxShader.bindMat4("view", glm::mat4(glm::mat3(view)));
@@ -52,5 +52,5 @@ void Cubemap::Display(mat4 &projection, mat4 &view){
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
     glDrawElements(GL_TRIANGLES, skyboxGeometry.indexes.size(), GL_UNSIGNED_SHORT, 0);
 
-    glDepthMask(true);
+    glDepthFunc(GL_LESS);
 }

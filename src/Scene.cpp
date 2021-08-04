@@ -535,8 +535,6 @@ void Scene::ExampleSkybox(){
         // Camera location
         view = camera.getViewMatrix();
 
-        skybox.Display(camera.projectionMatrix, view);
-
         phongCube->addRotationFromEuler(glm::vec3(0.01, 0., 0.));
 
         phongMat.setViewPosition(camera.position);
@@ -550,6 +548,8 @@ void Scene::ExampleSkybox(){
         for(int i = 0; i < 11; i++){
             crates[i]->display(camera.projectionMatrix, view);
         }
+
+        skybox.Display(camera.projectionMatrix, view);
 
         context->SwapWindow();
 
