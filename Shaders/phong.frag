@@ -44,7 +44,7 @@ uniform Material material;
 uniform Light lights[MAX_LIGHT];
 
 // Sortie
-out vec4 outColor;
+out vec4 fragColor;
 
 vec3 computeLightContribution(vec3 color, Light light){
     vec3 ambient = color * material.ambient * light.ambient;
@@ -96,5 +96,5 @@ void main(){
 
     vec3 emissive = texture(material.emissiveMap, coordTexture).rgb;
 
-    outColor = vec4((pointComponents + emissive), 1);
+    fragColor = vec4((pointComponents + emissive), 1);
 }
