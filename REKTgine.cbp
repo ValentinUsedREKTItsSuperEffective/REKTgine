@@ -63,6 +63,8 @@
 		<Unit filename="Shaders/couleur3D.vert" />
 		<Unit filename="Shaders/default.frag" />
 		<Unit filename="Shaders/default.vert" />
+		<Unit filename="Shaders/environment.frag" />
+		<Unit filename="Shaders/environment.vert" />
 		<Unit filename="Shaders/phong.frag" />
 		<Unit filename="Shaders/phong.vert" />
 		<Unit filename="Shaders/skybox.frag" />
