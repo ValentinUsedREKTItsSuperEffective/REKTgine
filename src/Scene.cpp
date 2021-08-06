@@ -1,4 +1,6 @@
 #include "glm/ext.hpp"
+#include <glm/gtc/quaternion.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "Scene.h"
 #include "Screen.hpp"
@@ -439,13 +441,14 @@ void Scene::ExampleSkybox(){
     glUseProgram(reflectionShader.programID);
     reflectionShader.bindInt("skybox", GL_TEXTURE0);
 
+    glm::vec3 reflexionCubeEuler = glm::vec3(0.0f);
+
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view;
 
     glEnable(GL_DEPTH_TEST);
 
-     while(!input.isEnd){
-
+    while(!input.isEnd){
         tic = SDL_GetTicks();
 
         input.updateEvent();
@@ -460,6 +463,10 @@ void Scene::ExampleSkybox(){
 
         // Camera location
         view = camera.getViewMatrix();
+
+        // Display reflectionCube
+        reflexionCubeEuler += glm::vec3(0.01, 0.005, 0.);
+        model = glm::toMat4(quat(reflexionCubeEuler));
 
         glUseProgram(reflectionShader.programID);
         reflectionShader.bindMat4("model", model);
