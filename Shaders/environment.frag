@@ -8,9 +8,27 @@ in vec3 normal;
 uniform vec3 cameraPosition;
 uniform samplerCube skybox;
 
-void main(){
+uniform float refractiveIndex;
+
+vec3 Reflect(){
     vec3 I = normalize(position - cameraPosition);
     vec3 N = normalize(normal);
-    vec3 R = reflect(I, N);
+    return reflect(I, N);
+}
+
+vec3 Refract(){
+    float ratio = 1.00 / refractiveIndex; // consider that the upper refractiveIndex is Air
+    vec3 I = normalize(position - cameraPosition);
+    vec3 N = normalize(normal);
+    return refract(I, N, ratio);
+}
+
+void main(){
+    vec3 R;
+    if(refractiveIndex == 0.0){
+        R = Reflect();
+    } else {
+        R = Refract();
+    }
     fragColor = vec4(texture(skybox, R).rgb, 1.0);
 }

@@ -422,9 +422,10 @@ void Scene::ExampleSkybox(){
     input.captureCursor(true);
 
     Shader reflectionShader("Shaders/environment.vert", "Shaders/environment.frag");
+    Shader refractionShader("Shaders/environment.vert", "Shaders/environment.frag");
 
-    // Reflexion cube
     CubeGeometry reflexionCube(2.5f);
+    CubeGeometry refractionCube(2.5f);
 
     string matPath = "Ressources/Materials/";
     string skyboxPath = matPath + "skybox/";
@@ -441,9 +442,15 @@ void Scene::ExampleSkybox(){
     glUseProgram(reflectionShader.programID);
     reflectionShader.bindInt("skybox", GL_TEXTURE0);
 
+    glUseProgram(refractionShader.programID);
+    refractionShader.bindInt("skybox", GL_TEXTURE0);
+
     glm::vec3 reflexionCubeEuler = glm::vec3(0.0f);
+    glm::vec3 refractionCubeEuler = glm::vec3(0.0f);
 
     glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 reflexionCubeTranslation = glm::translate(glm::mat4(1.0f), glm::vec3(-2.0f, 0.0f, 0.0f));
+    glm::mat4 refractionCubeTranslation = glm::translate(glm::mat4(1.0f), glm::vec3(2.0f, 0.0f, 0.0f));
     glm::mat4 view;
 
     glEnable(GL_DEPTH_TEST);
@@ -466,18 +473,35 @@ void Scene::ExampleSkybox(){
 
         // Display reflectionCube
         reflexionCubeEuler += glm::vec3(0.01, 0.005, 0.);
-        model = glm::toMat4(quat(reflexionCubeEuler));
+        model = reflexionCubeTranslation * glm::toMat4(quat(reflexionCubeEuler));
 
         glUseProgram(reflectionShader.programID);
         reflectionShader.bindMat4("model", model);
         reflectionShader.bindMat4("view", view);
         reflectionShader.bindMat4("projection", camera.projectionMatrix);
         reflectionShader.bindFloat3("cameraPosition", camera.position);
+        reflectionShader.bindFloat("refractiveIndex", 0.0f);
 
         reflexionCube.bindVertexArray();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.textureID);
         glDrawElements(GL_TRIANGLES, reflexionCube.indexes.size(), GL_UNSIGNED_SHORT, 0);
+
+        // Display refractionCube
+        refractionCubeEuler += glm::vec3(0.01, -0.005, 0.);
+        model = refractionCubeTranslation * glm::toMat4(quat(refractionCubeEuler));
+
+        glUseProgram(refractionShader.programID);
+        refractionShader.bindMat4("model", model);
+        refractionShader.bindMat4("view", view);
+        refractionShader.bindMat4("projection", camera.projectionMatrix);
+        refractionShader.bindFloat3("cameraPosition", camera.position);
+        refractionShader.bindFloat("refractiveIndex", 1.33f);
+
+        refractionCube.bindVertexArray();
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skybox.textureID);
+        glDrawElements(GL_TRIANGLES, refractionCube.indexes.size(), GL_UNSIGNED_SHORT, 0);
         glBindVertexArray(0);
         glUseProgram(0);
 
