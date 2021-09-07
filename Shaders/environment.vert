@@ -3,8 +3,11 @@
 layout (location = 0) in vec3 inPos;
 layout (location = 2) in vec3 inNormal;
 
-uniform mat4 projection;
-uniform mat4 view;
+layout (std140) uniform CameraMatrices {
+    mat4 projection;
+    mat4 view;
+};
+
 uniform mat4 model;
 
 out vec3 position;

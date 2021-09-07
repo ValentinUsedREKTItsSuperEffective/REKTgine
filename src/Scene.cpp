@@ -424,6 +424,20 @@ void Scene::ExampleSkybox(){
     Shader reflectionShader("Shaders/environment.vert", "Shaders/environment.frag");
     Shader refractionShader("Shaders/environment.vert", "Shaders/environment.frag");
 
+    unsigned int uniformBlockFlec = glGetUniformBlockIndex(reflectionShader.programID, "CameraMatrices");
+    unsigned int uniformBlockFrac = glGetUniformBlockIndex(refractionShader.programID, "CameraMatrices");
+
+    glUniformBlockBinding(reflectionShader.programID, uniformBlockFlec, 0);
+    glUniformBlockBinding(refractionShader.programID, uniformBlockFrac, 0);
+
+    unsigned int ubo;
+    glGenBuffers(1, &ubo);
+    glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+    glBufferData(GL_UNIFORM_BUFFER, 2 * sizeof(glm::mat4), NULL, GL_DYNAMIC_DRAW);
+    glBindBufferRange(GL_UNIFORM_BUFFER, 0, ubo, 0, 2 * sizeof(glm::mat4));
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(camera.projectionMatrix));
+    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
     CubeGeometry reflexionCube(2.5f);
     CubeGeometry refractionCube(2.5f);
 
@@ -464,6 +478,9 @@ void Scene::ExampleSkybox(){
             break;
 
         camera.translate(input);
+        glBindBuffer(GL_UNIFORM_BUFFER, ubo);
+        glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::mat4), glm::value_ptr(camera.getViewMatrix()));
+        glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
         // Clean buffers
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -477,8 +494,6 @@ void Scene::ExampleSkybox(){
 
         glUseProgram(reflectionShader.programID);
         reflectionShader.bindMat4("model", model);
-        reflectionShader.bindMat4("view", view);
-        reflectionShader.bindMat4("projection", camera.projectionMatrix);
         reflectionShader.bindFloat3("cameraPosition", camera.position);
         reflectionShader.bindFloat("refractiveIndex", 0.0f);
 
@@ -493,8 +508,6 @@ void Scene::ExampleSkybox(){
 
         glUseProgram(refractionShader.programID);
         refractionShader.bindMat4("model", model);
-        refractionShader.bindMat4("view", view);
-        refractionShader.bindMat4("projection", camera.projectionMatrix);
         refractionShader.bindFloat3("cameraPosition", camera.position);
         refractionShader.bindFloat("refractiveIndex", 1.33f);
 
