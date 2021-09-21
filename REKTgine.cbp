@@ -97,6 +97,7 @@
 		<Unit filename="include/Mesh.hpp" />
 		<Unit filename="include/ObjLoader.hpp" />
 		<Unit filename="include/Object3D.h" />
+		<Unit filename="include/Random.hpp" />
 		<Unit filename="include/Ray.h" />
 		<Unit filename="include/Scene.h" />
 		<Unit filename="include/Screen.hpp" />
@@ -129,6 +130,7 @@
 		<Unit filename="src/Mesh.cpp" />
 		<Unit filename="src/ObjLoader.cpp" />
 		<Unit filename="src/Object3D.cpp" />
+		<Unit filename="src/Random.cpp" />
 		<Unit filename="src/Ray.cpp" />
 		<Unit filename="src/Scene.cpp" />
 		<Unit filename="src/Screen.cpp" />

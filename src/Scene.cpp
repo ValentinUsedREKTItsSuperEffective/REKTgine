@@ -17,6 +17,7 @@
 #include "Billboard.hpp"
 #include "Framebuffer.hpp"
 #include "Cubemap.hpp"
+#include "Random.hpp"
 
 using namespace std;
 
@@ -246,8 +247,7 @@ void Scene::ExampleOne(){
 }
 
 void Scene::ExampleFramework(){
-    // TODO : Random class
-    srand (time(NULL));
+    Random random;
 
     unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
@@ -333,7 +333,7 @@ void Scene::ExampleFramework(){
     for(int i = 0; i < 7; i++){
         Mesh* crate = new Mesh(&emeraldGeom, &phongMatTex);
         crate->setPosition(cubePositions[i]);
-        crate->setRotationFromEuler(vec3(radians((float)(rand() % 365)), radians((float)(rand() % 365)), radians((float)(rand() % 365))));
+        crate->setRotationFromEuler(vec3(radians((float)(random.Range(365))), radians((float)(random.Range(365))), radians((float)(random.Range(365)))));
         crate->useLight(pointLight);
         crate->useLight(dirLight);
         crate->useLight(spotlight);
@@ -410,9 +410,6 @@ void Scene::ExampleFramework(){
 }
 
 void Scene::ExampleSkybox(){
-    // TODO : Random class
-    srand (time(NULL));
-
     unsigned int frameRate = 1000 / 60;
     Uint32 tic(0), tac(0), timeSpend(0);
 
