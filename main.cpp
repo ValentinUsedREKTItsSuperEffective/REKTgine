@@ -80,6 +80,8 @@ int main(int argc, char **argv){
     exercice.Palyndrome(alela);
     exercice.Palyndrome(allea);
 
+    exercice.Tri();
+
     return 0;
 
     bool realtime = true;
