@@ -76,6 +76,7 @@
 		<Unit filename="include/Camera.h" />
 		<Unit filename="include/Context.hpp" />
 		<Unit filename="include/Cubemap.hpp" />
+		<Unit filename="include/Exercices.h" />
 		<Unit filename="include/Framebuffer.hpp" />
 		<Unit filename="include/Geometry/CubeGeometry.h" />
 		<Unit filename="include/Geometry/Geometry.h" />
@@ -111,6 +112,7 @@
 		<Unit filename="src/Camera.cpp" />
 		<Unit filename="src/Context.cpp" />
 		<Unit filename="src/Cubemap.cpp" />
+		<Unit filename="src/Exercices.cpp" />
 		<Unit filename="src/Framebuffer.cpp" />
 		<Unit filename="src/Geometry/CubeGeometry.cpp" />
 		<Unit filename="src/Geometry/Geometry.cpp" />

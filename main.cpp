@@ -11,6 +11,9 @@
 #include "rt_Camera.h"
 #include "Material_RT.h"
 
+#include "Exercices.h"
+#include <string>
+
 Vector3 getPointInUnitSphere(){
     Vector3 p;
     do{
@@ -65,6 +68,19 @@ Hitable *randomList(){
 }
 
 int main(int argc, char **argv){
+
+    std::string ala("ALA");
+    std::string alla("ALLA");
+    std::string alela("ALELA");
+    std::string allea("ALLEA");
+
+    Exercices exercice;
+    exercice.Palyndrome(ala);
+    exercice.Palyndrome(alla);
+    exercice.Palyndrome(alela);
+    exercice.Palyndrome(allea);
+
+    return 0;
 
     bool realtime = true;
 
