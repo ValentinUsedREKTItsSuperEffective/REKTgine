@@ -19,6 +19,8 @@ class Exercices{
 
     private:
         void printArray(int a[ARRAY_SIZE_SORT]);
+        void triRapide(int a[ARRAY_SIZE_SORT], int debut, int fin);
+        int partition(int a[ARRAY_SIZE_SORT], int debut, int fin);
 };
 
 #endif // EXERCICES_H

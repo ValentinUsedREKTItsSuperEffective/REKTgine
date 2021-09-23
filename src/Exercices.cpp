@@ -48,8 +48,32 @@ void Exercices::Tri(){
         selection[indexBuffer] = buffer;
     }
 
-    printArray(refArray);
-    printArray(selection);
+    //printArray(refArray);
+    //printArray(selection);
+
+    //tri a bulle
+    int bulle[ARRAY_SIZE_SORT];
+    std::copy(std::begin(refArray), std::end(refArray), std::begin(bulle));
+
+    for (int j = 0; j < ARRAY_SIZE_SORT; j++){
+        for(int i = 0; i < ARRAY_SIZE_SORT - j - 1; i++){
+            if(bulle[i] > bulle[i + 1]){
+                buffer = bulle[i + 1];
+                bulle[i + 1] = bulle[i];
+                bulle[i] = buffer;
+
+                //printArray(bulle);
+            }
+        }
+    }
+
+    // tri rapide
+    int rapide[ARRAY_SIZE_SORT];
+    std::copy(std::begin(refArray), std::end(refArray), std::begin(rapide));
+    printArray(rapide);
+    triRapide(rapide, 0, ARRAY_SIZE_SORT-1);
+
+    printArray(rapide);
 }
 
 void Exercices::printArray(int a[ARRAY_SIZE_SORT]){
@@ -58,4 +82,35 @@ void Exercices::printArray(int a[ARRAY_SIZE_SORT]){
     }
 
     std::cout << std::endl << std::endl;
+}
+
+void Exercices::triRapide(int a[ARRAY_SIZE_SORT], int debut, int fin){
+    if(fin - debut > 0){
+        int pivot = partition(a, debut, fin);
+        triRapide(a, debut, pivot - 1);
+        triRapide(a, pivot + 1, fin);
+    }
+}
+
+int Exercices::partition(int a[ARRAY_SIZE_SORT], int debut, int fin){
+    // pivot = fin;
+    int upperSize = 0;
+    int buffer;
+    for(int i = debut; i <= fin; i++){
+        if(a[i] > a[fin]){
+            upperSize++;
+            //std::cout << "i: " << i << " ! UpperSize++ = " << upperSize << std::endl;
+        } else {
+            if(upperSize > 0){
+                //std::cout << "i: " << i << " ! Swap " << a[i] << " at " << i << " with " << a[i - upperSize] << " at " << (i - upperSize) << std::endl;
+                buffer = a[i];
+                a[i] = a[i - upperSize];
+                a[i - upperSize] = buffer;
+
+                //printArray(a);
+            }
+        }
+    }
+
+    return fin - upperSize;
 }
