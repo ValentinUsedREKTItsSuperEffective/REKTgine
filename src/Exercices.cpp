@@ -76,6 +76,26 @@ void Exercices::Tri(){
     printArray(rapide);
 }
 
+bool Exercices::Bananagram(vector<char> bag, string word){
+    std::map<char, int> bagMap;
+
+    for(char c : bag){
+        bagMap[c]++;
+    }
+
+    for(int i = 0; i < word.size(); i++){
+        if(bagMap.count(word[i]) > 0){
+            bagMap[word[i]]--;
+        } else {
+            std::cout << "Lack of letters !" << std::endl;
+            return false;
+        }
+    }
+
+    std::cout << "Enough letter !" << std::endl;
+    return true;
+}
+
 void Exercices::printArray(int a[ARRAY_SIZE_SORT]){
     for(int i = 0; i < ARRAY_SIZE_SORT; i++){
        std::cout << a[i] << " ";

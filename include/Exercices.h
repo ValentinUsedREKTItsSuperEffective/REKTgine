@@ -3,6 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <vector>
+#include <map>
 
 #define ARRAY_SIZE_SORT 20
 
@@ -16,6 +18,7 @@ class Exercices{
 
         bool Palyndrome(string &word);
         void Tri();
+        bool Bananagram(vector<char> bag, string word);
 
     private:
         void printArray(int a[ARRAY_SIZE_SORT]);

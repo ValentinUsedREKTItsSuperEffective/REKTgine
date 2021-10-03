@@ -82,6 +82,9 @@ int main(int argc, char **argv){
 
     exercice.Tri();
 
+    exercice.Bananagram({'b', 'a', 'n', 'a', 'n', 'a', 'a', 'f', 'a', 'h', 'n', 'g', 'h'}, "banana");
+    exercice.Bananagram({'b', 'a', 'n', 'a', 'n', 'a', 'a', 'f', 'a', 'h', 'n', 'g', 'h'}, "wanana");
+
     return 0;
 
     bool realtime = true;
